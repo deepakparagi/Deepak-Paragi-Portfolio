@@ -7,6 +7,7 @@ import Projects from './sections/Projects';
 import Contact from './sections/Contact';
 
 import Background from './components/Background';
+import ThreeBackground from './components/ThreeBackground';
 
 function App() {
   useEffect(() => {
@@ -16,6 +17,7 @@ function App() {
   return (
     <main className="text-primary min-h-screen selection:bg-accent selection:text-white overflow-hidden relative">
       <Background />
+      <ThreeBackground />
 
       <Navbar />
       <Hero />

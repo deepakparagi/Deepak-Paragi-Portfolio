@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import Magnetic from './Magnetic';
 
+import Logo from './Logo';
+
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
 
@@ -44,9 +46,7 @@ const Navbar = () => {
             <div className="pointer-events-auto relative z-50">
                 <Magnetic>
                     <div className="group relative cursor-pointer px-2 py-1">
-                        <span className="text-2xl font-display font-bold tracking-tighter text-white transition-all duration-300 group-hover:tracking-normal">
-                            dp<span className="text-emerald-400">.</span>
-                        </span>
+                        <Logo />
                     </div>
                 </Magnetic>
             </div>

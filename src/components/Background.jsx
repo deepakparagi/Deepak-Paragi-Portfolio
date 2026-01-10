@@ -2,6 +2,59 @@ import { useEffect } from 'react';
 import { motion, useMotionValue, useSpring, useMotionTemplate } from 'framer-motion';
 import { NeuralLines } from './Decorative';
 
+const FloatingParticles = () => {
+    // Generate random particles
+    const particles = Array.from({ length: 20 }).map((_, i) => ({
+        id: i,
+        x: Math.random() * 100,
+        y: Math.random() * 100,
+        duration: 15 + Math.random() * 20,
+        delay: Math.random() * 5
+    }));
+
+    return (
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            {particles.map((p) => (
+                <motion.div
+                    key={p.id}
+                    className="absolute text-[10px] font-mono text-white/10 select-none"
+                    initial={{ x: `${p.x}%`, y: "110%", opacity: 0 }}
+                    animate={{
+                        y: "-10%",
+                        opacity: [0, 1, 0]
+                    }}
+                    transition={{
+                        duration: p.duration,
+                        repeat: Infinity,
+                        delay: p.delay,
+                        ease: "linear"
+                    }}
+                >
+                    {Math.random() > 0.5 ? '1' : '0'}
+                </motion.div>
+            ))}
+        </div>
+    );
+};
+
+const VolumetricBeam = ({ delay = 0, className }) => (
+    <motion.div
+        initial={{ opacity: 0, rotate: -45 }}
+        animate={{
+            opacity: [0.03, 0.08, 0.03],
+            rotate: [-45, -35, -45],
+            x: [-20, 20, -20]
+        }}
+        transition={{
+            duration: 15,
+            repeat: Infinity,
+            delay,
+            ease: "easeInOut"
+        }}
+        className={`absolute w-[200px] h-[150vh] bg-gradient-to-r from-transparent via-white/5 to-transparent blur-3xl pointer-events-none ${className}`}
+    />
+);
+
 const Background = () => {
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
@@ -22,12 +75,12 @@ const Background = () => {
     }, [mouseX, mouseY]);
 
     // Dynamic background gradient based on heavy cursor
-    const background = useMotionTemplate`radial-gradient(400px at ${x}px ${y}px, rgba(29, 78, 216, 0.05), transparent 80%)`;
+    const background = useMotionTemplate`radial-gradient(400px at ${x}px ${y}px, rgba(29, 78, 216, 0.08), transparent 80%)`;
 
     return (
         <div className="fixed inset-0 z-[-1] overflow-hidden bg-[#0a0a0a] pointer-events-none">
 
-            {/* 1. Base Gradient Follower */}
+            {/* 1. Base Gradient Follower - Slightly Stronger for 4DX feel */}
             <motion.div
                 className="absolute inset-0 z-0"
                 style={{ background }}
@@ -47,8 +100,18 @@ const Background = () => {
                 }}
             />
 
+            {/* 4DX Atmospheric Beams */}
+            <div className="absolute inset-0 z-0 perspective-[1000px]">
+                <VolumetricBeam className="-left-[10%] -top-[20%] via-blue-500/10" />
+                <VolumetricBeam className="right-[20%] -bottom-[20%] via-purple-500/10" delay={5} />
+                <VolumetricBeam className="left-[40%] -top-[10%] via-emerald-500/5 w-[300px]" delay={2} />
+            </div>
+
             {/* Neural Connections */}
             <NeuralLines />
+
+            {/* Data Stream Particles */}
+            <FloatingParticles />
 
             {/* 4. Inertial Abstract Shapes - Slowly fading/moving lines */}
             <div className="absolute inset-0 z-0">
