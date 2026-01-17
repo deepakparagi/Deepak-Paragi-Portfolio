@@ -3,36 +3,45 @@ import { Link } from 'react-router-dom';
 import { ArrowUpRight, Github } from 'lucide-react';
 import ScrollReveal from '../components/ScrollReveal';
 import PropTypes from 'prop-types';
-import { motion } from 'framer-motion';
 import aiFitnessImg from '../assets/ai_fitness_coach.webp';
 import witnestImg from '../assets/witnest_joke_generator.webp';
 import signifyImg from '../assets/signify_studio.webp';
+import bipinSchoolImg from '../assets/bipin_school_hero.png';
 
 const projects = [
     {
         id: "01",
+        title: "Bipin Chikkatti School",
+        category: "Web Development",
+        description: "Designed and developed the official website for Bipin Chikkatti School, Gadag. The platform features sections for academics, admissions, faculty, and facilities, serving as a comprehensive digital hub for the school community.",
+        tags: ["HTML", "CSS", "JavaScript"],
+        link: "https://www.chikkattieducation.co.in/",
+        image: bipinSchoolImg
+    },
+    {
+        id: "02",
         title: "AI Fitness Coach",
         category: "Artificial Intelligence",
         description: "A personalized workout planner powered by OpenAI, generating custom routines based on user goals and equipment availability.",
-        tags: ["Next.js", "OpenAI", "Tailwind CSS"],
+        tags: ["React.js", "TailwindCSS", "OpenAI API"],
         link: "https://ai-fitness-coach-git-main-deepaks-projects-f551996f.vercel.app/",
         image: aiFitnessImg
     },
     {
-        id: "02",
+        id: "03",
         title: "Witnest Joke Generator",
         category: "Web Application",
         description: "An interactive entertainment platform fetching dynamic content via external APIs with a focus on clean UI.",
-        tags: ["React", "API Integration", "Vercel"],
+        tags: ["HTML", "CSS", "JavaScript"],
         link: "https://witnest-joke-generator.vercel.app/",
         image: witnestImg
     },
     {
-        id: "03",
+        id: "04",
         title: "Signify Studio",
         category: "Frontend Development",
         description: "A premium landing page template for creative agencies, featuring smooth scroll animations and responsive layout.",
-        tags: ["React", "Tailwind CSS", "UI/UX"],
+        tags: ["HTML", "CSS", "JavaScript"],
         link: "https://signify-studio-wine.vercel.app/",
         image: signifyImg
     }

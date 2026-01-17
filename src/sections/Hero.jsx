@@ -23,8 +23,8 @@ const Hero = () => {
                         </div>
 
                         <h1 className="text-7xl md:text-9xl font-display font-medium tracking-tight leading-[1.05] mb-8 text-primary">
-                            Product Designer <br />
-                            <span className="text-secondary font-normal">& Engineer</span>
+                            Full Stack Developer <br />
+                            <span className="text-secondary font-normal">& AI Engineer</span>
                         </h1>
                     </motion.div>
 
@@ -35,7 +35,7 @@ const Hero = () => {
                         className="text-xl md:text-2xl text-secondary max-w-lg leading-relaxed font-normal"
                     >
                         <p className="mb-6">
-                            I build interfaces that feel distinct and human. Specializing in <span className="text-primary font-medium">0 → 1 product execution</span> and scalable frontend architecture.
+                            I build intelligent systems that feel distinct and human. Specializing in <span className="text-primary font-medium">0 → 1 product execution</span>, scalable architecture, and AI-driven solutions.
                         </p>
 
                         <div className="flex gap-6">

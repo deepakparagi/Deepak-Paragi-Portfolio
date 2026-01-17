@@ -5,19 +5,57 @@ import { motion } from 'framer-motion';
 // This would typically come from a shared data file or API
 const projectsData = {
     "01": {
+        title: "Bipin Chikkatti School",
+        category: "Web Development",
+        period: "2024",
+        overview: "Designed and developed the official website for Bipin Chikkatti School, Gadag. The platform features sections for academics, admissions, faculty, and facilities, serving as a comprehensive digital hub for the school community.",
+        challenge: "The school required a modern, mobile-friendly platform to replace outdated communication methods and provide easy access to information for parents and prospective students.",
+        solution: "Developed a high-performance, responsive React application with Tailwind CSS. Focused on accessibility, clear navigation, and a professional design language that reflects the school's values.",
+        stack: ["HTML5", "CSS3", "JavaScript", "Responsive Design"],
+        links: {
+            live: "https://www.chikkattieducation.co.in/",
+            github: "https://github.com/deepakparagi/bipin-chikkatti-school"
+        }
+    },
+    "02": {
         title: "AI Fitness Coach",
         category: "Artificial Intelligence",
         period: "2024",
         overview: "A personalized workout planner powered by OpenAI that generates custom routines based on user goals and equipment availability.",
         challenge: "Users often struggle to create effective workout plans that match their specific constraints (time, equipment, injuries). Generic apps lack personalization.",
         solution: "Integrated GPT-4 to analyze user inputs and generate scientifically-backed workout splits. Implemented a drag-and-drop interface for users to tweak the generated plans.",
-        stack: ["Next.js", "OpenAI API", "Tailwind CSS", "Supabase"],
+        stack: ["React.js", "TailwindCSS", "OpenAI API"],
         links: {
-            live: "https://ai-fitness-coach.vercel.app",
+            live: "https://ai-fitness-coach-git-main-deepaks-projects-f551996f.vercel.app/",
             github: "https://github.com/deepakparagi"
         }
     },
-    // Add other projects here
+    "03": {
+        title: "Witnest Joke Generator",
+        category: "Web Application",
+        period: "2023",
+        overview: "An interactive entertainment platform fetching dynamic content via external APIs with a focus on clean UI.",
+        challenge: "Creating a seamless and engaging user experience for consuming dynamic content API responses.",
+        solution: "Built a reactive UI that fetches and displays jokes instantly, with social sharing capabilities and a minimalist design.",
+        stack: ["HTML5", "CSS3", "JavaScript"],
+        links: {
+            live: "https://witnest-joke-generator.vercel.app/",
+            github: "https://github.com/deepakparagi"
+        }
+    },
+    "04": {
+        title: "Signify Studio",
+        category: "Frontend Development",
+        period: "2023",
+        overview: "A premium landing page template for creative agencies, featuring smooth scroll animations and responsive layout.",
+        challenge: "Demonstrating high-end frontend capabilities with complex animations and layout requirements.",
+        solution: "Implemented ScrollReveal animations and a fluid responsive design that looks premium on all devices.",
+        stack: ["HTML5", "CSS3", "JavaScript"],
+        links: {
+            live: "https://signify-studio-wine.vercel.app/",
+            github: "https://github.com/deepakparagi"
+        }
+    }
 };
 
 const ProjectDetails = () => {
