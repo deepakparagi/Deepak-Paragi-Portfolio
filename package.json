@@ -2,7 +2,7 @@
   "name": "deepak-portfolio",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://deepakparagi.github.io/Deepak-Parai-Portfolio",
+  "homepage": "https://deepakparagi.github.io/Deepak-Paragi-Portfolio",
   "type": "module",
   "scripts": {
     "dev": "vite",

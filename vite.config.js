@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/Deepak-Parai-Portfolio/',
+  base: '/Deepak-Paragi-Portfolio/',
   plugins: [react()],
   test: {
     globals: true,
