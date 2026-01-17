@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Magnetic from './Magnetic';
 import ThemeToggle from './ThemeToggle';
 
@@ -8,8 +9,33 @@ import Logo from './Logo';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const location = useLocation();
+    const navigate = useNavigate();
 
     const toggleMenu = () => setIsOpen(!isOpen);
+
+    const handleScroll = (id) => {
+        if (location.pathname !== '/') {
+            navigate('/');
+            setTimeout(() => {
+                const element = document.getElementById(id);
+                if (element) element.scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+        } else {
+            const element = document.getElementById(id);
+            if (element) element.scrollIntoView({ behavior: 'smooth' });
+        }
+        setIsOpen(false);
+    };
+
+    const NavItem = ({ name, id }) => (
+        <Magnetic>
+            <button key={name} onClick={() => handleScroll(id)} className="relative group p-2 flex items-center gap-2 bg-transparent border-none cursor-pointer text-inherit font-inherit">
+                {name}
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+            </button>
+        </Magnetic>
+    );
 
     const menuVars = {
         initial: { scaleY: 0 },
@@ -54,18 +80,15 @@ const Navbar = () => {
 
             {/* Desktop Menu */}
             <div className="hidden md:flex items-center gap-8 text-sm font-medium pointer-events-auto relative z-50">
-                <Magnetic><a href="#about" className="relative group p-2 flex items-center gap-2">
-                    About
-                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
-                </a></Magnetic>
-                <Magnetic><a href="#projects" className="relative group p-2 flex items-center gap-2">
-                    Work
-                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
-                </a></Magnetic>
-                <Magnetic><a href="#contact" className="relative group p-2 flex items-center gap-2">
-                    Contact
-                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
-                </a></Magnetic>
+                <NavItem name="About" id="about" />
+                <NavItem name="Work" id="projects" />
+                <Magnetic>
+                    <Link to="/blog" className="relative group p-2 flex items-center gap-2">
+                        Writing
+                        <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                    </Link>
+                </Magnetic>
+                <NavItem name="Contact" id="contact" />
 
                 <div className="pl-4 border-l border-primary/10">
                     <ThemeToggle />
@@ -97,19 +120,29 @@ const Navbar = () => {
                             exit="initial"
                             className="flex flex-col items-center gap-8"
                         >
-                            {['About', 'Projects', 'Contact'].map((link) => (
-                                <div key={link} className="overflow-hidden">
+                            {['About', 'Projects', 'Contact'].map((item) => (
+                                <div key={item} className="overflow-hidden">
                                     <motion.div variants={mobileLinkVars}>
-                                        <a
-                                            href={`#${link.toLowerCase()}`}
-                                            onClick={toggleMenu}
-                                            className="text-5xl font-display font-medium text-primary hover:text-accent transition-colors"
+                                        <button
+                                            onClick={() => handleScroll(item.toLowerCase())}
+                                            className="text-5xl font-display font-medium text-primary hover:text-accent transition-colors bg-transparent border-none cursor-pointer"
                                         >
-                                            {link}
-                                        </a>
+                                            {item === 'Projects' ? 'Work' : item}
+                                        </button>
                                     </motion.div>
                                 </div>
                             ))}
+                            <div className="overflow-hidden">
+                                <motion.div variants={mobileLinkVars}>
+                                    <Link
+                                        to="/blog"
+                                        onClick={toggleMenu}
+                                        className="text-5xl font-display font-medium text-primary hover:text-accent transition-colors"
+                                    >
+                                        Writing
+                                    </Link>
+                                </motion.div>
+                            </div>
                         </motion.div>
                     </motion.div>
                 )}

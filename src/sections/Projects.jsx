@@ -1,10 +1,12 @@
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { ArrowUpRight, Github } from 'lucide-react';
 import ScrollReveal from '../components/ScrollReveal';
 import PropTypes from 'prop-types';
-import aiFitnessImg from '../assets/ai_fitness_coach.png';
-import witnestImg from '../assets/witnest_joke_generator.png';
-import signifyImg from '../assets/signify_studio.png';
+import { motion } from 'framer-motion';
+import aiFitnessImg from '../assets/ai_fitness_coach.webp';
+import witnestImg from '../assets/witnest_joke_generator.webp';
+import signifyImg from '../assets/signify_studio.webp';
 
 const projects = [
     {
@@ -38,10 +40,7 @@ const projects = [
 
 const ProjectItem = ({ project, index }) => {
     return (
-        <motion.a
-            href={project.link}
-            target="_blank"
-            rel="noopener noreferrer"
+        <motion.div
             className="group block w-full mb-12 last:mb-0 relative"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -56,7 +55,7 @@ const ProjectItem = ({ project, index }) => {
                         <span className="font-mono text-xs font-semibold text-accent uppercase tracking-widest px-3 py-1 bg-accent/5 rounded-full border border-accent/10">{project.category}</span>
                     </div>
 
-                    <h3 className="text-3xl md:text-4xl font-display font-medium text-primary leading-tight group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-primary group-hover:to-secondary transition-all duration-300">
+                    <h3 className="text-3xl md:text-4xl font-display font-medium text-primary leading-tight">
                         {project.title}
                     </h3>
 
@@ -66,31 +65,48 @@ const ProjectItem = ({ project, index }) => {
 
                     <div className="flex flex-wrap gap-2 mt-4">
                         {project.tags.map((tag, i) => (
-                            <span key={i} className="px-3 py-1.5 bg-background border border-primary/5 rounded-md text-xs font-medium text-secondary/70 group-hover:text-primary transition-colors duration-300">
+                            <span key={i} className="px-3 py-1.5 bg-background border border-primary/5 rounded-md text-xs font-medium text-secondary/70 transition-colors duration-300">
                                 {tag}
                             </span>
                         ))}
                     </div>
+
+                    <div className="flex gap-4 mt-6">
+                        <Link
+                            to={`/project/${project.id}`}
+                            className="flex items-center gap-2 px-6 py-3 bg-primary text-background rounded-full font-medium hover:opacity-90 transition-opacity"
+                        >
+                            Case Study <ArrowUpRight size={18} />
+                        </Link>
+                        <a
+                            href={project.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 px-6 py-3 border border-primary/20 rounded-full font-medium hover:bg-surface transition-colors"
+                        >
+                            Live Demo <ArrowUpRight size={18} />
+                        </a>
+                    </div>
                 </div>
 
                 {/* Right: Image */}
-                <div className="w-full md:w-[55%] aspect-[16/10] bg-background rounded-2xl overflow-hidden relative order-1 md:order-2 border border-primary/5 shadow-inner">
-                    <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/0 transition-colors duration-500 z-10" />
-                    <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 to-transparent opacity-100 group-hover:opacity-0 transition-opacity duration-500 z-20 pointer-events-none mix-blend-multiply" />
+                <Link to={`/project/${project.id}`} className="w-full md:w-[55%] aspect-[16/10] bg-background rounded-2xl overflow-hidden relative order-1 md:order-2 border border-primary/5 shadow-inner cursor-pointer group/image">
+                    <div className="absolute inset-0 bg-primary/0 group-hover/image:bg-primary/0 transition-colors duration-500 z-10" />
+                    <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 to-transparent opacity-100 group-hover/image:opacity-0 transition-opacity duration-500 z-20 pointer-events-none mix-blend-multiply" />
 
                     <img
                         src={project.image}
                         alt={project.title}
-                        className="w-full h-full object-cover transform scale-100 group-hover:scale-105 transition-transform duration-700 ease-in-out"
+                        className="w-full h-full object-cover transform scale-100 group-hover/image:scale-105 transition-transform duration-700 ease-in-out"
                     />
 
-                    <div className="absolute top-4 right-4 z-30 bg-surface/90 backdrop-blur-sm p-3 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 ease-out border border-primary/5">
+                    <div className="absolute top-4 right-4 z-30 bg-surface/90 backdrop-blur-sm p-3 rounded-full shadow-lg opacity-0 group-hover/image:opacity-100 transform translate-y-4 group-hover/image:translate-y-0 transition-all duration-500 ease-out border border-primary/5">
                         <ArrowUpRight size={20} className="text-primary" />
                     </div>
-                </div>
+                </Link>
 
             </div>
-        </motion.a>
+        </motion.div>
     );
 };
 

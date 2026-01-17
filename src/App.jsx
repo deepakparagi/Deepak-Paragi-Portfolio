@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import Lenis from 'lenis';
-import Navbar from './components/Navbar';
-import Hero from './sections/Hero';
-import About from './sections/About';
-import Skills from './sections/Skills';
-import Projects from './sections/Projects';
-import Contact from './sections/Contact';
+import { HashRouter, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import ProjectDetails from './pages/ProjectDetails';
+import Blog from './pages/Blog';
 
 import GridBackground from './components/GridBackground';
 import Loader from './components/Loader';
@@ -39,7 +37,7 @@ function App() {
   }, []);
 
   return (
-    <>
+    <HashRouter>
       <AnimatePresence mode="wait">
         {isLoading && <Loader onComplete={() => setIsLoading(false)} />}
       </AnimatePresence>
@@ -48,15 +46,14 @@ function App() {
         <GridBackground />
 
         <div className="relative z-10">
-          <Navbar />
-          <Hero />
-          <About />
-          <Skills />
-          <Projects />
-          <Contact />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/project/:id" element={<ProjectDetails />} />
+            <Route path="/blog" element={<Blog />} />
+          </Routes>
         </div>
       </main>
-    </>
+    </HashRouter>
   );
 }
 
