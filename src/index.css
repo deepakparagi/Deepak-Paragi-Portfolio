@@ -5,13 +5,40 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --background: 243 243 243;
+    /* #f3f3f3 */
+    --surface: 255 255 255;
+    /* #ffffff */
+    --primary: 10 10 10;
+    /* #0a0a0a */
+    --secondary: 115 115 115;
+    /* #737373 */
+    --accent: 59 130 246;
+    /* #3b82f6 */
+  }
+
+  .dark {
+    --background: 10 10 10;
+    /* #0a0a0a */
+    --surface: 18 18 18;
+    /* #121212 */
+    --primary: 255 255 255;
+    /* #ffffff */
+    --secondary: 161 161 170;
+    /* #a1a1aa */
+    --accent: 59 130 246;
+    /* #3b82f6 - keeping same for now */
+  }
+
   html {
-    background-color: #0a0a0a;
-    color: #ffffff;
+    @apply scroll-smooth;
+    background-color: rgb(var(--background));
+    color: rgb(var(--primary));
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-  
+
   body {
     @apply font-sans;
   }
@@ -20,20 +47,27 @@
   html.lenis {
     height: auto;
   }
-  
+
   .lenis.lenis-smooth {
     scroll-behavior: auto;
   }
-  
+
   .lenis.lenis-smooth [data-lenis-prevent] {
     overscroll-behavior: contain;
   }
-  
+
   .lenis.lenis-stopped {
     overflow: hidden;
   }
-  
+
   .lenis.lenis-scrolling iframe {
     pointer-events: none;
+  }
+}
+
+@layer utilities {
+  .mask-radial {
+    mask-image: radial-gradient(circle at center, black, transparent 80%);
+    -webkit-mask-image: radial-gradient(circle at center, black, transparent 80%);
   }
 }

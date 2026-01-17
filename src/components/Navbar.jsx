@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import Magnetic from './Magnetic';
+import ThemeToggle from './ThemeToggle';
 
 import Logo from './Logo';
 
@@ -39,11 +40,11 @@ const Navbar = () => {
     };
 
     return (
-        <nav className="fixed top-0 left-0 right-0 px-6 py-4 md:px-12 md:py-5 flex justify-between items-center z-50 text-white pointer-events-none">
+        <nav className="fixed top-0 left-0 right-0 px-6 py-4 md:px-12 md:py-5 flex justify-between items-center z-50 text-primary pointer-events-none">
             {/* Background Blur only when menu is closed or on desktop */}
-            <div className={`absolute inset-0 bg-background/60 backdrop-blur-md border-b border-white/5 transition-opacity duration-300 ${isOpen ? 'opacity-0' : 'opacity-100'}`} />
+            <div className={`absolute inset-0 bg-background/80 backdrop-blur-md border-b border-primary/5 transition-opacity duration-300 ${isOpen ? 'opacity-0' : 'opacity-100'}`} />
 
-            <div className="pointer-events-auto relative z-50">
+            <div className="pointer-events-auto relative z-50 flex items-center gap-4">
                 <Magnetic>
                     <div className="group relative cursor-pointer px-2 py-1">
                         <Logo />
@@ -52,24 +53,29 @@ const Navbar = () => {
             </div>
 
             {/* Desktop Menu */}
-            <div className="hidden md:flex gap-8 text-sm font-medium pointer-events-auto relative z-50">
+            <div className="hidden md:flex items-center gap-8 text-sm font-medium pointer-events-auto relative z-50">
                 <Magnetic><a href="#about" className="relative group p-2 flex items-center gap-2">
                     About
-                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
                 </a></Magnetic>
-                <Magnetic><a href="#work" className="relative group p-2 flex items-center gap-2">
+                <Magnetic><a href="#projects" className="relative group p-2 flex items-center gap-2">
                     Work
-                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
                 </a></Magnetic>
                 <Magnetic><a href="#contact" className="relative group p-2 flex items-center gap-2">
                     Contact
-                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
                 </a></Magnetic>
+
+                <div className="pl-4 border-l border-primary/10">
+                    <ThemeToggle />
+                </div>
             </div>
 
             {/* Mobile Hamburger */}
-            <div className="md:hidden pointer-events-auto relative z-50">
-                <button onClick={toggleMenu} className="p-2 text-white hover:text-emerald-400 transition-colors">
+            <div className="md:hidden pointer-events-auto relative z-50 flex items-center gap-4">
+                <ThemeToggle />
+                <button onClick={toggleMenu} className="p-2 text-primary hover:text-accent transition-colors">
                     {isOpen ? <X size={24} /> : <Menu size={24} />}
                 </button>
             </div>
@@ -91,13 +97,13 @@ const Navbar = () => {
                             exit="initial"
                             className="flex flex-col items-center gap-8"
                         >
-                            {['About', 'Work', 'Contact'].map((link) => (
+                            {['About', 'Projects', 'Contact'].map((link) => (
                                 <div key={link} className="overflow-hidden">
                                     <motion.div variants={mobileLinkVars}>
                                         <a
                                             href={`#${link.toLowerCase()}`}
                                             onClick={toggleMenu}
-                                            className="text-5xl font-display font-medium text-white hover:text-emerald-400 transition-colors"
+                                            className="text-5xl font-display font-medium text-primary hover:text-accent transition-colors"
                                         >
                                             {link}
                                         </a>

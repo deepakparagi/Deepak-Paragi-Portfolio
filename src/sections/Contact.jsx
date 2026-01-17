@@ -1,7 +1,5 @@
-import { motion } from 'framer-motion';
 import { ArrowUpRight, Copy, Check, Github, Linkedin, Twitter, Mail, FileText } from 'lucide-react';
 import ScrollReveal from '../components/ScrollReveal';
-import { SystemLabel } from '../components/Technical';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 
@@ -11,17 +9,17 @@ const ContactItem = ({ icon: Icon, value, href, download }) => (
         target={href.startsWith('mailto') ? '_self' : '_blank'}
         rel="noopener noreferrer"
         download={download}
-        className="group flex items-center justify-between py-6 border-b border-white/10 hover:border-white/30 transition-colors"
+        className="group flex items-center justify-between py-6 border-b border-primary/10 hover:border-primary/30 transition-colors"
     >
         <div className="flex items-center gap-4">
-            <div className="p-3 bg-white/5 rounded-full group-hover:bg-white/10 transition-colors">
-                <Icon size={20} className="text-secondary group-hover:text-white transition-colors" />
+            <div className="p-3 bg-surface rounded-full group-hover:bg-primary/5 border border-black/5 transition-colors">
+                <Icon size={20} className="text-secondary group-hover:text-primary transition-colors" />
             </div>
-            <span className="text-xl md:text-2xl font-display text-white group-hover:text-emerald-400 transition-colors">
+            <span className="text-xl md:text-2xl font-display text-primary group-hover:text-accent transition-colors">
                 {value}
             </span>
         </div>
-        <ArrowUpRight className="text-white/20 group-hover:text-emerald-400 transform group-hover:-translate-y-1 group-hover:translate-x-1 transition-all duration-300" size={24} />
+        <ArrowUpRight className="text-secondary/50 group-hover:text-accent transform group-hover:-translate-y-1 group-hover:translate-x-1 transition-all duration-300" size={24} />
     </a>
 );
 
@@ -43,16 +41,16 @@ const CopyEmail = () => {
     };
 
     return (
-        <div className="py-6 border-b border-white/10 flex items-center justify-between group cursor-pointer" onClick={handleCopy}>
+        <div className="py-6 border-b border-primary/10 flex items-center justify-between group cursor-pointer" onClick={handleCopy}>
             <div className="flex items-center gap-4">
-                <div className="p-3 bg-white/5 rounded-full group-hover:bg-white/10 transition-colors">
-                    <Mail size={20} className="text-secondary group-hover:text-white transition-colors" />
+                <div className="p-3 bg-surface rounded-full group-hover:bg-primary/5 border border-black/5 transition-colors">
+                    <Mail size={20} className="text-secondary group-hover:text-primary transition-colors" />
                 </div>
-                <span className="text-xl md:text-2xl font-display text-white group-hover:text-emerald-400 transition-colors">
+                <span className="text-xl md:text-2xl font-display text-primary group-hover:text-accent transition-colors">
                     {email}
                 </span>
             </div>
-            <button className="text-white/20 group-hover:text-emerald-400 transition-colors">
+            <button className="text-secondary/50 group-hover:text-accent transition-colors">
                 {copied ? <Check size={24} /> : <Copy size={24} />}
             </button>
         </div>
@@ -63,32 +61,28 @@ const Contact = () => {
     return (
         <section id="contact" className="min-h-screen flex items-center py-24 px-6 md:px-12 bg-surface relative overflow-hidden">
 
-            <div className="absolute top-12 right-6 hidden 2xl:block opacity-20">
-                <SystemLabel>SYS.LINK_ESTABLISHED</SystemLabel>
-            </div>
-
-            <div className="max-w-7xl mx-auto w-full z-10 grid md:grid-cols-2 gap-16 md:gap-32 items-end">
+            <div className="max-w-screen-2xl mx-auto w-full z-10 grid md:grid-cols-2 gap-16 md:gap-32 items-end">
 
                 {/* Left Column: Headline */}
                 <div className="space-y-12">
                     <ScrollReveal>
-                        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 mb-8">
+                        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-green-500/10 border border-green-500/20 mb-8">
                             <span className="relative flex h-2 w-2">
-                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
+                                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
                             </span>
-                            <span className="font-mono text-[10px] text-emerald-400 tracking-widest uppercase">Available for work</span>
+                            <span className="font-sans text-[10px] font-medium text-green-600 tracking-widest uppercase">Available for work</span>
                         </div>
                     </ScrollReveal>
 
                     <ScrollReveal delay={0.1}>
-                        <h2 className="text-6xl md:text-8xl font-display font-medium tracking-tighter leading-[0.9] text-white">
-                            Let's <br /> engineer <br /> <span className="text-white/20">the future.</span>
+                        <h2 className="text-5xl md:text-7xl font-display font-medium tracking-tighter leading-[0.9] text-primary">
+                            Let's <br /> engineer <br /> <span className="text-primary/20">the future.</span>
                         </h2>
                     </ScrollReveal>
 
                     <ScrollReveal delay={0.2}>
-                        <div className="text-secondary/60 font-light max-w-sm leading-relaxed">
+                        <div className="text-secondary font-light max-w-sm leading-relaxed">
                             <p>
                                 Always interested in discussing new projects, opportunities, or just chatting about AI and system architecture.
                             </p>
@@ -99,7 +93,7 @@ const Contact = () => {
                 {/* Right Column: Links List */}
                 <div className="w-full">
                     <ScrollReveal delay={0.3} width="100%">
-                        <div className="border-t border-white/10">
+                        <div className="border-t border-primary/10">
                             <div className="py-2">
                                 <CopyEmail />
                             </div>
@@ -128,7 +122,7 @@ const Contact = () => {
                     </ScrollReveal>
 
                     <ScrollReveal delay={0.4}>
-                        <footer className="mt-16 flex justify-between text-xs text-secondary/30 font-mono uppercase tracking-widest">
+                        <footer className="mt-16 flex justify-between text-xs text-secondary/30 font-medium uppercase tracking-widest">
                             <span>Deepak Paragi</span>
                             <span>© 2026</span>
                         </footer>

@@ -1,87 +1,65 @@
 import { motion } from 'framer-motion';
-import { CodeCard, GradientShape } from '../components/Decorative';
-import { CornerBracket, Crosshair, SystemLabel } from '../components/Technical';
-import GlitchText from '../components/GlitchText';
+import profileImg from '../assets/profile_new.png';
 
 const Hero = () => {
     return (
-        <section className="min-h-screen flex flex-col justify-center px-6 md:px-12 bg-background relative overflow-hidden pt-20">
+        <section className="min-h-screen flex flex-col justify-center px-6 md:px-12 relative overflow-hidden pt-20">
 
-            {/* Subtle Grid Background */}
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
-
-            {/* Precision UI Markers */}
-            <CornerBracket position="top-left" className="top-8 left-8 hidden md:block" />
-            <CornerBracket position="bottom-right" className="bottom-8 right-8 hidden md:block" />
-            <Crosshair className="absolute top-20 right-12 hidden md:block" />
-            <Crosshair className="absolute bottom-20 left-12 hidden md:block" />
-
-            <div className="absolute top-12 left-1/2 -translate-x-1/2">
-                <SystemLabel>SYS.INIT_SEQUENCE_V2</SystemLabel>
-            </div>
-
-            {/* Decorative Gradient Shapes */}
-            <GradientShape className="top-20 right-0 w-96 h-96 bg-accent/10 rounded-full" />
-            <GradientShape className="bottom-0 left-0 w-64 h-64 bg-purple-500/10 rounded-full" delay={0.5} />
-
-
-            <div className="max-w-7xl mx-auto w-full z-10 grid md:grid-cols-2 gap-12 items-center relative">
+            <div className="max-w-screen-2xl mx-auto w-full z-10 grid md:grid-cols-[1.5fr_1fr] gap-12 items-center relative">
 
                 {/* Left Column: Typography */}
                 <div>
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6 }}
+                        transition={{ duration: 0.8, ease: "easeOut" }}
                     >
-                        <div className="flex items-center gap-3 mb-6">
-                            <span className="relative flex h-3 w-3">
-                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                                <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+                        <div className="flex items-center gap-3 mb-8">
+                            <span className="relative flex h-2.5 w-2.5">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
+                                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-600"></span>
                             </span>
-                            <span className="font-mono text-sm text-emerald-400 tracking-wider">AVAILABLE FOR WORK</span>
+                            <span className="font-sans text-base font-medium text-secondary tracking-wide uppercase">Available for work</span>
                         </div>
 
-                        <h1 className="text-[13vw] md:text-8xl font-display font-medium tracking-tight leading-[0.9] md:leading-[1.1] mb-8 text-white">
-                            Building <br />
-                            <span className="text-white/50"><GlitchText text="Intelligent" /></span> <br />
-                            Systems
+                        <h1 className="text-7xl md:text-9xl font-display font-medium tracking-tight leading-[1.05] mb-8 text-primary">
+                            Product Designer <br />
+                            <span className="text-secondary font-normal">& Engineer</span>
                         </h1>
                     </motion.div>
 
-                    <motion.p
+                    <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        transition={{ delay: 0.4, duration: 0.6 }}
-                        className="text-xl md:text-2xl text-secondary max-w-lg leading-relaxed font-light"
+                        transition={{ delay: 0.4, duration: 0.8 }}
+                        className="text-xl md:text-2xl text-secondary max-w-lg leading-relaxed font-normal"
                     >
-                        Designing interfaces that feel increasingly human.
-                    </motion.p>
+                        <p className="mb-6">
+                            I build interfaces that feel distinct and human. Specializing in <span className="text-primary font-medium">0 → 1 product execution</span> and scalable frontend architecture.
+                        </p>
+
+                        <div className="flex gap-6">
+                            <a href="#projects" className="text-primary font-medium hover:text-accent transition-colors border-b border-primary/20 hover:border-accent pb-0.5">View Projects</a>
+                            <a href="#contact" className="text-secondary hover:text-primary transition-colors pb-0.5">Contact Me</a>
+                        </div>
+                    </motion.div>
                 </div>
 
-                {/* Right Column: Bio / Info Card */}
+                {/* Right Column: Minimalist Visual (Optional, can be a profile shot or empty) */}
                 <motion.div
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.6, duration: 0.8 }}
-                    className="md:pl-0 relative"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.6, duration: 1 }}
+                    className="relative hidden md:block max-w-md ml-auto"
                 >
-                    <CodeCard />
-                    <div className="relative z-10">
-                        <div className="text-secondary/80 text-lg leading-relaxed space-y-6">
-                            <p>
-                                <span className="text-2xl md:text-3xl font-display font-medium block mb-4 text-white">I am Deepak Paragi</span>
-                                <span className="text-white block text-xl mb-2 font-light">Architecting the <span className="text-emerald-400">Intelligent Web</span>.</span>
-                                I believe code is more than logic—it’s <span className="text-white">structure, clarity, and intent</span>.
-                            </p>
-                            <p>
-                                By fusing <span className="text-white font-medium">Generative AI</span> and <span className="text-white font-medium">Modern Development Tools</span> with robust architecture, I build systems that are <span className="text-white">scalable and intuitive</span>.
-                                I don't just write code; I engineer solutions that solve complex problems with elegance.
-                            </p>
-                            <p>
-                                From Bengaluru, I am bringing the <span className="text-white">precision of machine learning</span> to the <span className="text-white">fluidity of the modern web</span>.
-                            </p>
-                        </div>
+                    {/* Placeholder for Profile Image or Minimal Graphic */}
+                    {/* Profile Image */}
+                    <div className="aspect-[3/4] rounded-lg bg-surface border border-primary/5 overflow-hidden relative grayscale hover:grayscale-0 transition-all duration-700">
+                        <img
+                            src={profileImg}
+                            alt="Deepak Paragi"
+                            className="w-full h-full object-cover object-center"
+                        />
                     </div>
                 </motion.div>
 

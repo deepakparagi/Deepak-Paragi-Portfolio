@@ -8,8 +8,7 @@ import Skills from './sections/Skills';
 import Projects from './sections/Projects';
 import Contact from './sections/Contact';
 
-import Background from './components/Background';
-import ThreeBackground from './components/ThreeBackground';
+import GridBackground from './components/GridBackground';
 import Loader from './components/Loader';
 
 function App() {
@@ -45,16 +44,17 @@ function App() {
         {isLoading && <Loader onComplete={() => setIsLoading(false)} />}
       </AnimatePresence>
 
-      <main className="text-primary min-h-screen selection:bg-accent selection:text-white overflow-hidden relative">
-        <Background />
-        <ThreeBackground />
+      <main className="text-primary min-h-screen selection:bg-black selection:text-white overflow-hidden relative">
+        <GridBackground />
 
-        <Navbar />
-        <Hero />
-        <About />
-        <Skills />
-        <Projects />
-        <Contact />
+        <div className="relative z-10">
+          <Navbar />
+          <Hero />
+          <About />
+          <Skills />
+          <Projects />
+          <Contact />
+        </div>
       </main>
     </>
   );

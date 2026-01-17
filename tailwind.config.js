@@ -4,18 +4,19 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
-        display: ['Space Grotesk', 'sans-serif'],
+        display: ['Inter', 'sans-serif'],
       },
       colors: {
-        background: '#0a0a0a', /* Very dark, premium background */
-        surface: '#121212',
-        primary: '#ffffff',
-        secondary: '#a1a1aa', /* Zinc 400 */
-        accent: '#3b82f6', /* Blue 500 - restrained accent */
+        background: 'rgb(var(--background) / <alpha-value>)',
+        surface: 'rgb(var(--surface) / <alpha-value>)',
+        primary: 'rgb(var(--primary) / <alpha-value>)',
+        secondary: 'rgb(var(--secondary) / <alpha-value>)',
+        accent: 'rgb(var(--accent) / <alpha-value>)',
       }
     },
   },
