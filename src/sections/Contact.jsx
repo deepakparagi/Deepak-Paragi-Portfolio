@@ -1,4 +1,4 @@
-import { ArrowUpRight, Copy, Check, Github, Linkedin, Twitter, Mail, FileText } from 'lucide-react';
+import { ArrowUpRight, Copy, Check, Github, Linkedin, Twitter, Mail, FileText, Send } from 'lucide-react';
 import ScrollReveal from '../components/ScrollReveal';
 import { useState } from 'react';
 import PropTypes from 'prop-types';
@@ -9,13 +9,13 @@ const ContactItem = ({ icon: Icon, value, href, download }) => (
         target={href.startsWith('mailto') ? '_self' : '_blank'}
         rel="noopener noreferrer"
         download={download}
-        className="group flex items-center justify-between py-6 border-b border-primary/10 hover:border-primary/30 transition-colors"
+        className="group relative flex items-center justify-between p-6 bg-primary/5 rounded-2xl border border-primary/5 hover:border-primary/20 hover:bg-primary/10 transition-all duration-300"
     >
         <div className="flex items-center gap-4">
-            <div className="p-3 bg-surface rounded-full group-hover:bg-primary/5 border border-black/5 transition-colors">
+            <div className="p-3 bg-surface rounded-full border border-primary/5 group-hover:bg-primary/10 transition-colors">
                 <Icon size={20} className="text-secondary group-hover:text-primary transition-colors" />
             </div>
-            <span className="text-xl md:text-2xl font-display text-primary group-hover:text-accent transition-colors">
+            <span className="text-lg md:text-xl font-display text-primary/80 group-hover:text-primary transition-colors">
                 {value}
             </span>
         </div>
@@ -30,6 +30,64 @@ ContactItem.propTypes = {
     download: PropTypes.bool
 };
 
+const WhatsAppForm = () => {
+    const [formData, setFormData] = useState({
+        name: '',
+        message: ''
+    });
+
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const { name, message } = formData;
+        const text = `Hi, I am ${name}. ${message}`;
+        const encodedText = encodeURIComponent(text);
+        window.open(`https://wa.me/918197174493?text=${encodedText}`, '_blank');
+    };
+
+    return (
+        <form onSubmit={handleSubmit} className="p-8 bg-primary/5 rounded-3xl backdrop-blur-sm border border-primary/10 space-y-6 hover:border-primary/20 transition-all duration-500">
+            <div className="space-y-4">
+                <h3 className="text-2xl font-display text-primary">Send a message</h3>
+                <p className="text-secondary/80 text-sm">Direct to WhatsApp</p>
+            </div>
+            <div className="space-y-4">
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="Your Name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                    className="w-full bg-surface/50 border border-primary/10 rounded-xl px-6 py-4 text-primary placeholder:text-secondary/30 focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/50 transition-all"
+                />
+                <textarea
+                    name="message"
+                    placeholder="Your Message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    required
+                    rows="4"
+                    className="w-full bg-surface/50 border border-primary/10 rounded-xl px-6 py-4 text-primary placeholder:text-secondary/30 focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/50 transition-all resize-none"
+                />
+            </div>
+            <button
+                type="submit"
+                className="w-full group flex items-center justify-center gap-3 px-6 py-4 bg-primary text-surface rounded-xl hover:bg-accent transition-all duration-300 transform hover:scale-[1.02]"
+            >
+                <span className="font-medium text-lg">Send to WhatsApp</span>
+                <Send size={20} className="transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+            </button>
+        </form>
+    );
+};
+
 const CopyEmail = () => {
     const [copied, setCopied] = useState(false);
     const email = "deepakparagi03@gmail.com";
@@ -41,12 +99,15 @@ const CopyEmail = () => {
     };
 
     return (
-        <div className="py-6 border-b border-primary/10 flex items-center justify-between group cursor-pointer" onClick={handleCopy}>
+        <div
+            onClick={handleCopy}
+            className="group relative flex items-center justify-between p-6 bg-primary/5 rounded-2xl border border-primary/5 hover:border-primary/20 hover:bg-primary/10 transition-all duration-300 cursor-pointer"
+        >
             <div className="flex items-center gap-4">
-                <div className="p-3 bg-surface rounded-full group-hover:bg-primary/5 border border-black/5 transition-colors">
+                <div className="p-3 bg-surface rounded-full border border-primary/5 group-hover:bg-primary/10 transition-colors">
                     <Mail size={20} className="text-secondary group-hover:text-primary transition-colors" />
                 </div>
-                <span className="text-xl md:text-2xl font-display text-primary group-hover:text-accent transition-colors">
+                <span className="text-lg md:text-xl font-display text-primary/80 group-hover:text-primary transition-colors">
                     {email}
                 </span>
             </div>
@@ -60,11 +121,10 @@ const CopyEmail = () => {
 const Contact = () => {
     return (
         <section id="contact" className="min-h-screen flex items-center py-16 md:py-24 px-6 md:px-12 bg-surface relative overflow-hidden">
-
-            <div className="max-w-screen-2xl mx-auto w-full z-10 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-32 items-end">
+            <div className="max-w-screen-2xl mx-auto w-full z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-32 items-start">
 
                 {/* Left Column: Headline */}
-                <div className="space-y-12">
+                <div className="space-y-12 lg:sticky lg:top-24">
                     <ScrollReveal>
                         <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-green-500/10 border border-green-500/20 mb-8">
                             <span className="relative flex h-2 w-2">
@@ -76,42 +136,53 @@ const Contact = () => {
                     </ScrollReveal>
 
                     <ScrollReveal delay={0.1}>
-                        <h2 className="text-5xl md:text-7xl font-display font-medium tracking-tighter leading-[0.9] text-primary">
+                        <h2 className="text-6xl md:text-8xl font-display font-medium tracking-tighter leading-[0.9] text-primary">
                             Let's <br /> engineer <br /> <span className="text-primary/20">the future.</span>
                         </h2>
                     </ScrollReveal>
 
                     <ScrollReveal delay={0.2}>
-                        <div className="text-secondary font-light max-w-sm leading-relaxed">
+                        <div className="text-secondary font-light max-w-sm leading-relaxed text-lg">
                             <p>
                                 Always interested in discussing new projects, opportunities, or just chatting about AI and system architecture.
                             </p>
                         </div>
                     </ScrollReveal>
+
+                    <ScrollReveal delay={0.3}>
+                        <footer className="hidden lg:flex flex-col gap-2 text-sm text-secondary/30 font-medium uppercase tracking-widest pt-12">
+                            <span>Deepak Paragi</span>
+                            <span>© 2026</span>
+                        </footer>
+                    </ScrollReveal>
                 </div>
 
                 {/* Right Column: Links List */}
-                <div className="w-full">
+                <div className="w-full space-y-8">
                     <ScrollReveal delay={0.3} width="100%">
-                        <div className="border-t border-primary/10">
-                            <div className="py-2">
-                                <CopyEmail />
-                            </div>
+                        <WhatsAppForm />
+                    </ScrollReveal>
+
+                    <ScrollReveal delay={0.4} width="100%">
+                        <div className="grid gap-4">
+                            <CopyEmail />
                             <ContactItem
                                 icon={FileText}
                                 value="View Resume"
                                 href="Deepak_Paragi_Resume.pdf"
                             />
-                            <ContactItem
-                                icon={Github}
-                                value="GitHub"
-                                href="https://github.com/deepakparagi"
-                            />
-                            <ContactItem
-                                icon={Linkedin}
-                                value="LinkedIn"
-                                href="https://www.linkedin.com/in/deepak-paragi-501140261/"
-                            />
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <ContactItem
+                                    icon={Github}
+                                    value="GitHub"
+                                    href="https://github.com/deepakparagi"
+                                />
+                                <ContactItem
+                                    icon={Linkedin}
+                                    value="LinkedIn"
+                                    href="https://www.linkedin.com/in/deepak-paragi-501140261/"
+                                />
+                            </div>
                             <ContactItem
                                 icon={Twitter}
                                 value="Twitter / X"
@@ -120,8 +191,8 @@ const Contact = () => {
                         </div>
                     </ScrollReveal>
 
-                    <ScrollReveal delay={0.4}>
-                        <footer className="mt-16 flex justify-between text-xs text-secondary/30 font-medium uppercase tracking-widest">
+                    <ScrollReveal delay={0.5}>
+                        <footer className="lg:hidden mt-16 flex justify-between text-sm text-secondary/30 font-medium uppercase tracking-widest">
                             <span>Deepak Paragi</span>
                             <span>© 2026</span>
                         </footer>
