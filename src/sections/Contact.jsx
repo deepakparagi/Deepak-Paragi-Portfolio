@@ -120,8 +120,8 @@ const CopyEmail = () => {
 
 const Contact = () => {
     return (
-        <section id="contact" className="min-h-screen flex items-center py-16 md:py-24 px-6 md:px-12 bg-surface relative overflow-hidden">
-            <div className="max-w-screen-2xl mx-auto w-full z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-32 items-start">
+        <section id="contact" className="min-h-screen flex flex-col justify-between py-16 md:py-24 px-6 md:px-12 bg-surface relative overflow-hidden">
+            <div className="max-w-screen-2xl mx-auto w-full z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-32 items-start mb-24">
 
                 {/* Left Column: Headline */}
                 <div className="space-y-12 lg:sticky lg:top-24">
@@ -148,13 +148,6 @@ const Contact = () => {
                             </p>
                         </div>
                     </ScrollReveal>
-
-                    <ScrollReveal delay={0.3}>
-                        <footer className="hidden lg:flex flex-col gap-2 text-sm text-secondary/30 font-medium uppercase tracking-widest pt-12">
-                            <span>Deepak Paragi</span>
-                            <span>© 2026</span>
-                        </footer>
-                    </ScrollReveal>
                 </div>
 
                 {/* Right Column: Links List */}
@@ -176,30 +169,34 @@ const Contact = () => {
                                     icon={Github}
                                     value="GitHub"
                                     href="https://github.com/deepakparagi"
+                                    download={false}
                                 />
                                 <ContactItem
                                     icon={Linkedin}
                                     value="LinkedIn"
                                     href="https://www.linkedin.com/in/deepak-paragi-501140261/"
+                                    download={false}
                                 />
                             </div>
                             <ContactItem
                                 icon={Twitter}
                                 value="Twitter / X"
                                 href="https://x.com/Deepak_Paragi"
+                                download={false}
                             />
                         </div>
-                    </ScrollReveal>
-
-                    <ScrollReveal delay={0.5}>
-                        <footer className="lg:hidden mt-16 flex justify-between text-sm text-secondary/30 font-medium uppercase tracking-widest">
-                            <span>Deepak Paragi</span>
-                            <span>© 2026</span>
-                        </footer>
                     </ScrollReveal>
                 </div>
 
             </div>
+
+            {/* Footer */}
+            <ScrollReveal delay={0.5} width="100%">
+                <div className="max-w-screen-2xl mx-auto w-full pt-8 border-t border-primary/10 flex flex-col md:flex-row justify-between items-center text-sm text-secondary/40 font-medium uppercase tracking-widest">
+                    <span>Deepak Paragi</span>
+                    <span>© 2026</span>
+                </div>
+            </ScrollReveal>
         </section>
     );
 };

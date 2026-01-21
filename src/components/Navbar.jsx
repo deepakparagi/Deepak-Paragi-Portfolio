@@ -82,12 +82,6 @@ const Navbar = () => {
             <div className="hidden md:flex items-center gap-8 text-sm font-medium pointer-events-auto relative z-50">
                 <NavItem name="About" id="about" />
                 <NavItem name="Work" id="projects" />
-                <Magnetic>
-                    <Link to="/blog" className="relative group p-2 flex items-center gap-2">
-                        Writing
-                        <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
-                    </Link>
-                </Magnetic>
                 <NavItem name="Contact" id="contact" />
 
                 <div className="pl-4 border-l border-primary/10">
@@ -132,17 +126,6 @@ const Navbar = () => {
                                     </motion.div>
                                 </div>
                             ))}
-                            <div className="overflow-hidden">
-                                <motion.div variants={mobileLinkVars}>
-                                    <Link
-                                        to="/blog"
-                                        onClick={toggleMenu}
-                                        className="text-5xl font-display font-medium text-primary hover:text-accent transition-colors"
-                                    >
-                                        Writing
-                                    </Link>
-                                </motion.div>
-                            </div>
                         </motion.div>
                     </motion.div>
                 )}

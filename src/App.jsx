@@ -4,7 +4,6 @@ import Lenis from 'lenis';
 import { HashRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import ProjectDetails from './pages/ProjectDetails';
-import Blog from './pages/Blog';
 
 import GridBackground from './components/GridBackground';
 import Loader from './components/Loader';
@@ -49,7 +48,6 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/project/:id" element={<ProjectDetails />} />
-            <Route path="/blog" element={<Blog />} />
           </Routes>
         </div>
       </main>

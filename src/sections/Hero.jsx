@@ -39,8 +39,26 @@ const Hero = () => {
                         </p>
 
                         <div className="flex gap-6">
-                            <a href="#projects" className="text-primary font-medium hover:text-accent transition-colors border-b border-primary/20 hover:border-accent pb-0.5">View Projects</a>
-                            <a href="#contact" className="text-secondary hover:text-primary transition-colors pb-0.5">Contact Me</a>
+                            <a
+                                href="#projects"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+                                }}
+                                className="text-primary font-medium hover:text-accent transition-colors border-b border-primary/20 hover:border-accent pb-0.5"
+                            >
+                                View Projects
+                            </a>
+                            <a
+                                href="#contact"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                                }}
+                                className="text-secondary hover:text-primary transition-colors pb-0.5"
+                            >
+                                Contact Me
+                            </a>
                         </div>
                     </motion.div>
                 </div>
