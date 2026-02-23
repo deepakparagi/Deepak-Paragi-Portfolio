@@ -1,7 +1,6 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useState, useEffect } from 'react';
-import Hero3D from '../components/Hero3D';
-import KineticText from '../components/KineticText';
+import profileImg from '../assets/profile_photo.webp';
 
 const Hero = () => {
     const [isMobile, setIsMobile] = useState(false);
@@ -17,102 +16,90 @@ const Hero = () => {
     const scrollYAnimated = useTransform(scrollY, [0, 500], [0, 200]);
     const scrollYAnimatedText = useTransform(scrollY, [0, 500], [0, 100]);
 
-    return (
-        <section className="min-h-[100dvh] flex flex-col justify-center px-6 md:px-12 relative overflow-hidden pt-20 bg-background transition-colors duration-500">
-            <div className="max-w-screen-2xl mx-auto w-full z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative">
+    const y1 = isMobile ? 0 : scrollYAnimated;
+    const y2 = isMobile ? 0 : scrollYAnimatedText; // Optional: Keep text static too or let it move. User focused on image. Safer to disable both.
 
-                {/* Text Content */}
-                <div className="flex flex-col items-start text-left">
+    return (
+        <section className="min-h-[100dvh] flex flex-col justify-center px-6 md:px-12 relative overflow-hidden pt-20">
+
+            <div className="max-w-screen-2xl mx-auto w-full z-10 grid md:grid-cols-[1.5fr_1fr] gap-12 items-center relative">
+
+                {/* Left Column: Typography */}
+                <motion.div style={{ y: y2 }}>
                     <motion.div
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.8 }}
-                        className="flex items-center gap-4 mb-12"
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
                     >
-                        <span className="h-px w-12 bg-primary/20"></span>
-                        <span className="font-sans text-xs font-bold text-secondary tracking-[0.3em] uppercase italic">The Portfolio of Deepak Paragi</span>
+                        <div className="flex items-center gap-3 mb-8">
+                            <span className="relative flex h-2.5 w-2.5">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
+                                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-600"></span>
+                            </span>
+                            <span className="font-sans text-base font-medium text-secondary tracking-wide uppercase">Available for work</span>
+                        </div>
+
+                        <h1 className="text-7xl md:text-9xl font-display font-medium tracking-tight leading-[1.05] mb-8 text-primary">
+                            Full Stack Developer <br />
+                            <span className="text-secondary font-normal">& AI Engineer</span>
+                        </h1>
                     </motion.div>
 
-                    <div className="relative mb-12">
-                        <KineticText>
-                            <motion.h1
-                                initial={{ clipPath: 'inset(100% 0 0 0)' }}
-                                animate={{ clipPath: 'inset(0% 0 0 0)' }}
-                                transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-                                className="text-[clamp(3rem,8vw,8rem)] font-display font-medium tracking-tighter leading-[0.9] text-primary"
-                            >
-                                FULL STACK <br />
-                                <span className="font-serif italic font-light text-accent">Developer</span>
-                            </motion.h1>
-                        </KineticText>
-                    </div>
-
                     <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.5, duration: 0.8 }}
-                        className="max-w-lg"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.4, duration: 0.8 }}
+                        className="text-xl md:text-2xl text-secondary max-w-lg leading-relaxed font-normal"
                     >
-                        <p className="text-xl md:text-2xl text-secondary mb-12 leading-relaxed font-light font-sans">
-                            Crafting <span className="text-primary italic font-serif">sophisticated digital experiences</span> through high-performance systems and AI-driven intelligence.
+                        <p className="mb-6">
+                            I build intelligent systems that feel distinct and human. Specializing in <span className="text-primary font-medium">0 → 1 product execution</span>, scalable architecture, and AI-driven solutions.
                         </p>
 
-                        <div className="flex flex-col sm:flex-row items-center gap-8">
+                        <div className="flex gap-6">
                             <a
                                 href="#projects"
                                 onClick={(e) => {
                                     e.preventDefault();
                                     document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
                                 }}
-                                className="group relative px-10 py-5 bg-primary text-background font-display font-bold uppercase tracking-widest overflow-hidden"
+                                className="text-primary font-medium hover:text-accent transition-colors border-b border-primary/20 hover:border-accent pb-0.5"
                             >
-                                <span className="relative z-10 transition-colors duration-300 group-hover:text-primary">Exploration</span>
-                                <div className="absolute inset-0 bg-accent translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[0.16,1,0.3,1]"></div>
-                                <div className="absolute inset-0 bg-surface -translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[0.16,1,0.3,1] delay-75"></div>
+                                View Projects
                             </a>
-
                             <a
                                 href="#contact"
                                 onClick={(e) => {
                                     e.preventDefault();
                                     document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
                                 }}
-                                className="font-display font-medium text-primary hover:text-accent transition-colors uppercase tracking-[0.2em] relative py-2 overflow-hidden group"
+                                className="text-secondary hover:text-primary transition-colors pb-0.5"
                             >
-                                <span className="relative z-10">Get in touch</span>
-                                <span className="absolute bottom-0 left-0 w-full h-px bg-accent -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></span>
+                                Contact Me
                             </a>
                         </div>
                     </motion.div>
-                </div>
+                </motion.div>
 
-                {/* Visual Content / 3D */}
-                <div className="relative h-[50vh] lg:h-[80vh] w-full flex items-center justify-center order-first lg:order-last">
-                    <div className="absolute inset-0 scale-125 lg:scale-100">
-                        <Hero3D />
+                {/* Right Column: Minimalist Visual (Optional, can be a profile shot or empty) */}
+                <motion.div
+                    style={{ y: y1 }}
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.2, duration: 1, ease: [0.25, 0.46, 0.45, 0.94] }}
+                    className="relative block max-w-sm md:max-w-md mx-auto md:ml-auto mt-12 md:mt-0"
+                >
+                    {/* Placeholder for Profile Image or Minimal Graphic */}
+                    {/* Profile Image */}
+                    <div className="md:aspect-[3/4] rounded-lg bg-surface border border-primary/5 overflow-hidden relative grayscale hover:grayscale-0 transition-all duration-700">
+                        <img
+                            src={profileImg}
+                            alt="Deepak Paragi"
+                            className="w-full h-auto md:h-full object-cover md:object-[center_25%]"
+                        />
                     </div>
-                    {/* Floating Decorative Text */}
-                    <motion.div
-                        animate={{ y: [0, -10, 0] }}
-                        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                        className="absolute bottom-10 right-0 text-right hidden lg:block"
-                    >
-                        <span className="block text-[10vw] font-serif italic text-primary/[0.03] leading-none mb-4">CRAFT</span>
-                        <span className="block text-[6vw] font-display font-black text-primary/[0.02] leading-none">PRECISION</span>
-                    </motion.div>
-                </div>
-            </div>
+                </motion.div>
 
-            {/* Subtle Scroll Indicator */}
-            <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1.5, duration: 1 }}
-                className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4"
-            >
-                <span className="text-[10px] font-sans font-bold uppercase tracking-[0.5em] text-secondary/40 rotate-90 mb-4">SCROLL</span>
-                <div className="w-px h-16 bg-gradient-to-b from-primary/20 to-transparent" />
-            </motion.div>
+            </div>
         </section >
     );
 };
