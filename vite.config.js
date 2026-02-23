@@ -2,8 +2,8 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 // https://vite.dev/config/
-export default defineConfig({
-  base: '/Deepak-Paragi-Portfolio/',
+export default defineConfig(({ command }) => ({
+  base: '/',
   plugins: [react()],
   test: {
     globals: true,
@@ -11,4 +11,4 @@ export default defineConfig({
     setupFiles: './src/test/setup.jsx',
     css: true,
   },
-})
+}));

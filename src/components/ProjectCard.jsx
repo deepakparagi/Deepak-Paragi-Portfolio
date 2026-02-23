@@ -1,111 +1,114 @@
-import { motion } from 'framer-motion';
+import { motion, useMotionValue, useTransform } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight, Github, Star } from 'lucide-react';
 import PropTypes from 'prop-types';
 import LazyImage from './LazyImage';
+import KineticText from './KineticText';
 
-const ProjectCard = ({ project, index }) => {
+const ProjectCard = ({ project, index, isAlternate }) => {
+    const mouseX = useMotionValue(0.5);
+    const mouseY = useMotionValue(0.5);
+
+    const handleMouseMove = (e) => {
+        const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
+        mouseX.set((e.clientX - left) / width);
+        mouseY.set((e.clientY - top) / height);
+    };
+
+    const baseFreq = useTransform(mouseX, [0, 1], [0.03, 0.07]);
+    const distortionScale = useTransform(mouseY, [0, 1], [20, 50]);
+
     return (
         <motion.div
-            className="group block w-full mb-12 last:mb-0 relative"
-            initial={{ opacity: 0, y: 50 }}
+            className="group block w-full relative"
+            initial={{ opacity: 0, y: 100 }}
             whileInView={{ opacity: 1, y: 0 }}
-            whileHover={{ y: -12, scale: 1.02 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+            onMouseMove={handleMouseMove}
         >
-            <div className="bg-surface rounded-3xl border border-primary/5 p-8 md:p-12 flex flex-col md:flex-row gap-8 md:gap-16 items-center transition-all duration-500 hover:border-primary/20 relative overflow-hidden">
-
-                {/* Glow Effect */}
-                <motion.div
-                    className="absolute inset-0 bg-gradient-to-tr from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                    style={{ filter: 'blur(20px)' }}
-                />
-
-                {/* Left: Content */}
-                <div className="flex-1 flex flex-col gap-6 order-2 md:order-1 self-center">
-                    <div className="flex items-center gap-3 mb-2">
-                        <span className="font-mono text-xs font-semibold text-accent uppercase tracking-widest px-3 py-1 bg-accent/5 rounded-full border border-accent/10">
-                            {project.category}
+            <div className="flex flex-col gap-12">
+                {/* Header: Project Number and Title */}
+                <div className={`flex flex-col gap-4 ${isAlternate ? 'items-end text-right' : 'items-start'}`}>
+                    <div className="flex items-center gap-3">
+                        <span className="w-8 h-px bg-accent/40"></span>
+                        <span className="font-sans text-[10px] font-bold text-secondary uppercase tracking-[0.5em]">
+                            0{index + 1}
                         </span>
-                        {project.featured && (
-                            <span className="flex items-center gap-1.5 font-mono text-xs font-semibold text-primary uppercase tracking-widest px-3 py-1 bg-primary/5 rounded-full border border-primary/10">
-                                <Star size={12} className="fill-primary" />
-                                Featured
-                            </span>
-                        )}
                     </div>
-
-                    <h3 className="text-3xl md:text-4xl font-display font-medium text-primary leading-tight">
-                        {project.title}
-                    </h3>
-
-                    <p className="text-secondary text-base md:text-lg leading-relaxed font-light line-clamp-3">
-                        {project.description}
-                    </p>
-
-                    <div className="flex flex-wrap gap-2 mt-4">
-                        {project.tags.map((tag, i) => (
-                            <span
-                                key={i}
-                                className="px-3 py-1.5 bg-background border border-primary/5 rounded-md text-xs font-medium text-secondary/70 transition-colors duration-300"
-                            >
-                                {tag}
-                            </span>
-                        ))}
-                    </div>
-
-                    <div className="flex flex-wrap gap-4 mt-6">
-                        <Link
-                            to={`/project/${project.id}`}
-                            className="flex items-center gap-2 px-6 py-3 bg-primary text-background rounded-full font-medium hover:opacity-90 transition-opacity"
-                            aria-label={`View ${project.title} case study`}
-                        >
-                            Case Study <ArrowUpRight size={18} />
-                        </Link>
-                        <a
-                            href={project.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-2 px-6 py-3 border border-primary/20 rounded-full font-medium hover:bg-surface transition-colors"
-                            aria-label={`View ${project.title} live demo`}
-                        >
-                            Live Demo <ArrowUpRight size={18} />
-                        </a>
-                        {project.github && (
-                            <a
-                                href={project.github}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex items-center gap-2 px-6 py-3 border border-primary/20 rounded-full font-medium hover:bg-surface transition-colors"
-                                aria-label={`View ${project.title} on GitHub`}
-                            >
-                                <Github size={18} />
-                                Code
-                            </a>
-                        )}
-                    </div>
+                    <Link to={`/project/${project.id}`}>
+                        <h3 className="text-4xl md:text-8xl font-serif italic text-primary tracking-tight transition-colors duration-500 hover:text-accent">
+                            {project.title}
+                        </h3>
+                    </Link>
                 </div>
 
-                {/* Right: Image */}
-                <Link
-                    to={`/project/${project.id}`}
-                    className="w-full md:w-[55%] aspect-[16/10] bg-background rounded-2xl overflow-hidden relative order-1 md:order-2 border border-primary/5 shadow-inner cursor-pointer group/image"
-                >
-                    <div className="absolute inset-0 bg-primary/0 group-hover/image:bg-primary/0 transition-colors duration-500 z-10" />
-                    <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 to-transparent opacity-100 group-hover/image:opacity-0 transition-opacity duration-500 z-20 pointer-events-none mix-blend-multiply" />
+                {/* Main Content Split */}
+                <div className={`grid grid-cols-1 lg:grid-cols-12 gap-16 items-start`}>
 
-                    <LazyImage
-                        src={project.image}
-                        alt={project.title}
-                        className="w-full h-full object-cover transform scale-100 group-hover/image:scale-105 transition-transform duration-700 ease-in-out"
-                    />
+                    {/* Image Area */}
+                    <Link
+                        to={`/project/${project.id}`}
+                        className={`lg:col-span-8 ${isAlternate ? 'lg:order-2' : ''} w-full aspect-[16/10] bg-surface overflow-hidden relative group/image block`}
+                    >
+                        <motion.div
+                            className="w-full h-full"
+                            whileHover={{ scale: 1.02 }}
+                            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+                        >
+                            <motion.img
+                                src={project.image}
+                                alt={project.title}
+                                className="w-full h-full object-cover grayscale brightness-90 group-hover/image:grayscale-0 group-hover/image:brightness-100 transition-all duration-1000 ease-in-out"
+                                initial={{ opacity: 0 }}
+                                whileInView={{ opacity: 1 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.8 }}
+                            />
+                        </motion.div>
 
-                    <div className="absolute top-4 right-4 z-30 bg-surface/90 backdrop-blur-sm p-3 rounded-full shadow-lg opacity-0 group-hover/image:opacity-100 transform translate-y-4 group-hover/image:translate-y-0 transition-all duration-500 ease-out border border-primary/5">
-                        <ArrowUpRight size={20} className="text-primary" />
+                        <div className="absolute inset-0 bg-primary/5 group-hover/image:bg-primary/0 transition-colors duration-700" />
+
+                        {/* Elegant Reveal Overlay */}
+                        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover/image:opacity-100 transition-all duration-500">
+                            <div className="px-8 py-3 bg-primary text-background font-display text-[10px] font-bold uppercase tracking-[0.3em] backdrop-blur-sm -translate-y-4 group-hover/image:translate-y-0 transition-transform duration-500">
+                                View Case Study
+                            </div>
+                        </div>
+                    </Link>
+
+                    {/* Meta and Description */}
+                    <div className={`lg:col-span-4 ${isAlternate ? 'lg:order-1' : ''} flex flex-col gap-10 lg:pt-12`}>
+                        <p className="text-secondary text-lg leading-relaxed font-light font-sans max-w-sm">
+                            {project.description}
+                        </p>
+
+                        <div className="flex flex-wrap gap-4">
+                            {project.tags?.map((tag, i) => (
+                                <span
+                                    key={i}
+                                    className="text-[9px] font-sans font-bold uppercase tracking-[0.2em] text-secondary/60"
+                                >
+                                    {tag}
+                                </span>
+                            ))}
+                        </div>
+
+                        {/* CTA Area */}
+                        <div className="pt-4">
+                            <Link
+                                to={`/project/${project.id}`}
+                                className="group/btn inline-flex items-center gap-6 text-[10px] font-bold uppercase tracking-[0.4rem] text-primary hover:text-accent transition-all duration-500"
+                            >
+                                <span>Discover</span>
+                                <div className="relative flex items-center">
+                                    <div className="w-16 h-px bg-primary/20 group-hover/btn:bg-accent group-hover/btn:w-24 transition-all duration-700" />
+                                    <ArrowUpRight size={14} className="absolute right-0 opacity-0 group-hover/btn:opacity-100 transition-all duration-500 translate-x-4 group-hover/btn:translate-x-0" />
+                                </div>
+                            </Link>
+                        </div>
                     </div>
-                </Link>
-
+                </div>
             </div>
         </motion.div>
     );

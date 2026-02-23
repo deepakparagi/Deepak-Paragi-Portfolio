@@ -2,6 +2,7 @@ import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Github, ExternalLink, Calendar, Code2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { getProjectById, projectsData } from '../data/projectsData';
+import KineticText from '../components/KineticText';
 
 const ProjectDetails = () => {
     const { id } = useParams();
@@ -13,71 +14,79 @@ const ProjectDetails = () => {
     ).slice(0, 2);
 
     return (
-        <div className="min-h-screen bg-background text-primary p-6 md:p-12">
-            <Link to="/" className="inline-flex items-center gap-2 text-secondary hover:text-primary transition-colors mb-12" aria-label="Back to home">
-                <ArrowLeft size={20} />
-                <span>Back to Home</span>
-            </Link>
+        <div className="min-h-screen bg-background text-primary">
+            {/* Cinematic Header Section */}
+            <div className="relative h-[70vh] w-full overflow-hidden flex flex-col justify-end p-6 md:p-12 pb-24">
+                {/* Background Text Overlay */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[30vw] font-display font-black text-primary/[0.02] select-none pointer-events-none whitespace-nowrap z-0">
+                    {project.category.toUpperCase()}
+                </div>
 
-            <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className="max-w-4xl mx-auto"
-            >
-                {/* Hero Section */}
-                <div className="mb-12">
-                    <span className="text-accent font-mono text-sm tracking-widest uppercase">{project.category}</span>
-                    <h1 className="text-4xl md:text-6xl font-display font-medium mt-4 mb-6">{project.title}</h1>
+                <div className="max-w-screen-2xl mx-auto w-full z-10">
+                    <Link to="/" className="inline-flex items-center gap-2 text-accent hover:text-primary transition-colors mb-12 group" aria-label="Back to home">
+                        <ArrowLeft size={18} className="group-hover:-translate-x-1 transition-transform" />
+                        <span className="font-mono text-xs uppercase tracking-widest font-bold">Return to Core</span>
+                    </Link>
 
-                    {/* Metadata */}
-                    <div className="flex flex-wrap gap-6 mb-8 text-secondary">
-                        <div className="flex items-center gap-2">
-                            <Calendar size={16} />
-                            <span className="text-sm">{project.period}</span>
+                    <div className="max-w-4xl">
+                        <div className="flex items-center gap-4 mb-6">
+                            <span className="h-px w-8 bg-accent"></span>
+                            <span className="text-accent font-mono text-xs tracking-[0.4em] uppercase font-bold">{project.category}</span>
                         </div>
-                        <div className="flex items-center gap-2">
-                            <Code2 size={16} />
-                            <span className="text-sm">{project.metrics.technologies} Technologies</span>
-                        </div>
-                    </div>
 
-                    {/* Action Buttons */}
-                    <div className="flex flex-wrap gap-4">
-                        <a
-                            href={project.link}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="flex items-center gap-2 px-6 py-2 bg-primary text-background rounded-full font-medium hover:opacity-90 transition-opacity"
-                            aria-label={`View ${project.title} live demo`}
-                        >
-                            View Live <ExternalLink size={16} />
-                        </a>
-                        {project.github && (
+                        <KineticText className="w-fit">
+                            <h1 className="text-5xl md:text-9xl font-display font-medium tracking-tighter leading-[0.8] mb-8">
+                                {project.title}
+                            </h1>
+                        </KineticText>
+
+                        {/* Action Buttons */}
+                        <div className="flex flex-wrap gap-6">
                             <a
-                                href={project.github}
+                                href={project.link}
                                 target="_blank"
                                 rel="noreferrer"
-                                className="flex items-center gap-2 px-6 py-2 border border-primary/20 rounded-full font-medium hover:bg-surface transition-colors"
-                                aria-label={`View ${project.title} on GitHub`}
+                                className="group flex items-center gap-3 px-8 py-4 bg-primary text-background rounded-full font-bold uppercase tracking-widest text-xs hover:bg-accent transition-colors relative overflow-hidden"
                             >
-                                GitHub <Github size={16} />
+                                <span className="relative z-10 flex items-center gap-2">Initialize Demo <ExternalLink size={14} /></span>
+                                <div className="absolute inset-0 bg-accent translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
                             </a>
-                        )}
+                            {project.github && (
+                                <a
+                                    href={project.github}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="flex items-center gap-3 px-8 py-4 border border-primary/20 rounded-full font-bold uppercase tracking-widest text-xs hover:border-accent hover:text-accent transition-colors"
+                                >
+                                    Source Code <Github size={14} />
+                                </a>
+                            )}
+                        </div>
                     </div>
                 </div>
+            </div>
 
-                {/* Project Image */}
-                <div className="mb-12 rounded-2xl overflow-hidden border border-primary/5 shadow-xl">
-                    <img
-                        src={project.image}
-                        alt={project.title}
-                        className="w-full h-auto"
-                        loading="eager"
-                    />
+            {/* Cinematic Project Image Reveal */}
+            <div className="px-6 md:px-12 -mt-12 mb-24 relative z-20">
+                <div className="max-w-screen-2xl mx-auto">
+                    <motion.div
+                        initial={{ clipPath: 'inset(100% 0 0 0)' }}
+                        whileInView={{ clipPath: 'inset(0% 0 0 0)' }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+                        className="rounded-2xl overflow-hidden border border-primary/5 shadow-2xl bg-surface"
+                    >
+                        <img
+                            src={project.image}
+                            alt={project.title}
+                            className="w-full h-auto grayscale brightness-75 hover:grayscale-0 hover:brightness-100 transition-all duration-1000"
+                            loading="eager"
+                        />
+                    </motion.div>
                 </div>
+            </div>
 
-                {/* Content Grid */}
+            <div className="max-w-screen-2xl mx-auto px-6 md:px-12 pb-32">
                 <div className="grid md:grid-cols-3 gap-12">
                     <div className="md:col-span-2 space-y-12">
                         {/* Overview */}
@@ -167,12 +176,12 @@ const ProjectDetails = () => {
                 <div className="mt-16 text-center">
                     <Link
                         to="/#projects"
-                        className="inline-flex items-center gap-2 text-secondary hover:text-primary transition-colors border-b border-secondary/20 hover:border-primary/30 pb-1"
+                        className="inline-flex items-center gap-2 text-secondary hover:text-primary transition-colors border-b border-secondary/20 hover:border-primary/30 pb-1 font-mono text-xs uppercase tracking-widest"
                     >
                         ← View All Projects
                     </Link>
                 </div>
-            </motion.div>
+            </div>
         </div>
     );
 };
