@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useState, useEffect } from 'react';
-import profileImg from '../assets/profile_photo.webp';
+import profileImg from '../assets/roman_reigns.jpg';
 
 const Hero = () => {
     const [isMobile, setIsMobile] = useState(false);
