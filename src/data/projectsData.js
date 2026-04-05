@@ -42,14 +42,14 @@ export const projectsData = [
         image: gadagImg, // The screenshot sent by user
         focalPoint: "object-center",
         featured: true,
-        period: "2024",
+        period: "2026",
         overview: "A high-performance localized web experience documenting the soul of North Karnataka. Blends millennia of Chalukyan architecture with 2026-level digital aesthetics.",
         challenge: "Creating an immersive, bilingual editorial experience that runs at 60fps while handling heavy image assets and complex scroll-driven storytelling.",
         solution: "Implemented CSS-based language switching for zero-lag localization, Lenis for silky smooth scrolling, and aggressive asset optimization to ensure a 10/10 lighthouse score.",
         stack: ["React", "Vite", "TailwindCSS", "Framer Motion"],
         metrics: {
             technologies: 4,
-            year: 2024
+            year: 2026
         },
         lessonsLearned: [
             "CSS-driven localization provides significantly faster feedback than JS-state toggles.",
