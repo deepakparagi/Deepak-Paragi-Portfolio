@@ -7,6 +7,7 @@ import AnimatedRoutes from './components/AnimatedRoutes';
 import GridBackground from './components/GridBackground';
 import Loader from './components/Loader';
 import ScrollProgress from './components/ScrollProgress';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -30,6 +31,9 @@ function App() {
 
     requestAnimationFrame(raf);
 
+    // Global reference to reset scroll manually if needed
+    window.lenis = lenis;
+
     return () => {
       lenis.destroy();
     };
@@ -37,18 +41,17 @@ function App() {
 
   return (
     <HashRouter>
+      <ScrollToTop />
       <AnimatePresence mode="wait">
         {isLoading && <Loader onComplete={() => setIsLoading(false)} />}
       </AnimatePresence>
 
-      <main className="text-primary min-h-screen selection:bg-black selection:text-white overflow-hidden relative">
+      <main className="text-primary min-h-screen selection:bg-black selection:text-white relative">
         <ScrollProgress />
         <GridBackground />
 
-        <div className="relative z-10">
-          <div className="relative z-10">
-            <AnimatedRoutes />
-          </div>
+        <div className="relative z-10 isolate">
+          <AnimatedRoutes />
         </div>
       </main>
     </HashRouter>
