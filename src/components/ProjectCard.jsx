@@ -89,10 +89,14 @@ const ProjectCard = ({ project, index }) => {
                     </div>
 
                     <div className="flex flex-wrap gap-6 mt-8">
-                        <div className="group/btn relative pb-1 font-mono text-xs tracking-widest uppercase text-primary hover:text-accent transition-colors flex items-center gap-2 cursor-pointer">
+                        <Link
+                            to={`/project/${project.id}`}
+                            className="group/btn relative pb-1 font-mono text-xs tracking-widest uppercase text-primary hover:text-accent transition-colors flex items-center gap-2"
+                            aria-label={`View ${project.title} case study`}
+                        >
                             Case Study <ArrowUpRight size={14} className="transition-transform group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1" />
                             <span className="absolute bottom-0 left-0 w-full h-[1px] bg-accent origin-right scale-x-0 transition-transform duration-500 ease-out group-hover/btn:scale-x-100 group-hover/btn:origin-left"></span>
-                        </div>
+                        </Link>
                         
                         {project.link !== '#' && (
                             <a
@@ -110,7 +114,10 @@ const ProjectCard = ({ project, index }) => {
                 </div>
 
                 {/* Image Frame */}
-                <div className="w-full md:w-[60%] aspect-[4/3] md:aspect-[16/10] p-2 md:p-3 bg-white/[0.02] backdrop-blur-md rounded-[1.5rem] md:rounded-[2rem] border border-white/5 shadow-2xl relative block group/image transition-transform duration-700 ease-out hover:-translate-y-2 order-1 md:order-none overflow-hidden">
+                <Link
+                    to={`/project/${project.id}`}
+                    className="w-full md:w-[60%] aspect-[4/3] md:aspect-[16/10] p-2 md:p-3 bg-white/[0.02] backdrop-blur-md rounded-[1.5rem] md:rounded-[2rem] border border-white/5 shadow-2xl relative block group/image transition-transform duration-700 ease-out hover:-translate-y-2 order-1 md:order-none overflow-hidden"
+                >
                     <div className="relative w-full h-full rounded-[1rem] md:rounded-[1.5rem] overflow-hidden bg-background ring-1 ring-white/10">
                         <motion.div
                             className="pointer-events-none absolute -inset-px rounded-[1rem] md:rounded-[1.5rem] opacity-0 transition duration-300 group-hover/image:opacity-100 z-30"
@@ -143,7 +150,7 @@ const ProjectCard = ({ project, index }) => {
                              <span className="font-mono text-[10px] uppercase tracking-widest text-primary">Explore</span>
                         </div>
                     </div>
-                </div>
+                </Link>
 
             </div>
         </motion.div>
