@@ -91,14 +91,14 @@ export const projectsData = [
         focalPoint: "object-center",
         featured: true,
         // Extended details for ProjectDetails page
-        period: "2024",
+        period: "2025",
         overview: "A personalized workout planner powered by OpenAI that generates custom routines based on user goals and equipment availability.",
         challenge: "Users often struggle to create effective workout plans that match their specific constraints (time, equipment, injuries). Generic apps lack personalization.",
         solution: "Integrated GPT-4 to analyze user inputs and generate scientifically-backed workout splits. Implemented a drag-and-drop interface for users to tweak the generated plans.",
         stack: ["React.js", "TailwindCSS", "OpenAI API", "JavaScript"],
         metrics: {
             technologies: 3,
-            year: 2024
+            year: 2025
         },
         lessonsLearned: [
             "Effective prompt engineering is crucial for consistent AI outputs",
