@@ -69,14 +69,14 @@ export const projectsData = [
         focalPoint: "object-center-top",
         featured: true,
         // Extended details for ProjectDetails page
-        period: "2024",
+        period: "2026",
         overview: "Designed and developed the official website for Bipin Chikkatti School, Gadag. The platform features sections for academics, admissions, faculty, and facilities, serving as a comprehensive digital hub for the school community.",
         challenge: "The school required a modern, mobile-friendly platform to replace outdated communication methods and provide easy access to information for parents and prospective students.",
         solution: "Developed a high-performance, responsive React application with Tailwind CSS. Focused on accessibility, clear navigation, and a professional design language that reflects the school's values.",
         stack: ["HTML5", "CSS3", "JavaScript", "Responsive Design"],
         metrics: {
             technologies: 3,
-            year: 2024
+            year: 2026
         }
     },
     {
