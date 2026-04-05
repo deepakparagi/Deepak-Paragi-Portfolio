@@ -8,6 +8,7 @@ import GridBackground from './components/GridBackground';
 import Loader from './components/Loader';
 import ScrollProgress from './components/ScrollProgress';
 import ScrollToTop from './components/ScrollToTop';
+import ShaderLine from './components/ShaderLine';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -49,6 +50,7 @@ function App() {
       <main className="text-primary min-h-screen selection:bg-black selection:text-white relative">
         <ScrollProgress />
         <GridBackground />
+        <ShaderLine />
 
         <div className="relative z-10 isolate">
           <AnimatedRoutes />

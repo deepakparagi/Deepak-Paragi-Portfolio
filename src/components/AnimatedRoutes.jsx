@@ -4,29 +4,11 @@ import Home from '../pages/Home';
 import ProjectDetails from '../pages/ProjectDetails';
 
 const AnimatedRoutes = () => {
-    const location = useLocation();
-
     return (
-        <AnimatePresence mode="wait">
-            <Routes location={location} key={location.pathname}>
-                <Route
-                    path="/"
-                    element={
-                        <PageWrapper>
-                            <Home />
-                        </PageWrapper>
-                    }
-                />
-                <Route
-                    path="/project/:id"
-                    element={
-                        <PageWrapper>
-                            <ProjectDetails />
-                        </PageWrapper>
-                    }
-                />
-            </Routes>
-        </AnimatePresence>
+        <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/project/:id" element={<ProjectDetails />} />
+        </Routes>
     );
 };
 
