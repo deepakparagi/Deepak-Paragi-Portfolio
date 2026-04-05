@@ -8,9 +8,9 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['DM Mono', 'monospace'],
-        display: ['Cormorant Garamond', 'serif'],
-        mono: ['DM Mono', 'monospace'],
+        sans: ['"Plus Jakarta Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        display: ['"Cormorant Garamond"', 'serif'],
+        mono: ['"JetBrains Mono"', 'monospace'],
       },
       colors: {
         background: 'rgb(var(--background) / <alpha-value>)',

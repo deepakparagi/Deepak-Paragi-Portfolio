@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import LazyImage from './LazyImage';
 
 const ProjectCard = ({ project, index }) => {
-    const navigate = useNavigate();
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
 
@@ -15,21 +14,13 @@ const ProjectCard = ({ project, index }) => {
         mouseY.set(clientY - top);
     }
 
-    const handleCardClick = (e) => {
-        // Prevent navigation if clicking on a specific link like Github
-        if (e.target.closest('a') && e.target.closest('a').getAttribute('target') === '_blank') return;
-        
-        navigate(`/project/${project.id}`);
-    };
-
     return (
         <motion.div
-            className="group block w-full mb-24 md:mb-40 last:mb-0 relative cursor-pointer"
+            className="group block w-full mb-24 md:mb-40 last:mb-0 relative"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            onClick={handleCardClick}
         >
             <div 
                 className={`relative flex flex-col gap-12 md:gap-20 items-center ${
