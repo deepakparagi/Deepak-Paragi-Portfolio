@@ -38,9 +38,20 @@ const skills = [
         icon: Wrench,
         items: [
             { name: "Git & GitHub", level: 90 },
-            { name: "Docker", level: 70 },
-            { name: "Vercel / CI-CD", level: 80 },
-            { name: "Figma", level: 75 }
+            { name: "Docker", level: 75 },
+            { name: "Vercel / CI-CD", level: 85 },
+            { name: "Linux / Bash", level: 80 }
+        ] 
+    },
+    { 
+        category: "AI Engineering",
+        icon: Bot,
+        items: [
+            { name: "Antigravity", level: 95 },
+            { name: "Claude / GPT-4", level: 90 },
+            { name: "OpenAI API", level: 85 },
+            { name: "Codex / Copilot", level: 90 },
+            { name: "Gemma / Llama", level: 80 }
         ] 
     }
 ];
@@ -58,7 +69,7 @@ const Skills = () => {
                     </div>
                 </ScrollReveal>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 md:gap-8">
                     {skills.map((skillGroup, index) => (
                         <ScrollReveal key={index} delay={index * 0.1} width="100%">
                             <div className="group h-full p-8 rounded-sm bg-surface/50 backdrop-blur-sm border border-primary/5 hover:border-accent/30 transition-all duration-500 relative overflow-hidden">

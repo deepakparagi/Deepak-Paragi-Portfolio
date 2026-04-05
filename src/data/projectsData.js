@@ -16,14 +16,14 @@ export const projectsData = [
         image: shingriImg, // The screenshot sent by user
         focalPoint: "object-center",
         featured: true,
-        period: "2024",
+        period: "2026",
         overview: "A high-end real estate platform for Shingri Developers offering a digital showcase of luxury architectural projects, incorporating smooth animations and deep brand aesthetics.",
         challenge: "Developing a digital presence that reflects luxury and high-end real estate while ensuring exceptional performance and accessibility.",
         solution: "Engineered a performant Next.js application with a focus on typography, generous negative space, and custom CSS-based animations to create a premium, award-winning user experience.",
         stack: ["React", "Next.js", "TailwindCSS", "Framer Motion"],
         metrics: {
             technologies: 4,
-            year: 2024
+            year: 2026
         },
         lessonsLearned: [
             "Premium aesthetics heavily rely on carefully tuned typography and exact spacing",
