@@ -113,12 +113,13 @@ const Navbar = () => {
             {/* Mobile Fullscreen Menu */}
             <AnimatePresence>
                 {isOpen && (
-                    <motion.div
+                        <motion.div
                         variants={menuVars}
                         initial="initial"
                         animate="animate"
                         exit="exit"
-                        className="fixed inset-0 bg-background origin-top pointer-events-auto flex flex-col justify-center items-center md:hidden"
+                        className="fixed inset-0 origin-top pointer-events-auto flex flex-col justify-center items-center md:hidden"
+                        style={{ backgroundColor: 'rgb(var(--background))', color: 'rgb(var(--primary))' }}
                     >
                         <motion.div
                             variants={containerVars}
@@ -132,7 +133,8 @@ const Navbar = () => {
                                     <motion.div variants={mobileLinkVars}>
                                         <button
                                             onClick={() => handleScroll(item.toLowerCase())}
-                                            className="text-5xl font-display font-medium text-primary hover:text-accent transition-colors bg-transparent border-none cursor-pointer"
+                                            className="text-5xl font-display font-medium hover:text-accent transition-colors bg-transparent border-none cursor-pointer"
+                                            style={{ color: 'rgb(var(--primary))' }}
                                             aria-label={`Navigate to ${item === 'Projects' ? 'Work' : item} section`}
                                         >
                                             {item === 'Projects' ? 'Work' : item}

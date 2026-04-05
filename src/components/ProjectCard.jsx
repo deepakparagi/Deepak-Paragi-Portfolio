@@ -1,108 +1,144 @@
-import { motion } from 'framer-motion';
+import { motion, useMotionTemplate, useMotionValue } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight, Github, Star } from 'lucide-react';
 import PropTypes from 'prop-types';
 import LazyImage from './LazyImage';
 
 const ProjectCard = ({ project, index }) => {
+    const mouseX = useMotionValue(0);
+    const mouseY = useMotionValue(0);
+
+    function handleMouseMove({ currentTarget, clientX, clientY }) {
+        const { left, top } = currentTarget.getBoundingClientRect();
+        mouseX.set(clientX - left);
+        mouseY.set(clientY - top);
+    }
+
     return (
         <motion.div
-            className="group block w-full mb-12 last:mb-0 relative"
+            className="group block w-full mb-24 md:mb-40 last:mb-0 relative"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
-            whileHover={{ y: -12, scale: 1.02 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
-            <div className="bg-surface rounded-3xl border border-primary/5 p-8 md:p-12 flex flex-col md:flex-row gap-8 md:gap-16 items-center transition-all duration-500 hover:border-primary/20 relative overflow-hidden">
-
-                {/* Glow Effect */}
-                <motion.div
-                    className="absolute inset-0 bg-gradient-to-tr from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                    style={{ filter: 'blur(20px)' }}
-                />
-
-                {/* Left: Content */}
-                <div className="flex-1 flex flex-col gap-6 order-2 md:order-1 self-center">
+            <div 
+                className={`relative flex flex-col gap-12 md:gap-20 items-center ${
+                    index % 2 === 1 ? 'md:flex-row-reverse' : 'md:flex-row'
+                }`}
+                onMouseMove={handleMouseMove}
+            >
+                {/* Content */}
+                <div className={`flex-1 flex flex-col gap-6 relative z-10 w-full order-2 md:order-none ${index % 2 === 1 ? 'md:pl-8 lg:pl-16' : 'md:pr-8 lg:pr-16'}`}>
                     <div className="flex items-center gap-3 mb-2">
-                        <span className="font-mono text-xs font-semibold text-accent uppercase tracking-widest px-3 py-1 bg-accent/5 rounded-full border border-accent/10">
+                        <span className="font-mono text-xs font-semibold text-secondary uppercase tracking-widest px-3 py-1 bg-surface rounded-full border border-primary/5">
                             {project.category}
                         </span>
                         {project.featured && (
-                            <span className="flex items-center gap-1.5 font-mono text-xs font-semibold text-primary uppercase tracking-widest px-3 py-1 bg-primary/5 rounded-full border border-primary/10">
-                                <Star size={12} className="fill-primary" />
+                            <span className="flex items-center gap-1.5 font-mono text-xs font-semibold text-accent uppercase tracking-widest px-3 py-1 bg-accent/5 rounded-full border border-accent/20">
+                                <Star size={12} className="fill-accent" />
                                 Featured
                             </span>
                         )}
                     </div>
 
-                    <h3 className="text-3xl md:text-4xl font-display font-medium text-primary leading-tight">
+                    <h3 className="text-4xl md:text-5xl lg:text-6xl font-display font-medium text-primary leading-[1.1] transition-transform duration-500 group-hover:translate-x-4">
+                        <span className="text-accent/30 mr-4 tabular-nums">0{index + 1} /</span>
                         {project.title}
                     </h3>
 
-                    <p className="text-secondary text-base md:text-lg leading-relaxed font-light line-clamp-3">
-                        {project.description}
-                    </p>
+                    <div className="relative mt-4">
+                        <div className="space-y-4">
+                            {project.challenge && project.solution ? (
+                                <>
+                                    <div className="pl-4 border-l border-primary/10 mb-4">
+                                        <p className="text-secondary/60 text-sm font-mono uppercase tracking-widest mb-2">The Problem</p>
+                                        <p className="text-secondary text-base leading-relaxed font-light line-clamp-2">{project.challenge}</p>
+                                    </div>
+                                    <div className="pl-4 border-l border-accent/30">
+                                        <p className="text-accent text-sm font-mono uppercase tracking-widest mb-2">The Solution</p>
+                                        <p className="text-primary/90 text-base leading-relaxed font-light line-clamp-3">{project.solution}</p>
+                                    </div>
+                                </>
+                            ) : (
+                                <p className="text-secondary text-lg leading-relaxed font-light line-clamp-4">
+                                    {project.description}
+                                </p>
+                            )}
+                        </div>
+                    </div>
 
                     <div className="flex flex-wrap gap-2 mt-4">
                         {project.tags.map((tag, i) => (
                             <span
                                 key={i}
-                                className="px-3 py-1.5 bg-background border border-primary/5 rounded-md text-xs font-medium text-secondary/70 transition-colors duration-300"
+                                className="px-3 py-1 bg-surface border border-primary/5 rounded-sm text-xs font-mono text-secondary hover:text-primary hover:border-primary/20 transition-colors duration-300"
                             >
                                 {tag}
                             </span>
                         ))}
                     </div>
 
-                    <div className="flex flex-wrap gap-4 mt-6">
+                    <div className="flex flex-wrap gap-6 mt-8">
                         <Link
                             to={`/project/${project.id}`}
-                            className="flex items-center gap-2 px-6 py-3 bg-primary text-background rounded-full font-medium hover:opacity-90 transition-opacity"
+                            className="group/btn relative pb-1 font-mono text-xs tracking-widest uppercase text-primary hover:text-accent transition-colors flex items-center gap-2"
                             aria-label={`View ${project.title} case study`}
                         >
-                            Case Study <ArrowUpRight size={18} />
+                            Case Study <ArrowUpRight size={14} className="transition-transform group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1" />
+                            <span className="absolute bottom-0 left-0 w-full h-[1px] bg-accent origin-right scale-x-0 transition-transform duration-500 ease-out group-hover/btn:scale-x-100 group-hover/btn:origin-left"></span>
                         </Link>
-                        <a
-                            href={project.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-2 px-6 py-3 border border-primary/20 rounded-full font-medium hover:bg-surface transition-colors"
-                            aria-label={`View ${project.title} live demo`}
-                        >
-                            Live Demo <ArrowUpRight size={18} />
-                        </a>
-                        {project.github && (
+                        
+                        {project.link !== '#' && (
                             <a
-                                href={project.github}
+                                href={project.link}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex items-center gap-2 px-6 py-3 border border-primary/20 rounded-full font-medium hover:bg-surface transition-colors"
-                                aria-label={`View ${project.title} on GitHub`}
+                                className="group/btn relative pb-1 font-mono text-xs tracking-widest uppercase text-secondary hover:text-primary transition-colors flex items-center gap-2"
+                                aria-label={`View ${project.title} live demo`}
                             >
-                                <Github size={18} />
-                                Code
+                                Live Site <ArrowUpRight size={14} className="transition-transform group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1" />
                             </a>
                         )}
                     </div>
                 </div>
 
-                {/* Right: Image */}
+                {/* Image Frame */}
                 <Link
                     to={`/project/${project.id}`}
-                    className="w-full md:w-[55%] aspect-[16/10] bg-background rounded-2xl overflow-hidden relative order-1 md:order-2 border border-primary/5 shadow-inner cursor-pointer group/image"
+                    className="w-full md:w-[60%] aspect-[4/3] md:aspect-[16/10] p-2 md:p-3 bg-white/[0.02] backdrop-blur-md rounded-[1.5rem] md:rounded-[2rem] border border-white/5 shadow-2xl relative block group/image transition-transform duration-700 ease-out hover:-translate-y-2 order-1 md:order-none"
                 >
-                    <div className="absolute inset-0 bg-primary/0 group-hover/image:bg-primary/0 transition-colors duration-500 z-10" />
-                    <div className="absolute inset-0 bg-gradient-to-tr from-primary/5 to-transparent opacity-100 group-hover/image:opacity-0 transition-opacity duration-500 z-20 pointer-events-none mix-blend-multiply" />
+                    <div className="relative w-full h-full rounded-[1rem] md:rounded-[1.5rem] overflow-hidden bg-background ring-1 ring-white/10">
+                        <motion.div
+                            className="pointer-events-none absolute -inset-px rounded-[1rem] md:rounded-[1.5rem] opacity-0 transition duration-300 group-hover/image:opacity-100 z-30"
+                            style={{
+                                background: useMotionTemplate`
+                                    radial-gradient(
+                                        650px circle at ${mouseX}px ${mouseY}px,
+                                        rgba(255,255,255,0.15),
+                                        transparent 80%
+                                    )
+                                `,
+                            }}
+                        />
+                        
+                        <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent z-10 pointer-events-none opacity-50" />
 
-                    <LazyImage
-                        src={project.image}
-                        alt={project.title}
-                        className="w-full h-full object-cover transform scale-100 group-hover/image:scale-105 transition-transform duration-700 ease-in-out"
-                    />
+                        <LazyImage
+                            src={project.image}
+                            alt={project.title}
+                            className={`w-full h-full object-cover transform scale-[1.01] group-hover/image:scale-[1.05] transition-transform duration-[1.5s] ease-[cubic-bezier(0.16,1,0.3,1)] grayscale-[10%] group-hover/image:grayscale-0 ${project.focalPoint || 'object-center'}`}
+                        />
 
-                    <div className="absolute top-4 right-4 z-30 bg-surface/90 backdrop-blur-sm p-3 rounded-full shadow-lg opacity-0 group-hover/image:opacity-100 transform translate-y-4 group-hover/image:translate-y-0 transition-all duration-500 ease-out border border-primary/5">
-                        <ArrowUpRight size={20} className="text-primary" />
+                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 bg-primary/10 backdrop-blur-md p-6 rounded-full shadow-lg opacity-0 scale-90 group-hover/image:opacity-100 group-hover/image:scale-100 md:opacity-0 md:group-hover/image:opacity-100 transition-all duration-[0.6s] ease-[cubic-bezier(0.16,1,0.3,1)] border border-primary/10 text-primary pointer-events-none">
+                            <span className="font-mono text-xs uppercase tracking-[0.2em] block whitespace-nowrap">Explore Project</span>
+                        </div>
+                        
+                        {/* Mobile 'Tap to View' Indicator */}
+                        <div className="absolute bottom-4 right-4 z-30 md:hidden bg-background/80 backdrop-blur-sm px-3 py-1.5 rounded-full border border-primary/10 flex items-center gap-2">
+                             <ArrowUpRight size={12} className="text-accent" />
+                             <span className="font-mono text-[10px] uppercase tracking-widest text-primary">Explore</span>
+                        </div>
                     </div>
                 </Link>
 
@@ -121,7 +157,10 @@ ProjectCard.propTypes = {
         link: PropTypes.string.isRequired,
         github: PropTypes.string,
         image: PropTypes.string.isRequired,
-        featured: PropTypes.bool
+        focalPoint: PropTypes.string,
+        featured: PropTypes.bool,
+        challenge: PropTypes.string,
+        solution: PropTypes.string
     }).isRequired,
     index: PropTypes.number.isRequired
 };

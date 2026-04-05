@@ -10,18 +10,22 @@ const Projects = () => {
             <div className="relative z-10 px-6 md:px-12 max-w-screen-2xl mx-auto w-full">
 
                 {/* Header Section */}
-                <div className="mb-12 md:mb-20 grid md:grid-cols-2 gap-12 items-end">
-                    <ScrollReveal width="100%">
-                        <h2 className="text-sm font-medium text-secondary mb-4 uppercase tracking-wider">01 / Selected Work</h2>
-                        <h3 className="text-4xl md:text-5xl font-display font-semibold text-primary leading-tight">
-                            Digital products <br /> crafted with care.
-                        </h3>
-                    </ScrollReveal>
-                    <ScrollReveal delay={0.2} width="100%">
-                        <p className="text-secondary text-lg leading-relaxed max-w-md md:ml-auto">
-                            A selection of projects where I've helped bridge the gap between design and engineering.
-                        </p>
-                    </ScrollReveal>
+                <div className="mb-16 md:mb-32 grid md:grid-cols-12 gap-8 md:gap-12 items-end">
+                    <div className="md:col-span-8">
+                        <ScrollReveal width="100%">
+                            <h2 className="text-sm font-mono text-secondary mb-4 uppercase tracking-[0.2em]">01 / Selected Work</h2>
+                            <h3 className="text-4xl md:text-6xl font-display font-medium text-primary leading-[1.1]">
+                                Engineered experiences <br /> <span className="text-secondary italic font-light">crafted with precision.</span>
+                            </h3>
+                        </ScrollReveal>
+                    </div>
+                    <div className="md:col-span-4">
+                        <ScrollReveal delay={0.2} width="100%">
+                            <p className="text-secondary/80 font-sans font-light text-lg leading-relaxed md:ml-auto">
+                                A selection of projects where I've bridged the gap between complex engineering systems and beautiful user interfaces.
+                            </p>
+                        </ScrollReveal>
+                    </div>
                 </div>
 
                 {/* Projects List */}

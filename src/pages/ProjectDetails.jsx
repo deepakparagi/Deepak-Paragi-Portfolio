@@ -1,3 +1,4 @@
+import { useLayoutEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Github, ExternalLink, Calendar, Code2 } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -5,7 +6,23 @@ import { getProjectById, projectsData } from '../data/projectsData';
 
 const ProjectDetails = () => {
     const { id } = useParams();
-    const project = getProjectById(id) || projectsData[0]; // Fallback to first project
+    const project = getProjectById(id);
+
+    useLayoutEffect(() => {
+        window.scrollTo(0, 0);
+        // If Lenis is being used globally, we might need a small delay or a window trigger
+        const timeout = setTimeout(() => window.scrollTo(0, 0), 10);
+        return () => clearTimeout(timeout);
+    }, [id]);
+
+    if (!project) {
+        return (
+            <div className="min-h-screen bg-background flex flex-col items-center justify-center p-6 text-center">
+                <h1 className="text-4xl font-display mb-4">Project Not Found</h1>
+                <Link to="/" className="text-accent underline">Back to Home</Link>
+            </div>
+        );
+    }
 
     // Get related projects (same category, excluding current)
     const relatedProjects = projectsData.filter(
@@ -13,8 +30,8 @@ const ProjectDetails = () => {
     ).slice(0, 2);
 
     return (
-        <div className="min-h-screen bg-background text-primary p-6 md:p-12">
-            <Link to="/" className="inline-flex items-center gap-2 text-secondary hover:text-primary transition-colors mb-12" aria-label="Back to home">
+        <div className="min-h-screen bg-background text-primary p-6 md:p-12 relative z-[100] isolate">
+            <Link to="/" className="inline-flex items-center gap-2 text-secondary hover:text-primary transition-colors mb-12 relative z-[110]" aria-label="Back to home">
                 <ArrowLeft size={20} />
                 <span>Back to Home</span>
             </Link>

@@ -8,8 +8,9 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-        display: ['Inter', 'sans-serif'],
+        sans: ['DM Mono', 'monospace'],
+        display: ['Cormorant Garamond', 'serif'],
+        mono: ['DM Mono', 'monospace'],
       },
       colors: {
         background: 'rgb(var(--background) / <alpha-value>)',

@@ -1,9 +1,62 @@
 import bipinSchoolImg from '../assets/bipin_school_hero.png';
 import project2Fitai from '../assets/Screenshot (63).png';
-import witnestImg from '../assets/witnest_joke_generator.webp';
 import signifyImg from '../assets/signify_studio.webp';
+import shingriImg from '../assets/shingri.png';
+import gadagImg from '../assets/gadag_info.png';
 
 export const projectsData = [
+    {
+        id: "00",
+        title: "Shingri Developers",
+        category: "Full Stack Development",
+        description: "A premium luxury real estate platform designed with high-end editorial aesthetics. Features dynamic project showcases, smooth scroll animations, and secure lead generation.",
+        tags: ["Next.js", "Tailwind CSS", "Framer Motion", "GSAP"],
+        link: "https://shingri-developers.vercel.app/",
+        github: "https://github.com/deepakparagi",
+        image: shingriImg, // The screenshot sent by user
+        focalPoint: "object-center",
+        featured: true,
+        period: "2024",
+        overview: "A high-end real estate platform for Shingri Developers offering a digital showcase of luxury architectural projects, incorporating smooth animations and deep brand aesthetics.",
+        challenge: "Developing a digital presence that reflects luxury and high-end real estate while ensuring exceptional performance and accessibility.",
+        solution: "Engineered a performant Next.js application with a focus on typography, generous negative space, and custom CSS-based animations to create a premium, award-winning user experience.",
+        stack: ["React", "Next.js", "TailwindCSS", "Framer Motion"],
+        metrics: {
+            technologies: 4,
+            year: 2024
+        },
+        lessonsLearned: [
+            "Premium aesthetics heavily rely on carefully tuned typography and exact spacing",
+            "Performance optimization is critical when using heavy graphical assets",
+            "Complex stagger reveals create a dramatic feeling of depth"
+        ]
+    },
+    {
+        id: "00-B",
+        title: "GADAG_INFO",
+        category: "Web Application",
+        description: "A breathtaking digital platform built for the 'GADAG_INFO' Instagram brand. Featuring an open-air museum of empires with deep editorial design, localization (English/Kannada), and dynamic story showcases.",
+        tags: ["React", "TailwindCSS", "Framer Motion", "i18n"],
+        link: "https://gadag.vercel.app/",
+        github: "https://github.com/deepakparagi",
+        image: gadagImg, // The screenshot sent by user
+        focalPoint: "object-center",
+        featured: true,
+        period: "2024",
+        overview: "A high-performance localized web experience documenting the soul of North Karnataka. Blends millennia of Chalukyan architecture with 2026-level digital aesthetics.",
+        challenge: "Creating an immersive, bilingual editorial experience that runs at 60fps while handling heavy image assets and complex scroll-driven storytelling.",
+        solution: "Implemented CSS-based language switching for zero-lag localization, Lenis for silky smooth scrolling, and aggressive asset optimization to ensure a 10/10 lighthouse score.",
+        stack: ["React", "Vite", "TailwindCSS", "Framer Motion"],
+        metrics: {
+            technologies: 4,
+            year: 2024
+        },
+        lessonsLearned: [
+            "CSS-driven localization provides significantly faster feedback than JS-state toggles.",
+            "Historical content demands high-contrast serif typography for maximum impact.",
+            "Horizontal scroll architectures enhance the feeling of a physical gallery."
+        ]
+    },
     {
         id: "01",
         title: "Bipin Chikkatti School",
@@ -13,6 +66,7 @@ export const projectsData = [
         link: "https://www.chikkattieducation.co.in/",
         github: "https://github.com/deepakparagi/bipin-chikkatti-school",
         image: bipinSchoolImg,
+        focalPoint: "object-center-top",
         featured: true,
         // Extended details for ProjectDetails page
         period: "2024",
@@ -34,6 +88,7 @@ export const projectsData = [
         link: "https://ai-fitness-coach-git-main-deepaks-projects-f551996f.vercel.app/",
         github: "https://github.com/deepakparagi/ai-fitness-coach",
         image: project2Fitai,
+        focalPoint: "object-center",
         featured: true,
         // Extended details for ProjectDetails page
         period: "2024",
@@ -51,32 +106,7 @@ export const projectsData = [
             "Balancing AI automation with user control enhances UX"
         ]
     },
-    {
-        id: "03",
-        title: "WitNest Joke Generator",
-        category: "Web Application",
-        description: "An interactive entertainment platform that fetches and displays jokes dynamically through external APIs with a clean, engaging user interface.",
-        tags: ["HTML", "CSS", "JavaScript", "API Integration"],
-        link: "https://witnest-joke-generator.vercel.app/",
-        github: "https://github.com/deepakparagi/witnest-joke-generator",
-        image: witnestImg,
-        featured: false,
-        // Extended details for ProjectDetails page
-        period: "2023",
-        overview: "An interactive entertainment platform fetching dynamic content via external APIs with a focus on clean UI and seamless user experience.",
-        challenge: "Creating a seamless and engaging user experience for consuming dynamic content from API responses while maintaining fast load times and error handling.",
-        solution: "Built a reactive UI that fetches and displays jokes instantly, with social sharing capabilities, error handling, and a minimalist design that puts content first.",
-        stack: ["HTML5", "CSS3", "JavaScript", "REST API"],
-        metrics: {
-            technologies: 3,
-            year: 2023
-        },
-        lessonsLearned: [
-            "API error handling is essential for good UX",
-            "Simple, focused interfaces often perform better than complex ones",
-            "Caching API responses improves performance"
-        ]
-    },
+
     {
         id: "04",
         title: "Signify Studio",
@@ -86,6 +116,7 @@ export const projectsData = [
         link: "https://signify-studio-wine.vercel.app/",
         github: "https://github.com/deepakparagi/signify-studio",
         image: signifyImg,
+        focalPoint: "object-center",
         featured: false,
         // Extended details for ProjectDetails page
         period: "2023",
