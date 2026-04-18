@@ -201,26 +201,37 @@ const Hero = ({ onResumeClick }) => {
                             </motion.button>
                         </Magnetic>
                         
-                        <Magnetic strength={isMobile ? 0 : 0.3}>
+                        {isMobile ? (
                             <motion.button
                                 onClick={onResumeClick}
-                                whileHover="hover"
                                 whileTap={{ scale: 0.95 }}
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.8, delay: 1.5, ease: [0.16, 1, 0.3, 1] }}
-                                className="group flex items-center gap-5 py-6 px-4 -ml-4 font-sans text-[10px] font-medium tracking-[0.3em] uppercase text-secondary hover:text-primary transition-all relative z-50 pointer-events-auto"
+                                className="group flex items-center gap-5 py-6 px-4 -ml-4 font-sans text-[10px] font-medium tracking-[0.3em] uppercase text-secondary active:text-primary relative z-[60] pointer-events-auto touch-action-manipulation"
                             >
-                                <motion.span 
-                                    variants={{
-                                        hover: { width: 48, backgroundColor: "var(--accent)" }
-                                    }}
-                                    initial={{ width: 32 }}
-                                    className="h-[1px] bg-secondary/30"
-                                />
+                                <span className="h-[1px] w-8 bg-secondary/30" />
                                 Get Resume
                             </motion.button>
-                        </Magnetic>
+                        ) : (
+                            <Magnetic strength={0.3}>
+                                <motion.button
+                                    onClick={onResumeClick}
+                                    whileHover="hover"
+                                    whileTap={{ scale: 0.95 }}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.8, delay: 1.5, ease: [0.16, 1, 0.3, 1] }}
+                                    className="group flex items-center gap-5 py-6 px-4 -ml-4 font-sans text-[10px] font-medium tracking-[0.3em] uppercase text-secondary hover:text-primary transition-all relative z-50 pointer-events-auto"
+                                >
+                                    <motion.span 
+                                        variants={{
+                                            hover: { width: 48, backgroundColor: "var(--accent)" }
+                                        }}
+                                        initial={{ width: 32 }}
+                                        className="h-[1px] bg-secondary/30"
+                                    />
+                                    Get Resume
+                                </motion.button>
+                            </Magnetic>
+                        )}
                     </div>
                 </motion.div>
 
