@@ -2,7 +2,7 @@ import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import { useState, useEffect } from 'react';
 import profileImg from '../assets/roman_reigns.jpg';
 
-const Hero = () => {
+const Hero = ({ onResumeClick }) => {
     const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
@@ -41,12 +41,12 @@ const Hero = () => {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
                     >
-                        <div className="flex items-center gap-3 mb-8">
-                            <span className="relative flex h-2.5 w-2.5">
-                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
-                                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-accent"></span>
+                        <div className="flex items-center gap-2.5 mb-8 opacity-60 hover:opacity-100 transition-opacity">
+                            <span className="relative flex h-1.5 w-1.5">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-40"></span>
+                                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-accent"></span>
                             </span>
-                            <span className="font-mono text-sm tracking-[0.2em] text-secondary uppercase">Available for work</span>
+                            <span className="font-mono text-[10px] tracking-[0.3em] text-secondary uppercase italic">Available for work</span>
                         </div>
 
                         <h1 className="text-6xl md:text-8xl lg:text-9xl font-display font-medium tracking-tighter leading-[0.95] mb-12 text-primary">
@@ -87,8 +87,7 @@ const Hero = () => {
                         transition={{ delay: 0.6, duration: 0.8 }}
                     >
                         <div className="flex flex-wrap gap-6 items-center">
-                            <a
-                                href="#projects"
+                            <button
                                 onClick={(e) => {
                                     e.preventDefault();
                                     document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
@@ -97,14 +96,13 @@ const Hero = () => {
                             >
                                 <span className="relative z-10 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-[250%]">View Projects</span>
                                 <span className="absolute inset-0 z-10 flex items-center justify-center transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] translate-y-full group-hover:translate-y-0">View Projects</span>
-                            </a>
+                            </button>
                             
-                            <a
-                                href="/deepak-resume.pdf"
-                                download
+                            <button
+                                onClick={onResumeClick}
                                 className="group relative px-6 py-3 font-mono text-sm tracking-widest uppercase border border-primary/20 hover:border-accent text-secondary hover:text-primary transition-colors flex items-center justify-center gap-2 min-w-[200px]"
                             >
-                                <span>Download Resume</span>
+                                <span>View Resume</span>
                                 <span className="relative w-4 h-4 flex items-center justify-center overflow-hidden">
                                      <motion.svg 
                                         className="w-full h-full text-accent" 
@@ -117,7 +115,7 @@ const Hero = () => {
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                                      </motion.svg>
                                 </span>
-                            </a>
+                            </button>
                             
                             <a
                                 href="#contact"
@@ -134,7 +132,7 @@ const Hero = () => {
                     </motion.div>
                 </motion.div>
 
-                {/* Right Column: Minimalist Visual (Optional, can be a profile shot or empty) */}
+                {/* Right Column: Original Visual */}
                 <motion.div
                     style={{ y: y1 }}
                     initial={{ opacity: 0, scale: 0.95 }}
@@ -142,8 +140,6 @@ const Hero = () => {
                     transition={{ delay: 0.2, duration: 1, ease: [0.25, 0.46, 0.45, 0.94] }}
                     className="relative block max-w-sm md:max-w-md mx-auto md:ml-auto mt-12 md:mt-0"
                 >
-                    {/* Placeholder for Profile Image or Minimal Graphic */}
-                    {/* Profile Image */}
                     <div className="md:aspect-[3/4] rounded-lg bg-surface border border-primary/5 overflow-hidden relative grayscale hover:grayscale-0 transition-all duration-700">
                         <img
                             src={profileImg}

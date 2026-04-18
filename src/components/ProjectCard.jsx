@@ -1,10 +1,11 @@
 import { motion, useMotionTemplate, useMotionValue } from 'framer-motion';
-import { Link, useNavigate } from 'react-router-dom';
-import { ArrowUpRight, Github, Star } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { ArrowUpRight, Star } from 'lucide-react';
 import PropTypes from 'prop-types';
 import LazyImage from './LazyImage';
+import Skeleton from './Skeleton';
 
-const ProjectCard = ({ project, index }) => {
+const ProjectCard = ({ project, index, isLoading = false }) => {
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
 
@@ -12,6 +13,32 @@ const ProjectCard = ({ project, index }) => {
         const { left, top } = currentTarget.getBoundingClientRect();
         mouseX.set(clientX - left);
         mouseY.set(clientY - top);
+    }
+
+    if (isLoading) {
+        return (
+            <div className={`relative flex flex-col gap-12 md:gap-20 items-center mb-24 md:mb-40 ${
+                index % 2 === 1 ? 'md:flex-row-reverse' : 'md:flex-row'
+            }`}>
+                <div className="flex-1 w-full space-y-6">
+                    <Skeleton variant="rect" className="w-24 h-6 rounded-full" />
+                    <Skeleton variant="rect" className="w-3/4 h-12 md:h-16" />
+                    <div className="space-y-3">
+                        <Skeleton variant="text" />
+                        <Skeleton variant="text" />
+                        <Skeleton variant="text" className="w-5/6" />
+                    </div>
+                    <div className="flex gap-2">
+                        <Skeleton variant="rect" className="w-16 h-6" />
+                        <Skeleton variant="rect" className="w-20 h-6" />
+                        <Skeleton variant="rect" className="w-16 h-6" />
+                    </div>
+                </div>
+                <div className="w-full md:w-[60%] aspect-[4/3] md:aspect-[16/10]">
+                    <Skeleton variant="rect" className="w-full h-full rounded-[1.5rem] md:rounded-[2rem]" />
+                </div>
+            </div>
+        );
     }
 
     return (
@@ -162,8 +189,9 @@ ProjectCard.propTypes = {
         featured: PropTypes.bool,
         challenge: PropTypes.string,
         solution: PropTypes.string
-    }).isRequired,
-    index: PropTypes.number.isRequired
+    }),
+    index: PropTypes.number.isRequired,
+    isLoading: PropTypes.bool
 };
 
 export default ProjectCard;

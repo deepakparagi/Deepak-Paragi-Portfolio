@@ -13,7 +13,7 @@ const About = () => {
                     <ScrollReveal width="100%">
                         <div className="grid md:grid-cols-12 gap-12 lg:gap-20 items-start">
                             <div className="md:col-span-7">
-                                <h2 className="text-sm font-mono text-secondary mb-8 uppercase tracking-[0.2em]">02 / Origin Story</h2>
+                                <h2 className="text-sm font-mono text-secondary mb-8 uppercase tracking-[0.2em]">02 / System Architecture</h2>
                                 
                                 <div className="overflow-hidden mb-12">
                                     <motion.h3 
@@ -21,22 +21,22 @@ const About = () => {
                                         whileInView={{ y: 0 }}
                                         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                                         viewport={{ once: true }}
-                                        className="text-4xl md:text-6xl font-display font-medium text-primary leading-[1.1]"
+                                        className="text-4xl md:text-6xl font-display font-medium text-primary leading-[1.05]"
                                     >
-                                        Obsessed with solving hard problems. <br className="hidden md:block" />
-                                        <span className="text-secondary italic font-light">Engineering systems that scale.</span>
+                                        Architecting intelligence. <br className="hidden md:block" />
+                                        <span className="text-secondary italic font-light">Engineering systems that redefine autonomy.</span>
                                     </motion.h3>
                                 </div>
 
                                 <div className="space-y-8 text-lg md:text-xl text-secondary leading-relaxed font-sans font-light max-w-2xl relative">
                                     <p className="indent-0">
-                                        My journey started with a fascination for how complex algorithms could untangle real-world chaos. Today, I specialize in building <strong className="text-primary font-medium">Agentic AI systems</strong> and robust <strong className="text-primary font-medium">AI MCP architectures</strong> that turn raw models into autonomous, production-ready solutions.
+                                        I operate at the intersection of **Artificial Intelligence** and **Production-Grade Engineering**. As an AI & Machine Learning specialist, I don't just build models—I architect the ecosystems that allow them to live, breathe, and act autonomously. My work is focused on the deployment of <strong className="text-primary font-medium italic underline decoration-accent/30 decoration-2 underline-offset-4">Agentic Workflows</strong> and <strong className="text-primary font-medium">Full Stack distributed systems</strong> that scale.
                                     </p>
                                     <p>
-                                        As a final-year AI & Machine Learning engineer, I don't just train models—I architect the entire ecosystem around them. My <strong className="text-primary font-medium">Full Stack capabilities</strong> bridged through high-performance <strong className="text-primary font-medium">Framer Motion</strong> interfaces allowed me to create digital experiences that feel as intelligent as the backends powering them.
+                                        My engineering philosophy is rooted in **Materiality and Precision**. Whether I'm orchestrating a complex <strong className="text-primary font-medium">RAG (Retrieval-Augmented Generation) pipeline</strong> or crafting a high-performance web interface, I prioritize absolute system integrity and sub-millisecond efficiency. I believe that the next generation of digital experiences won't just be "smart"—they will be sentient-like, proactive, and perfectly integrated into our physical reality.
                                     </p>
                                     <p>
-                                        I operate with a precision-first mindset. Whether I'm deploying a scalable microservice or orchestrating a complex <strong className="text-primary font-medium">AI Agent architecture</strong>, I'm obsessed with the absolute quality of the final product. No shortcuts. Only elite-level engineering.
+                                        I am a final-year engineer currently pushing the boundaries of what is possible with **Autonomous Agents** and **MCP (Model Context Protocol)**. I operate with a zero-compromise mindset on code quality, performance metrics, and aesthetic excellence. I don't just write code; I design the future of human-machine interaction.
                                     </p>
                                 </div>
                             </div>
@@ -46,22 +46,19 @@ const About = () => {
                                     <img 
                                         src={aboutImg} 
                                         alt="Abstract engineering visualization" 
-                                        className="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-1000 scale-105 group-hover:scale-100"
+                                        className="w-full h-full object-cover grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-1000 scale-105 group-hover:scale-100"
                                     />
-                                    {/* Noise overlay for that 2026 rough texture */}
-                                    <div className="absolute inset-0 z-20 pointer-events-none opacity-[0.03] mix-blend-overlay bg-[url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E')]"></div>
+                                    {/* Noise overlay for that tactile texture */}
+                                    <div className="absolute inset-0 z-20 pointer-events-none opacity-[0.05] mix-blend-overlay bg-[url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E')]"></div>
                                     
-                                    {/* Corner Accents */}
-                                    <div className="absolute top-4 left-4 w-4 h-4 border-t border-l border-primary/50 z-30"></div>
-                                    <div className="absolute bottom-4 right-4 w-4 h-4 border-b border-r border-primary/50 z-30"></div>
+                                    {/* Minimalist Accents */}
+                                    <div className="absolute top-0 right-0 p-4 font-mono text-[10px] text-accent/20 tracking-widest uppercase">Node_v26.7</div>
+                                    <div className="absolute bottom-4 left-4 w-4 h-4 border-t border-r border-accent/40 z-30 opacity-40"></div>
                                 </div>
                             </div>
                         </div>
                     </ScrollReveal>
                 </div>
-
-                {/* Redundant sections removed to favor dedicated Experience & Chronology section */}
-
             </div>
         </section>
     );

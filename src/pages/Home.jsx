@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import Hero from '../sections/Hero';
 import About from '../sections/About';
 import Skills from '../sections/Skills';
@@ -8,21 +9,40 @@ import GithubStats from '../sections/GithubStats';
 import Contact from '../sections/Contact';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import ResumeModal from '../components/ResumeModal';
 
 const Home = () => {
+    const [isResumeOpen, setIsResumeOpen] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        // Simulated loading state for skeleton screen demonstration
+        const timer = setTimeout(() => {
+            setIsLoading(false);
+        }, 1500);
+        return () => clearTimeout(timer);
+    }, []);
+
+    const toggleResume = () => setIsResumeOpen(!isResumeOpen);
+
     return (
-        <>
-            <Navbar />
-            <Hero />
+        <div className="relative">
+            <Navbar onResumeClick={toggleResume} />
+            <Hero onResumeClick={toggleResume} />
             <About />
             <Skills />
             <Experience />
-            <Projects />
+            <Projects isLoading={isLoading} />
             <Certifications />
-            <GithubStats />
-            <Contact />
+            <GithubStats isLoading={isLoading} />
+            <Contact onResumeClick={toggleResume} />
             <Footer />
-        </>
+
+            <ResumeModal 
+                isOpen={isResumeOpen} 
+                onClose={() => setIsResumeOpen(false)} 
+            />
+        </div>
     );
 };
 

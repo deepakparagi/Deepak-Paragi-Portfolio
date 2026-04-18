@@ -4,10 +4,9 @@ import { Menu, X } from 'lucide-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Magnetic from './Magnetic';
 import ThemeToggle from './ThemeToggle';
-
 import Logo from './Logo';
 
-const Navbar = () => {
+const Navbar = ({ onResumeClick }) => {
     const [isOpen, setIsOpen] = useState(false);
     const location = useLocation();
     const navigate = useNavigate();
@@ -26,6 +25,11 @@ const Navbar = () => {
             if (element) element.scrollIntoView({ behavior: 'smooth' });
         }
         setIsOpen(false);
+    };
+
+    const handleResumeClick = () => {
+        setIsOpen(false);
+        onResumeClick();
     };
 
     const NavItem = ({ name, id }) => (
@@ -91,6 +95,20 @@ const Navbar = () => {
                 <NavItem name="About" id="about" />
                 <NavItem name="Work" id="projects" />
                 <NavItem name="Contact" id="contact" />
+                
+                <Magnetic>
+                    <button
+                        onClick={onResumeClick}
+                        className="relative group p-2 flex items-center gap-2 bg-transparent border-none cursor-pointer text-inherit font-inherit text-accent"
+                        aria-label="View Resume"
+                    >
+                        Resume
+                        <motion.span
+                            className="absolute bottom-0 left-0 w-full h-0.5 bg-accent origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"
+                            layoutId="underline-resume"
+                        />
+                    </button>
+                </Magnetic>
 
                 <div className="pl-4 border-l border-primary/10">
                     <ThemeToggle />
@@ -128,14 +146,14 @@ const Navbar = () => {
                             exit="initial"
                             className="flex flex-col items-center gap-8"
                         >
-                            {['About', 'Projects', 'Contact'].map((item) => (
+                            {['About', 'Projects', 'Contact', 'Resume'].map((item) => (
                                 <div key={item} className="overflow-hidden">
                                     <motion.div variants={mobileLinkVars}>
                                         <button
-                                            onClick={() => handleScroll(item.toLowerCase())}
-                                            className="text-5xl font-display font-medium hover:text-accent transition-colors bg-transparent border-none cursor-pointer"
-                                            style={{ color: 'rgb(var(--primary))' }}
-                                            aria-label={`Navigate to ${item === 'Projects' ? 'Work' : item} section`}
+                                            onClick={() => item === 'Resume' ? handleResumeClick() : handleScroll(item.toLowerCase())}
+                                            className={`text-5xl font-display font-medium hover:text-accent transition-colors bg-transparent border-none cursor-pointer ${item === 'Resume' ? 'text-accent' : ''}`}
+                                            style={{ color: item === 'Resume' ? 'rgb(var(--accent))' : 'rgb(var(--primary))' }}
+                                            aria-label={item === 'Resume' ? 'View Resume' : `Navigate to ${item === 'Projects' ? 'Work' : item} section`}
                                         >
                                             {item === 'Projects' ? 'Work' : item}
                                         </button>

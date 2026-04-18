@@ -3,7 +3,7 @@ import ScrollReveal from '../components/ScrollReveal';
 import ProjectCard from '../components/ProjectCard';
 import { projectsData } from '../data/projectsData';
 
-const Projects = () => {
+const Projects = ({ isLoading }) => {
     return (
         <section id="projects" className="relative py-16 md:py-32 flex flex-col justify-center overflow-hidden bg-background">
 
@@ -30,13 +30,20 @@ const Projects = () => {
 
                 {/* Projects List */}
                 <div className="flex flex-col gap-8">
-                    {projectsData.map((proj, i) => (
-                        <ProjectCard
-                            key={proj.id}
-                            index={i}
-                            project={proj}
-                        />
-                    ))}
+                    {isLoading ? (
+                        Array.from({ length: 3 }).map((_, i) => (
+                            <ProjectCard key={`skeleton-${i}`} isLoading={true} index={i} />
+                        ))
+                    ) : (
+                        projectsData.map((proj, i) => (
+                            <ProjectCard
+                                key={proj.id}
+                                index={i}
+                                project={proj}
+                                isLoading={false}
+                            />
+                        ))
+                    )}
                 </div>
 
                 <div className="mt-12 md:mt-24 text-center">
