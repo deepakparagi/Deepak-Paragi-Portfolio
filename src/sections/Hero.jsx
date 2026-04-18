@@ -53,9 +53,8 @@ const Hero = ({ onResumeClick }) => {
 
     return (
         <section 
-            ref={containerRef}
             onMouseMove={handleMouseMove}
-            className="min-h-[100dvh] flex flex-col justify-center px-6 md:px-12 relative overflow-hidden pt-12 md:pt-16 bg-background"
+            className="min-h-[100dvh] flex flex-col justify-center px-6 md:px-12 relative overflow-hidden pt-28 md:pt-36 bg-background"
         >
             {/* Elite HUD Decor - Mobile & Desktop */}
             <div className="absolute inset-0 pointer-events-none overflow-hidden sm:visible">
@@ -105,7 +104,7 @@ const Hero = ({ onResumeClick }) => {
                     className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-accent/30 rounded-full blur-[100px] md:blur-[160px] pointer-events-none z-0 mix-blend-screen"
                 />
                 <motion.div style={{ y: y2 }}>
-                    <div className="flex items-center gap-4 mb-12 sm:mb-16 mt-4 sm:mt-0">
+                    <div className="flex items-center gap-4 mb-8 sm:mb-12 mt-4 sm:mt-0">
                         <div className="flex items-center gap-2.5">
                             <span className="relative flex h-2 w-2">
                                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-40"></span>
@@ -140,9 +139,9 @@ const Hero = ({ onResumeClick }) => {
                             <motion.span
                                 key={i}
                                 initial={{ opacity: 0, x: -20 }}
-                                animate={{ opacity: 0.3, x: 0 }}
+                                animate={{ opacity: 0.25, x: 0 }}
                                 transition={{ duration: 1.2, delay: 0.6 + i * 0.15, ease: [0.16, 1, 0.3, 1] }}
-                                className="block font-display font-normal text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[1.0] transition-all duration-700 hover:opacity-100 hover:text-accent/40"
+                                className="block font-display font-normal text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.0] transition-all duration-700 hover:opacity-100 hover:text-accent/40"
                             >
                                 {text}
                             </motion.span>
