@@ -58,25 +58,49 @@ const ResumeModal = ({ isOpen, onClose }) => {
                         </div>
 
                         {/* PDF Viewer Container */}
-                        <div className="flex-grow bg-[#2a2a2a] relative group">
-                            <iframe
-                                src={`${resumeUrl}#toolbar=0&navpanes=0&scrollbar=0`}
-                                className="w-full h-full border-none"
-                                title="Deepak Paragi Resume"
-                            />
+                        <div className="flex-grow bg-[#2a2a2a] relative group overflow-hidden">
+                            {/* Desktop/Large View: Iframe */}
+                            <div className="hidden md:block w-full h-full">
+                                <iframe
+                                    src={`${resumeUrl}#toolbar=0&navpanes=0&scrollbar=0`}
+                                    className="w-full h-full border-none"
+                                    title="Deepak Paragi Resume"
+                                />
+                            </div>
+
+                            {/* Mobile/Tablet View: Interactive Fallback */}
+                            <div className="md:hidden flex flex-col items-center justify-center w-full h-full p-6 text-center">
+                                <div className="w-20 h-20 bg-accent/5 rounded-full flex items-center justify-center mb-6 animate-pulse">
+                                    <FileText size={40} className="text-accent/40" />
+                                </div>
+                                <h4 className="text-xl font-display font-medium text-primary mb-4">Mobile Viewer Prompt</h4>
+                                <p className="text-secondary/60 text-sm mb-8 max-w-[240px]">Mobile browsers usually block embedded PDF rendering for security. Click below to view the full document.</p>
+                                
+                                <a 
+                                    href={resumeUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="px-8 py-4 bg-accent text-background font-mono text-[10px] tracking-[0.2em] uppercase font-bold hover:scale-105 transition-transform"
+                                >
+                                    Open Full PDF
+                                </a>
+                            </div>
                             
                             {/* Sophisticated Overlay on Hover */}
                             <div className="absolute inset-0 pointer-events-none border-[1px] border-accent/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700 m-4" />
                         </div>
 
                         {/* Footer Info */}
-                        <div className="p-3 bg-background/50 border-t border-primary/5 flex justify-between items-center">
-                            <span className="text-[9px] font-mono text-secondary/40 tracking-[0.2em] uppercase">Secure_View / Port_8080</span>
+                        <div className="p-4 bg-background/50 border-t border-primary/5 flex justify-between items-center">
+                            <span className="text-[9px] font-mono text-secondary/40 tracking-[0.2em] uppercase">Document_Id: DP_2026_RES</span>
                             <div className="flex gap-4">
-                                <span className="text-[9px] font-mono text-accent/60 flex items-center gap-1 uppercase">
-                                    <div className="w-1 h-1 rounded-full bg-accent animate-pulse" />
-                                    Live Connection
-                                </span>
+                                <a 
+                                    href={resumeUrl}
+                                    download
+                                    className="text-[9px] font-mono text-accent hover:text-primary transition-colors flex items-center gap-1 uppercase underline underline-offset-4"
+                                >
+                                    Download Copy
+                                </a>
                             </div>
                         </div>
                     </motion.div>
