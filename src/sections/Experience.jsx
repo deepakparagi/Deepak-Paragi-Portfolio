@@ -1,59 +1,103 @@
-import { motion, useScroll, useTransform, useMotionValue, useSpring, useMotionTemplate } from 'framer-motion';
-import { useRef } from 'react';
+import { motion, useScroll, useTransform, useMotionValue, useSpring, useMotionTemplate, useInView } from 'framer-motion';
+import { useRef, useState, useEffect } from 'react';
 import ScrollReveal from '../components/ScrollReveal';
+import { ArrowUpRight, Database, Cpu, Activity, Circle, Layers, Zap, FastForward, Globe, Timer } from 'lucide-react';
+import Magnetic from '../components/Magnetic';
+import BitStream from '../components/BitStream';
 
-const experienceData = [
+const EXPERIENCE_DATA = [
     {
         id: 1,
+        year: "2023",
+        period: "Feb 2023 — Jun 2023",
         role: "Full Stack Engineering Intern",
         company: "GTTC, Hubli",
-        duration: "Feb 2023 — Jun 2023",
         description: "Architected and deployed modular internal tools using the MERN stack. Optimised the data persistence layer resulting in a 30% reduction in query latency. Orchestrated responsive frontend architectures that served 500+ internal users with 100% uptime.",
-        skills: ["React", "Express", "Node.js", "MongoDB", "Auth0"]
+        metrics: [
+            { label: "Query Latency", value: "30", suffix: "%", icon: Activity },
+            { label: "Internal Users", value: "500", suffix: "+", icon: Database },
+            { label: "System Uptime", value: "100", suffix: "%", icon: Zap },
+            { label: "Deployment Velocity", value: "3.2", suffix: "x", icon: FastForward }
+        ],
+        skills: ["React", "Express", "Node.js", "MongoDB", "Auth0"],
+        blueprint: "database",
+        image: "database_module.png"
     },
     {
         id: 2,
+        year: "2023",
+        period: "2023 — Present",
         role: "AI Open Source Contributor",
         company: "GitHub / Independent",
-        duration: "2023 — Present",
         description: "Engineering and iterating on high-performance Full Stack projects. Currently specializing in Agentic AI integration and Model Context Protocol (MCP) implementations. Deployed multiple production-ready templates utilized by 50+ developers for rapid AI prototyping.",
-        skills: ["Next.js", "Agentic AI", "MCP", "Framer Motion", "OpenAI"]
+        metrics: [
+            { label: "Logic Adoption", value: "120", suffix: "+", icon: Cpu },
+            { label: "Inference Efficiency", value: "99.8", suffix: "%", icon: Layers },
+            { label: "Context Window", value: "128", suffix: "K", icon: Globe },
+            { label: "Inference Latency", value: "180", suffix: "ms", icon: Timer }
+        ],
+        skills: ["Next.js", "Agentic AI", "MCP", "Framer Motion", "OpenAI"],
+        blueprint: "ai",
+        image: "ai_module.png"
     }
 ];
 
 const Experience = () => {
+    const baseUrl = import.meta.env.BASE_URL;
     const containerRef = useRef(null);
     const { scrollYProgress } = useScroll({
         target: containerRef,
-        offset: ["start center", "end center"]
+        offset: ["start start", "end end"]
     });
 
-    const scaleY = useTransform(scrollYProgress, [0, 1], [0, 1]);
-
     return (
-        <section id="experience" className="py-16 md:py-32 px-4 md:px-12 bg-background relative overflow-hidden">
-            <div className="max-w-screen-xl mx-auto w-full relative z-10" ref={containerRef}>
-                <ScrollReveal width="100%">
-                    <div className="mb-16 md:mb-24 flex flex-col md:items-center text-left md:text-center">
-                        <h2 className="text-sm font-mono text-secondary mb-4 uppercase tracking-[0.2em]">04 / Industrial Deployment</h2>
-                        <h3 className="text-3xl md:text-5xl font-display font-medium text-primary">
-                            Professional Chronology
-                        </h3>
-                    </div>
-                </ScrollReveal>
+        <section ref={containerRef} id="experience" className="pt-20 pb-10 md:py-64 px-6 md:px-12 bg-background relative">
+            <div className="max-w-screen-2xl mx-auto w-full">
+                <div className="lg:grid lg:grid-cols-2 lg:gap-24 items-start relative">
+                    
+                    {/* Sticky Column */}
+                    <div className="lg:sticky lg:top-40 mb-20 lg:mb-0 z-20">
+                        <ScrollReveal width="100%" margin="0px">
+                            <div className="max-w-xl">
+                                <div className="flex items-center gap-6 mb-8 lg:mb-12 group/label cursor-crosshair">
+                                    <motion.div
+                                        animate={{ scale: [1, 1.2, 1], opacity: [0.5, 1, 0.5] }}
+                                        transition={{ duration: 4, repeat: Infinity }}
+                                        className="w-2 h-2 rounded-full bg-accent group-hover/label:bg-primary transition-colors shadow-[0_0_10px_rgba(212,175,55,0.5)]"
+                                    />
+                                    <h2 className="font-sans text-[8px] text-secondary uppercase tracking-[0.6em] group-hover/label:text-primary transition-colors">Process.Industrial_Deployment</h2>
+                                </div>
+                                <motion.h3 
+                                    whileHover="hover"
+                                    className="text-6xl md:text-[10rem] lg:text-[13rem] font-display font-medium text-primary leading-[0.8] tracking-tighter cursor-default"
+                                >
+                                    CORE <br />
+                                    <motion.span 
+                                        variants={{
+                                            hover: { opacity: 0.8, letterSpacing: "0.05em", color: "var(--accent)" }
+                                        }}
+                                        className="text-secondary italic font-light opacity-20 text-4xl md:text-8xl lg:text-[11rem] transition-all duration-700"
+                                    >
+                                        SYSTEMS
+                                    </motion.span>
+                                </motion.h3>
 
-                <div className="relative max-w-4xl mx-auto">
-                    {/* Timeline Spine */}
-                    <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-[1px] bg-primary/10 md:-translate-x-1/2">
-                        <motion.div 
-                            className="absolute top-0 left-0 w-full bg-accent origin-top"
-                            style={{ scaleY, height: "100%" }}
-                        />
+                                {/* Sticky Progress Track */}
+                                <div className="hidden lg:block w-[1px] h-64 bg-primary/5 relative mt-32">
+                                    <motion.div
+                                        className="absolute top-0 left-0 w-full bg-accent shadow-[0_0_15px_rgba(212,175,55,0.4)]"
+                                        style={{ height: useTransform(scrollYProgress, [0, 1], ["0%", "100%"]) }}
+                                    />
+                                    <div className="absolute top-0 -left-6 font-mono text-[8px] text-secondary/40 whitespace-nowrap -rotate-90 origin-right tracking-widest">SCROLL_SEQUENCE</div>
+                                </div>
+                            </div>
+                        </ScrollReveal>
                     </div>
 
-                    <div className="space-y-12 md:space-y-32">
-                        {experienceData.map((exp, index) => (
-                            <ExperienceItem key={exp.id} exp={exp} index={index} />
+                    {/* Scrolling Track */}
+                    <div className="space-y-40 md:space-y-[40rem] pb-20">
+                        {EXPERIENCE_DATA.map((exp, index) => (
+                            <CoreModule key={exp.id} exp={exp} index={index} baseUrl={baseUrl} />
                         ))}
                     </div>
                 </div>
@@ -62,71 +106,134 @@ const Experience = () => {
     );
 };
 
-const ExperienceItem = ({ exp, index }) => {
-    const isEven = index % 2 === 0;
+const CoreModule = ({ exp, index, baseUrl }) => {
     const cardRef = useRef(null);
-    const mouseX = useMotionValue(0.5);
-    const mouseY = useMotionValue(0.5);
+    const isInView = useInView(cardRef, { once: false, amount: 0.2 });
 
-    const springConfig = { damping: 20, stiffness: 150 };
-    const xSpring = useSpring(mouseX, springConfig);
-    const ySpring = useSpring(mouseY, springConfig);
+    const { scrollYProgress } = useScroll({
+        target: cardRef,
+        offset: ["start end", "end start"]
+    });
 
-    const rotateX = useTransform(ySpring, [0, 1], [10, -10]);
-    const rotateY = useTransform(xSpring, [0, 1], [-10, 10]);
+    const rotateX = useTransform(scrollYProgress, [0, 0.5, 1], [15, 0, -15]);
+    const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
+    const scale = useTransform(scrollYProgress, [0, 0.2], [0.8, 1]);
 
-    const handleMouseMove = (e) => {
-        if (!cardRef.current) return;
-        const rect = cardRef.current.getBoundingClientRect();
-        mouseX.set((e.clientX - rect.left) / rect.width);
-        mouseY.set((e.clientY - rect.top) / rect.height);
-    };
-
-    const handleMouseLeave = () => {
-        mouseX.set(0.5);
-        mouseY.set(0.5);
-    };
+    const imageUrl = `${baseUrl}${exp.image}`.replace(/\/+/g, '/');
 
     return (
-        <div className="relative flex flex-col md:flex-row items-center justify-between w-full">
-            <div className="hidden md:block absolute left-1/2 top-1/2 w-4 h-4 bg-background border-2 border-accent rounded-full -translate-x-1/2 -translate-y-1/2 z-10 shadow-[0_0_15px_rgba(212,175,55,0.4)]" />
+        <motion.div
+            ref={cardRef}
+            style={{ opacity, scale, perspective: 1000 }}
+            className="relative"
+        >
+            <motion.div
+                style={{ rotateX }}
+                className="space-y-16"
+            >
+                {/* Visual Slab - Full Bleed Fit */}
+                <div className="relative aspect-video w-full bg-surface/20 backdrop-blur-3xl border border-primary/5 rounded-sm overflow-hidden group transition-all duration-700 hover:border-accent/40 hover:shadow-[0_0_60px_rgba(212,175,55,0.15)]">
+                    <div
+                        className="absolute inset-0 opacity-20 saturate-0 scale-105 group-hover:scale-110 group-hover:saturate-100 group-hover:opacity-40 transition-all duration-[2000ms] bg-cover bg-no-repeat bg-center mix-blend-screen"
+                        style={{ backgroundImage: `url(${imageUrl})` }}
+                    />
 
-            <div className={`w-full md:w-[45%] pl-12 md:pl-0 ${isEven ? 'md:pr-12' : 'md:pl-12 md:ml-auto'}`}>
-                <ScrollReveal delay={0.2} width="100%">
+                    {/* Golden Sweep */}
                     <motion.div
-                        ref={cardRef}
-                        onMouseMove={handleMouseMove}
-                        onMouseLeave={handleMouseLeave}
-                        style={{ rotateX, rotateY, transformStyle: "preserve-3d", perspective: 1000 }}
-                        className="group bg-surface/40 backdrop-blur-xl p-8 md:p-10 rounded-sm border border-primary/5 hover:border-accent/20 transition-all duration-500 relative"
-                    >
-                        <div style={{ transform: "translateZ(50px)", transformStyle: "preserve-3d" }} className="relative z-10">
-                            <span className="font-mono text-accent text-[10px] mb-3 block tracking-[0.3em] uppercase">{exp.duration}</span>
-                            <h4 className="text-3xl font-display font-medium text-primary mb-2">{exp.role}</h4>
-                            <h5 className="text-secondary/60 font-sans text-xs tracking-[0.2em] uppercase mb-6">{exp.company}</h5>
-                            
-                            <p className="text-secondary/90 font-light leading-relaxed mb-8 text-lg">
-                                {exp.description}
-                            </p>
-                            
-                            <div className="flex flex-wrap gap-2">
-                                {exp.skills.map((skill, i) => (
-                                    <span key={i} className="px-3 py-1 bg-background/50 border border-primary/10 rounded-sm text-[9px] font-mono text-secondary tracking-widest uppercase">
-                                        {skill}
-                                    </span>
-                                ))}
-                            </div>
-                        </div>
+                        className="absolute inset-0 z-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity bg-gradient-to-r from-transparent via-accent/10 to-transparent"
+                        animate={{ left: ["-100%", "200%"] }}
+                        transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                    />
 
-                        <motion.div 
-                            className="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                            style={{
-                                background: useMotionTemplate`radial-gradient(400px circle at ${xSpring.get() * 100}% ${ySpring.get() * 100}%, rgba(212, 175, 55, 0.05), transparent 80%)`
-                            }}
-                        />
-                    </motion.div>
-                </ScrollReveal>
-            </div>
+                    {/* SVG Blueprint Overlay - Interacts with Hover */}
+                    <div className="group-hover:opacity-100 transition-opacity duration-700">
+                        <Blueprint schematic={exp.blueprint} trigger={isInView} />
+                    </div>
+
+                    <div className="absolute top-8 left-8 font-mono text-[9px] text-accent/60 tracking-[0.4em] uppercase group-hover:text-accent transition-colors">
+                        Module_{index + 1} // {exp.year}
+                    </div>
+                </div>
+
+                {/* Content Block */}
+                <div className="space-y-10 pl-6 border-l border-primary/5">
+                    <div className="space-y-4">
+                        <span className="text-[10px] font-mono text-secondary/60 uppercase tracking-[0.4em]">
+                            {exp.period}
+                        </span>
+                        <h4 className="text-4xl md:text-6xl font-display font-medium text-primary tracking-tighter leading-none">
+                            {exp.role}
+                        </h4>
+                        <div className="text-xs font-mono text-secondary italic tracking-widest">
+                            {exp.company}
+                        </div>
+                    </div>
+
+                    <p className="text-lg text-secondary/80 font-light leading-relaxed max-w-lg">
+                        {exp.description}
+                    </p>
+
+                    {/* Metrics HUD */}
+                    <div className="grid grid-cols-2 gap-px bg-primary/5 border border-primary/5">
+                        {exp.metrics.map((metric, idx) => (
+                            <div key={idx} className="bg-background p-4 flex flex-col gap-2 group/metric">
+                                <div className="flex items-center gap-2 opacity-40 group-hover/metric:opacity-100 transition-opacity">
+                                    <metric.icon size={12} className="text-accent" />
+                                    <span className="text-[8px] font-mono uppercase tracking-widest">{metric.label}</span>
+                                </div>
+                                <div className="text-xl md:text-2xl font-light font-mono">
+                                    {metric.value}<span className="text-xs opacity-40 ml-1">{metric.suffix}</span>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className="flex flex-wrap gap-2">
+                        {exp.skills.map((skill, i) => (
+                            <span key={i} className="px-3 py-1 bg-primary/5 text-[9px] font-mono text-secondary tracking-widest uppercase rounded-full">
+                                {skill}
+                            </span>
+                        ))}
+                    </div>
+
+                    <Magnetic strength={0.2}>
+                        <a
+                            href="#"
+                            className="inline-flex items-center gap-4 text-[9px] font-mono uppercase tracking-[0.4em] text-accent hover:text-primary transition-colors py-4"
+                        >
+                            Access Logs <ArrowUpRight size={14} />
+                        </a>
+                    </Magnetic>
+                </div>
+            </motion.div>
+        </motion.div>
+    );
+};
+
+const Blueprint = ({ schematic, trigger }) => {
+    return (
+        <div className="absolute inset-0 p-12 opacity-10">
+            <svg viewBox="0 0 400 400" className="w-full h-full text-accent" fill="none">
+                {schematic === "database" ? (
+                    <motion.path
+                        d="M200 50L350 120V280L200 350L50 280V120L200 50Z"
+                        stroke="currentColor"
+                        strokeWidth="1"
+                        initial={{ pathLength: 0 }}
+                        animate={trigger ? { pathLength: 1 } : {}}
+                        transition={{ duration: 2, ease: "easeInOut" }}
+                    />
+                ) : (
+                    <motion.circle
+                        cx="200" cy="200" r="100"
+                        stroke="currentColor"
+                        strokeWidth="0.5"
+                        strokeDasharray="10 10"
+                        animate={{ rotate: 360 }}
+                        transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+                    />
+                )}
+            </svg>
         </div>
     );
 };

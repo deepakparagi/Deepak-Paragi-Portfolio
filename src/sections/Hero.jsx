@@ -1,25 +1,47 @@
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import { useState, useEffect } from 'react';
+import { motion, useScroll, useTransform, AnimatePresence, useSpring, useMotionValue } from 'framer-motion';
+import { useState, useEffect, useRef } from 'react';
 import profileImg from '../assets/roman_reigns.jpg';
+import { ArrowUpRight, Download, Plus } from 'lucide-react';
+import Magnetic from '../components/Magnetic';
+import BitStream from '../components/BitStream';
 
 const Hero = ({ onResumeClick }) => {
     const [isMobile, setIsMobile] = useState(false);
+    const containerRef = useRef(null);
+    const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
         const checkMobile = () => setIsMobile(window.innerWidth < 768);
         checkMobile();
         window.addEventListener('resize', checkMobile);
-        return () => window.removeEventListener('resize', checkMobile);
+        const timer = setTimeout(() => setIsLoaded(true), 1200);
+        return () => {
+            window.removeEventListener('resize', checkMobile);
+            clearTimeout(timer);
+        };
     }, []);
 
     const { scrollY } = useScroll();
-    const scrollYAnimated = useTransform(scrollY, [0, 500], [0, 200]);
-    const scrollYAnimatedText = useTransform(scrollY, [0, 500], [0, 100]);
+    const y1_transform = useTransform(scrollY, [0, 500], [0, 200]);
+    const y2_transform = useTransform(scrollY, [0, 500], [0, 100]);
+    
+    const y1 = isMobile ? 0 : y1_transform;
+    const y2 = isMobile ? 0 : y2_transform;
 
-    const y1 = isMobile ? 0 : scrollYAnimated;
-    const y2 = isMobile ? 0 : scrollYAnimatedText; 
+    const mouseX = useMotionValue(0);
+    const mouseY = useMotionValue(0);
+    const xSpring = useSpring(mouseX, { stiffness: 100, damping: 20 });
+    const ySpring = useSpring(mouseY, { stiffness: 100, damping: 20 });
 
-    const roles = ["scalable web apps.", "intelligent systems.", "premium digital experiences."];
+    const handleMouseMove = (e) => {
+        if (isMobile) return;
+        const { clientX, clientY } = e;
+        const { innerWidth, innerHeight } = window;
+        mouseX.set((clientX / innerWidth) - 0.5);
+        mouseY.set((clientY / innerHeight) - 0.5);
+    };
+
+    const roles = ["intelligent logic.", "elite digital craft."];
     const [roleIndex, setRoleIndex] = useState(0);
 
     useEffect(() => {
@@ -30,127 +52,233 @@ const Hero = ({ onResumeClick }) => {
     }, []);
 
     return (
-        <section className="min-h-[100dvh] flex flex-col justify-center px-6 md:px-12 relative overflow-hidden pt-32 md:pt-40">
+        <section 
+            ref={containerRef}
+            onMouseMove={handleMouseMove}
+            className="min-h-[100dvh] flex flex-col justify-center px-6 md:px-12 relative overflow-hidden pt-12 md:pt-16 bg-background"
+        >
+            {/* Elite HUD Decor - Mobile & Desktop */}
+            <div className="absolute inset-0 pointer-events-none overflow-hidden overflow-hidden">
+                <div className="absolute inset-0 z-0 opacity-10 md:opacity-20">
+                    <motion.div 
+                        style={{ 
+                            x: useTransform(xSpring, [-0.5, 0.5], [-20, 20]), 
+                            y: useTransform(ySpring, [-0.5, 0.5], [-20, 20]) 
+                        }}
+                        className="absolute inset-0 border-[1px] border-primary/5 m-4 md:m-24"
+                    />
+                    
+                    {/* Floating Crosshairs */}
+                    {[...Array(isMobile ? 4 : 6)].map((_, i) => (
+                        <FloatingCrosshair key={i} index={i} xSpring={xSpring} ySpring={ySpring} />
+                    ))}
+                </div>
 
-            <div className="max-w-screen-2xl mx-auto w-full z-10 grid md:grid-cols-[1.5fr_1fr] gap-12 items-center relative">
+                {/* Corner System Metadata HUD */}
+                <div className="absolute inset-x-0 inset-y-0 p-6 md:p-12 flex flex-col justify-between z-20 pointer-events-none mix-blend-difference">
+                    <div className="flex justify-between items-start font-mono text-[7px] md:text-[8px] text-secondary/40 tracking-[0.3em] uppercase">
+                        <div className="flex flex-col gap-1">
+                            <span>SYS_AUTH_0x26</span>
+                            <span className="opacity-60 font-mono italic">Loc: 15.3617 / 75.1243</span>
+                        </div>
+                        <div className="flex flex-col items-end gap-1">
+                            <span>Build.Deepak_V2.6</span>
+                            <span className="opacity-60 font-mono italic">Access_Level: Root</span>
+                        </div>
+                    </div>
+                </div>
 
-                {/* Left Column: Typography */}
+                {/* Decorative Brackets for Technical Depth */}
+                <div className="absolute top-1/2 left-4 h-32 w-[1px] bg-accent/20 -translate-y-1/2 hidden md:block" />
+                <div className="absolute top-1/2 right-4 h-32 w-[1px] bg-accent/20 -translate-y-1/2 hidden md:block" />
+            </div>
+
+            <div className="max-w-screen-2xl mx-auto w-full z-10 grid lg:grid-cols-[1.2fr_1fr] gap-12 items-center relative">
+
+                {/* Neural Golden Glow - Atmospheric Depth (Enhanced for Mobile) */}
+                <motion.div 
+                    style={{ 
+                        x: useTransform(xSpring, [-0.5, 0.5], [-100, 100]), 
+                        y: useTransform(ySpring, [-0.5, 0.5], [-100, 100]),
+                        opacity: useTransform(scrollY, [0, 500], [0.25, 0])
+                    }}
+                    className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-accent/30 rounded-full blur-[100px] md:blur-[160px] pointer-events-none z-0 mix-blend-screen"
+                />
                 <motion.div style={{ y: y2 }}>
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-                    >
-                        <div className="flex items-center gap-2.5 mb-8 opacity-60 hover:opacity-100 transition-opacity">
-                            <span className="relative flex h-1.5 w-1.5">
-                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-40"></span>
-                                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-accent"></span>
-                            </span>
-                            <span className="font-mono text-[10px] tracking-[0.3em] text-secondary uppercase italic">Available for work</span>
-                        </div>
+                    <div className="flex items-center gap-2.5 mb-10">
+                        <span className="relative flex h-2 w-2">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-40"></span>
+                            <span className="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
+                        </span>
+                        <span className="font-mono text-[8px] tracking-[0.6em] text-secondary uppercase font-medium">
+                            <BitStream text="STATUS: OPERATIONAL // AVAILABLE" trigger={isLoaded} className="font-mono" />
+                        </span>
+                    </div>
 
-                        <h1 className="text-6xl md:text-8xl lg:text-9xl font-display font-medium tracking-tighter leading-[0.95] mb-12 text-primary">
-                            Hi, I’m Deepak — <br />
-                            <span className="text-secondary italic font-light opacity-80">AI & Full Stack Developer</span>
-                        </h1>
-                    </motion.div>
+                    <h1 className="font-display text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-normal tracking-tighter leading-[0.85] text-primary relative">
+                        <motion.span
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 1.2, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                            className="block relative z-10"
+                        >
+                            Deepak <span className="text-accent drop-shadow-[0_0_15px_rgba(212,175,55,0.6)]">—</span>
+                        </motion.span>
+                        
+                        {/* Secondary Concentrated Glow behind Name */}
+                        <div className="absolute top-1/2 left-0 -translate-y-1/2 w-48 h-48 bg-accent/30 rounded-full blur-[80px] pointer-events-none z-0 mix-blend-screen opacity-50" />
+                    </h1>
 
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.4, duration: 0.8 }}
-                        className="text-lg md:text-xl text-secondary max-w-lg leading-relaxed font-mono mt-8 mb-12 min-h-[4rem] md:min-h-[3rem]"
-                    >
-                        <p className="flex flex-wrap items-center gap-2">
-                            <span>Building</span>
-                            <span className="text-primary relative inline-block">
-                                <AnimatePresence mode="popLayout">
-                                    <motion.span
-                                        key={roleIndex}
-                                        initial={{ y: 20, opacity: 0, rotateX: -90 }}
-                                        animate={{ y: 0, opacity: 1, rotateX: 0 }}
-                                        exit={{ y: -20, opacity: 0, rotateX: 90 }}
-                                        transition={{ duration: 0.5, ease: "circOut" }}
-                                        className="inline-block origin-top text-accent font-sans"
-                                        style={{ transformStyle: "preserve-3d" }}
-                                    >
-                                        {roles[roleIndex]}
-                                    </motion.span>
-                                </AnimatePresence>
-                            </span>
-                        </p>
-                    </motion.div>
-
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.6, duration: 0.8 }}
-                    >
-                        <div className="flex flex-wrap gap-6 items-center">
-                            <button
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
-                                }}
-                                className="group relative px-6 py-3 bg-primary text-background font-mono text-sm tracking-widest uppercase overflow-hidden flex items-center justify-center min-w-[200px]"
+                    <div className="mt-6 space-y-0 font-display">
+                        {["AI & Full", "Stack", "Developer"].map((text, i) => (
+                            <motion.span
+                                key={i}
+                                initial={{ opacity: 0, x: -20 }}
+                                animate={{ opacity: 0.3, x: 0 }}
+                                transition={{ duration: 1.2, delay: 0.6 + i * 0.15, ease: [0.16, 1, 0.3, 1] }}
+                                className="block italic font-light text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[1.0] transition-all duration-700 hover:opacity-100 hover:text-accent/40"
                             >
-                                <span className="relative z-10 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-[250%]">View Projects</span>
-                                <span className="absolute inset-0 z-10 flex items-center justify-center transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] translate-y-full group-hover:translate-y-0">View Projects</span>
-                            </button>
-                            
-                            <button
-                                onClick={onResumeClick}
-                                className="group relative px-6 py-3 font-mono text-sm tracking-widest uppercase border border-primary/20 hover:border-accent text-secondary hover:text-primary transition-colors flex items-center justify-center gap-2 min-w-[200px]"
-                            >
-                                <span>View Resume</span>
-                                <span className="relative w-4 h-4 flex items-center justify-center overflow-hidden">
-                                     <motion.svg 
-                                        className="w-full h-full text-accent" 
-                                        viewBox="0 0 24 24" 
-                                        fill="none" 
-                                        stroke="currentColor"
-                                        animate={{ y: [0, 3, 0] }}
-                                        transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-                                     >
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                                     </motion.svg>
+                                {text}
+                            </motion.span>
+                        ))}
+                    </div>
+
+                    <div className="text-base md:text-xl text-secondary/80 max-w-2xl leading-relaxed font-sans mt-8 mb-10 min-h-[4rem]">
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 1, delay: 1.2, ease: [0.16, 1, 0.3, 1] }}
+                        >
+                            <p className="flex flex-wrap items-center gap-x-4 gap-y-2">
+                                <span className="opacity-40 uppercase tracking-[0.4em] text-[10px] font-bold">Orchestrating</span>
+                                <span className="text-primary relative inline-block">
+                                    <AnimatePresence mode="popLayout">
+                                        <motion.span
+                                            key={roleIndex}
+                                            initial={{ y: 10, opacity: 0 }}
+                                            animate={{ y: 0, opacity: 1 }}
+                                            exit={{ y: -10, opacity: 0 }}
+                                            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                                            className="inline-block text-accent font-display italic text-xl md:text-2xl"
+                                        >
+                                            {roles[roleIndex]}
+                                        </motion.span>
+                                    </AnimatePresence>
                                 </span>
-                            </button>
-                            
-                            <a
-                                href="#contact"
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-                                }}
-                                className="relative pb-1 font-mono text-sm tracking-widest uppercase text-secondary hover:text-accent transition-colors"
+                            </p>
+                            <p className="mt-4 text-secondary/60 text-sm md:text-base font-light max-w-xl">
+                                Bridging the gap between frontier AI intelligence and production-grade engineering to build the next generation of digital experiences.
+                            </p>
+                        </motion.div>
+                    </div>
+
+                    <div className="flex flex-wrap gap-10 items-center">
+                        <Magnetic strength={isMobile ? 0 : 0.2}>
+                            <motion.button
+                                onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+                                whileHover="hover"
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.8, delay: 1.4, ease: [0.16, 1, 0.3, 1] }}
+                                className="group relative px-12 py-5 bg-primary text-background font-sans text-[10px] font-medium tracking-[0.3em] uppercase overflow-hidden"
                             >
-                                Contact Me
-                                <span className="absolute bottom-0 left-0 w-full h-[1px] bg-accent origin-right scale-x-0 transition-transform duration-500 ease-out hover:scale-x-100 hover:origin-left"></span>
-                            </a>
-                        </div>
-                    </motion.div>
+                                <motion.div 
+                                    variants={{
+                                        hover: { x: "0%" }
+                                    }}
+                                    initial={{ x: "-101%" }}
+                                    transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                                    className="absolute inset-0 bg-accent"
+                                />
+                                <span className="relative z-10 flex items-center gap-3 transition-colors duration-500 group-hover:text-primary">
+                                    View Project <ArrowUpRight size={14} />
+                                </span>
+                            </motion.button>
+                        </Magnetic>
+                        
+                        <Magnetic strength={isMobile ? 0 : 0.3}>
+                            <motion.button
+                                onClick={onResumeClick}
+                                whileHover="hover"
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.8, delay: 1.5, ease: [0.16, 1, 0.3, 1] }}
+                                className="group flex items-center gap-5 py-4 px-2 font-sans text-[10px] font-medium tracking-[0.3em] uppercase text-secondary hover:text-primary transition-all"
+                            >
+                                <motion.span 
+                                    variants={{
+                                        hover: { width: 48, backgroundColor: "var(--accent)" }
+                                    }}
+                                    initial={{ width: 32 }}
+                                    className="h-[1px] bg-secondary/30"
+                                />
+                                Get Resume
+                            </motion.button>
+                        </Magnetic>
+                    </div>
                 </motion.div>
 
-                {/* Right Column: Original Visual */}
+                {/* Right Column: Neural Image Container - Optimized for all screens */}
                 <motion.div
                     style={{ y: y1 }}
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.2, duration: 1, ease: [0.25, 0.46, 0.45, 0.94] }}
-                    className="relative block max-w-sm md:max-w-md mx-auto md:ml-auto mt-12 md:mt-0"
+                    className="relative block h-[400px] md:h-[700px] lg:ml-auto w-full max-w-md group"
                 >
-                    <div className="md:aspect-[3/4] rounded-lg bg-surface border border-primary/5 overflow-hidden relative grayscale hover:grayscale-0 transition-all duration-700">
+                    <div className="absolute inset-0 border border-primary/5 -m-2 md:-m-8 transition-all duration-1000 z-0" />
+                    
+                    <div className="w-full h-full relative overflow-hidden grayscale hover:grayscale-0 transition-all duration-1000 ease-in-out rounded-sm">
+                        <div className="absolute inset-0 z-20 pointer-events-none opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] blend-overlay" />
+                        
                         <img
                             src={profileImg}
                             alt="Deepak Paragi"
-                            className="w-full h-auto md:h-full object-cover md:object-[center_25%]"
+                            className="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-1000"
                         />
+
+                        {/* Scan Line Effect */}
+                        <motion.div 
+                            className="absolute top-0 left-0 w-full h-[1px] bg-accent/20 z-30 pointer-events-none"
+                            animate={{ top: ["0%", "100%", "0%"] }}
+                            transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+                        />
+
+                        {/* Interactive HUD Corner */}
+                        <div className="absolute bottom-6 right-6 z-30 font-mono text-[7px] text-white/40 tracking-widest bg-background/40 backdrop-blur-md px-3 py-2 border border-white/5">
+                            <motion.span animate={{ opacity: [0.3, 1, 0.3] }} transition={{ duration: 2, repeat: Infinity }}>
+                                DATA_STREAM: OPERATIONAL
+                            </motion.span>
+                        </div>
+                    </div>
+                    
+                    {/* Bottom Tag */}
+                    <div className="absolute -bottom-4 -left-4 md:-bottom-8 md:-left-8 bg-surface p-4 border border-primary/5 flex items-center gap-3 shadow-2xl">
+                        <div className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+                        <span className="font-mono text-[8px] uppercase tracking-widest text-primary">
+                            <BitStream text="INTERFACE_V2.0" trigger={isLoaded} delay={2} />
+                        </span>
                     </div>
                 </motion.div>
 
             </div>
         </section >
+    );
+};
+
+const FloatingCrosshair = ({ index, xSpring, ySpring }) => {
+    const x = useTransform(xSpring, [-0.5, 0.5], [index * -10, index * 10]);
+    const y = useTransform(ySpring, [-0.5, 0.5], [index * -15, index * 15]);
+
+    return (
+        <motion.div 
+            className="absolute text-accent/30"
+            style={{ 
+                top: `${20 + index * 30}%`, 
+                left: `${10 + index * 35}%`,
+                x,
+                y
+            }}
+        >
+            <Plus size={12} strokeWidth={1} />
+        </motion.div>
     );
 };
 

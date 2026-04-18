@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react';
-import Home from './pages/Home';
+import AnimatedRoutes from './components/AnimatedRoutes';
+import ScrollToTop from './components/ScrollToTop';
 import GridBackground from './components/GridBackground';
 import { motion, AnimatePresence } from 'framer-motion';
 import Lenis from 'lenis';
+
+import Loader from './components/Loader';
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -21,56 +24,43 @@ function App() {
       infinite: false,
     });
 
+    // Store globally for other components to access
+    window.lenis = lenis;
+
+    let rafId;
     function raf(time) {
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      rafId = requestAnimationFrame(raf);
     }
 
-    requestAnimationFrame(raf);
-
-    // 2. Preloader simulation
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 2000);
+    rafId = requestAnimationFrame(raf);
 
     return () => {
       lenis.destroy();
-      clearTimeout(timer);
+      cancelAnimationFrame(rafId);
+      window.lenis = null;
     };
   }, []);
 
   return (
     <div className="bg-background min-h-screen selection:bg-accent selection:text-background">
+      <ScrollToTop />
       <AnimatePresence mode="wait">
         {loading ? (
-          <motion.div
-            key="preloader"
-            initial={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-0 z-[100] bg-background flex items-center justify-center"
-          >
-            <div className="flex flex-col items-center gap-6">
-              <motion.div 
-                initial={{ width: 0 }}
-                animate={{ width: 120 }}
-                className="h-[1px] bg-accent"
-                transition={{ duration: 1.5, ease: "easeInOut" }}
-              />
-              <span className="font-mono text-[10px] tracking-[0.4em] text-secondary uppercase animate-pulse">
-                Initializing Protocol...
-              </span>
-            </div>
-          </motion.div>
+          <Loader onComplete={() => setLoading(false)} />
         ) : (
           <motion.main
             key="main"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1 }}
+            initial={{ opacity: 0, scale: 1.05, filter: "blur(20px)" }}
+            animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+            transition={{ 
+              duration: 1.6, 
+              ease: [0.16, 1, 0.3, 1],
+              filter: { duration: 1.2 }
+            }}
           >
             <GridBackground />
-            <Home />
+            <AnimatedRoutes />
           </motion.main>
         )}
       </AnimatePresence>

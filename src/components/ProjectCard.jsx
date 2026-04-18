@@ -8,6 +8,15 @@ import Skeleton from './Skeleton';
 const ProjectCard = ({ project, index, isLoading = false }) => {
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
+    
+    // Always declare hooks at the top level
+    const mouseGradient = useMotionTemplate`
+        radial-gradient(
+            650px circle at ${mouseX}px ${mouseY}px,
+            rgba(255,255,255,0.15),
+            transparent 80%
+        )
+    `;
 
     function handleMouseMove({ currentTarget, clientX, clientY }) {
         const { left, top } = currentTarget.getBoundingClientRect();
@@ -134,19 +143,27 @@ const ProjectCard = ({ project, index, isLoading = false }) => {
                 {/* Image Frame */}
                 <Link
                     to={`/project/${project.id}`}
+                    whileTap={{ scale: 0.98 }}
                     className="w-full md:w-[60%] aspect-[4/3] md:aspect-[16/10] p-2 md:p-3 bg-white/[0.02] backdrop-blur-md rounded-[1.5rem] md:rounded-[2rem] border border-white/5 shadow-2xl relative block group/image transition-transform duration-700 ease-out hover:-translate-y-2 order-1 md:order-none overflow-hidden"
                 >
                     <div className="relative w-full h-full rounded-[1rem] md:rounded-[1.5rem] overflow-hidden bg-background ring-1 ring-white/10">
                         <motion.div
-                            className="pointer-events-none absolute -inset-px rounded-[1rem] md:rounded-[1.5rem] opacity-0 transition duration-300 group-hover/image:opacity-100 z-30"
+                            className="pointer-events-none absolute -inset-px rounded-[1rem] md:rounded-[1.5rem] opacity-0 transition duration-300 md:group-hover/image:opacity-100 z-30"
+                            animate={window.matchMedia('(pointer: coarse)').matches ? {
+                                opacity: [0, 0.5, 0],
+                                background: [
+                                    'radial-gradient(400px circle at 50% 50%, rgba(255,255,255,0.05), transparent 80%)',
+                                    'radial-gradient(400px circle at 50% 50%, rgba(255,255,255,0.15), transparent 80%)',
+                                    'radial-gradient(400px circle at 50% 50%, rgba(255,255,255,0.05), transparent 80%)'
+                                ]
+                            } : {}}
+                            transition={window.matchMedia('(pointer: coarse)').matches ? {
+                                duration: 4,
+                                repeat: Infinity,
+                                ease: "easeInOut"
+                            } : {}}
                             style={{
-                                background: useMotionTemplate`
-                                    radial-gradient(
-                                        650px circle at ${mouseX}px ${mouseY}px,
-                                        rgba(255,255,255,0.15),
-                                        transparent 80%
-                                    )
-                                `,
+                                background: mouseGradient,
                             }}
                         />
                         

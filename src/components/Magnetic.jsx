@@ -1,33 +1,42 @@
 import { useRef, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useSpring, useMotionValue } from 'framer-motion';
 
-export default function Magnetic({ children }) {
+const Magnetic = ({ children, strength = 0.5 }) => {
     const ref = useRef(null);
-    const [position, setPosition] = useState({ x: 0, y: 0 });
+    const x = useMotionValue(0);
+    const y = useMotionValue(0);
 
-    const handleMouse = (e) => {
+    const springConfig = { damping: 15, stiffness: 150 };
+    const springX = useSpring(x, springConfig);
+    const springY = useSpring(y, springConfig);
+
+    const handleMouseMove = (e) => {
+        if (window.matchMedia('(pointer: coarse)').matches) return;
         const { clientX, clientY } = e;
-        const { height, width, left, top } = ref.current.getBoundingClientRect();
-        const middleX = clientX - (left + width / 2);
-        const middleY = clientY - (top + height / 2);
-        setPosition({ x: middleX * 0.5, y: middleY * 0.5 }); // Reduced strength
+        const { left, top, width, height } = ref.current.getBoundingClientRect();
+        const centerX = left + width / 2;
+        const centerY = top + height / 2;
+        
+        x.set((clientX - centerX) * strength);
+        y.set((clientY - centerY) * strength);
     };
 
-    const reset = () => {
-        setPosition({ x: 0, y: 0 });
+    const handleMouseLeave = () => {
+        if (window.matchMedia('(pointer: coarse)').matches) return;
+        x.set(0);
+        y.set(0);
     };
 
-    const { x, y } = position;
     return (
         <motion.div
-            style={{ position: "relative" }}
             ref={ref}
-            onMouseMove={handleMouse}
-            onMouseLeave={reset}
-            animate={{ x, y }}
-            transition={{ type: "spring", stiffness: 150, damping: 15, mass: 0.1 }}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            style={{ x: springX, y: springY }}
         >
             {children}
         </motion.div>
     );
-}
+};
+
+export default Magnetic;

@@ -8,8 +8,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['"Plus Jakarta Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        display: ['"Cormorant Garamond"', 'serif'],
+        sans: ['"Instrument Sans"', '"Space Grotesk"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        display: ['"Instrument Serif"', 'serif'],
         mono: ['"JetBrains Mono"', 'monospace'],
       },
       colors: {

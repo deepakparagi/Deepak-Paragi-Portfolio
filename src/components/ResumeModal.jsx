@@ -2,8 +2,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Download, Maximize2, FileText } from 'lucide-react';
 
 const ResumeModal = ({ isOpen, onClose }) => {
-    // We use the absolute path from the public folder
-    const resumeUrl = "/Deepak_Paragi_Resume.pdf";
+    const baseUrl = import.meta.env.BASE_URL;
+    const resumeUrl = `${baseUrl}Deepak_Paragi_Resume.pdf`.replace(/\/+/g, '/');
 
     return (
         <AnimatePresence>

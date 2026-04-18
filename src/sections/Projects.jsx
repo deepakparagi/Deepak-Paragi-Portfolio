@@ -5,7 +5,7 @@ import { projectsData } from '../data/projectsData';
 
 const Projects = ({ isLoading }) => {
     return (
-        <section id="projects" className="relative py-16 md:py-32 flex flex-col justify-center overflow-hidden bg-background">
+        <section id="projects" className="relative pt-10 pb-32 md:py-32 flex flex-col justify-center overflow-hidden bg-background">
 
             <div className="relative z-10 px-6 md:px-12 max-w-screen-2xl mx-auto w-full">
 
