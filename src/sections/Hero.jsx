@@ -58,7 +58,7 @@ const Hero = ({ onResumeClick }) => {
             className="min-h-[100dvh] flex flex-col justify-center px-6 md:px-12 relative overflow-hidden pt-12 md:pt-16 bg-background"
         >
             {/* Elite HUD Decor - Mobile & Desktop */}
-            <div className="absolute inset-0 pointer-events-none overflow-hidden overflow-hidden">
+            <div className="absolute inset-0 pointer-events-none overflow-hidden sm:visible">
                 <div className="absolute inset-0 z-0 opacity-10 md:opacity-20">
                     <motion.div 
                         style={{ 
@@ -105,13 +105,19 @@ const Hero = ({ onResumeClick }) => {
                     className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-accent/30 rounded-full blur-[100px] md:blur-[160px] pointer-events-none z-0 mix-blend-screen"
                 />
                 <motion.div style={{ y: y2 }}>
-                    <div className="flex items-center gap-2.5 mb-10">
-                        <span className="relative flex h-2 w-2">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-40"></span>
-                            <span className="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
-                        </span>
-                        <span className="font-mono text-[8px] tracking-[0.6em] text-secondary uppercase font-medium">
-                            <BitStream text="STATUS: OPERATIONAL // AVAILABLE" trigger={isLoaded} className="font-mono" />
+                    <div className="flex items-center gap-4 mb-12 sm:mb-16 mt-4 sm:mt-0">
+                        <div className="flex items-center gap-2.5">
+                            <span className="relative flex h-2 w-2">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-40"></span>
+                                <span className="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
+                            </span>
+                            <span className="font-display italic text-[10px] md:text-[11px] tracking-[0.3em] text-secondary uppercase font-medium">
+                                <BitStream text="STATUS: OPERATIONAL" trigger={isLoaded} />
+                            </span>
+                        </div>
+                        <div className="h-[1px] w-8 md:w-12 bg-primary/10" />
+                        <span className="font-mono text-[8px] md:text-[9px] tracking-[0.2em] text-secondary/40 uppercase">
+                            Available // 2026
                         </span>
                     </div>
 
@@ -129,14 +135,14 @@ const Hero = ({ onResumeClick }) => {
                         <div className="absolute top-1/2 left-0 -translate-y-1/2 w-48 h-48 bg-accent/30 rounded-full blur-[80px] pointer-events-none z-0 mix-blend-screen opacity-50" />
                     </h1>
 
-                    <div className="mt-6 space-y-0 font-display">
+                    <div className="mt-6 space-y-0">
                         {["AI & Full", "Stack", "Developer"].map((text, i) => (
                             <motion.span
                                 key={i}
                                 initial={{ opacity: 0, x: -20 }}
                                 animate={{ opacity: 0.3, x: 0 }}
                                 transition={{ duration: 1.2, delay: 0.6 + i * 0.15, ease: [0.16, 1, 0.3, 1] }}
-                                className="block italic font-light text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[1.0] transition-all duration-700 hover:opacity-100 hover:text-accent/40"
+                                className="block font-display font-normal text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[1.0] transition-all duration-700 hover:opacity-100 hover:text-accent/40"
                             >
                                 {text}
                             </motion.span>
@@ -200,10 +206,11 @@ const Hero = ({ onResumeClick }) => {
                             <motion.button
                                 onClick={onResumeClick}
                                 whileHover="hover"
+                                whileTap={{ scale: 0.95 }}
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.8, delay: 1.5, ease: [0.16, 1, 0.3, 1] }}
-                                className="group flex items-center gap-5 py-4 px-2 font-sans text-[10px] font-medium tracking-[0.3em] uppercase text-secondary hover:text-primary transition-all"
+                                className="group flex items-center gap-5 py-6 px-4 -ml-4 font-sans text-[10px] font-medium tracking-[0.3em] uppercase text-secondary hover:text-primary transition-all relative z-50 pointer-events-auto"
                             >
                                 <motion.span 
                                     variants={{
