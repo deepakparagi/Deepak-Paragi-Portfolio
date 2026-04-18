@@ -1,88 +1,81 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Download } from 'lucide-react';
-import { useEffect } from 'react';
+import { X, Download, Maximize2, FileText } from 'lucide-react';
 
 const ResumeModal = ({ isOpen, onClose }) => {
-    // Correctly handle the base path for Vite environments
-    const resumeUrl = `${import.meta.env.BASE_URL}Deepak_Paragi_Resume.pdf`;
-
-    useEffect(() => {
-        if (isOpen) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = 'unset';
-        }
-        return () => {
-            document.body.style.overflow = 'unset';
-        };
-    }, [isOpen]);
-
-    // Close on Escape key
-    useEffect(() => {
-        const handleEsc = (e) => {
-            if (e.key === 'Escape') onClose();
-        };
-        window.addEventListener('keydown', handleEsc);
-        return () => window.removeEventListener('keydown', handleEsc);
-    }, [onClose]);
+    // We use the absolute path from the public folder
+    const resumeUrl = "/Deepak_Paragi_Resume.pdf";
 
     return (
         <AnimatePresence>
             {isOpen && (
-                <div className="fixed inset-0 z-[100] flex items-center justify-center">
-                    {/* Backdrop - Increased blur for less 'clutter' from the background */}
+                <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 md:p-8">
+                    {/* Backdrop with sophisticated glass blur */}
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         onClick={onClose}
-                        className="absolute inset-0 bg-background/90 backdrop-blur-2xl"
+                        className="absolute inset-0 bg-background/80 backdrop-blur-xl"
                     />
 
-                    {/* Modal Content - Full height on mobile, elegant frame on desktop */}
+                    {/* Modal Content */}
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.98, y: 10 }}
+                        initial={{ opacity: 0, scale: 0.9, y: 20 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
-                        exit={{ opacity: 0, scale: 0.98, y: 10 }}
-                        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                        className="relative w-full max-w-5xl h-[100svh] md:h-[90vh] bg-background shadow-2xl md:rounded-sm overflow-hidden flex flex-col"
+                        exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                        className="relative w-full max-w-5xl h-[90vh] bg-surface border border-primary/10 rounded-sm shadow-2xl overflow-hidden flex flex-col"
                     >
-                        {/* Minimalist Floating Controls */}
-                        <div className="absolute top-6 right-6 z-50 flex items-center gap-4">
-                            <motion.a
-                                href={resumeUrl}
-                                download
-                                whileHover={{ scale: 1.1 }}
-                                whileTap={{ scale: 0.9 }}
-                                className="p-3 bg-primary text-background rounded-full shadow-xl hover:bg-accent transition-colors flex items-center justify-center cursor-pointer"
-                                title="Download Resume"
-                            >
-                                <Download size={18} />
-                            </motion.a>
+                        {/* Header */}
+                        <div className="flex justify-between items-center p-4 border-b border-primary/5 bg-background/50">
+                            <div className="flex items-center gap-3">
+                                <div className="p-1.5 bg-accent/10 rounded-sm">
+                                    <FileText size={16} className="text-accent" />
+                                </div>
+                                <div>
+                                    <h3 className="text-sm font-display font-medium text-primary tracking-wide uppercase">Curriculum Vitae</h3>
+                                    <p className="text-[10px] font-mono text-secondary uppercase opacity-50">Deepak_Paragi_Resume_v2.pdf</p>
+                                </div>
+                            </div>
                             
-                            <motion.button
-                                onClick={onClose}
-                                whileHover={{ scale: 1.1, rotate: 90 }}
-                                whileTap={{ scale: 0.9 }}
-                                className="p-3 bg-surface/50 backdrop-blur-md text-primary border border-primary/10 rounded-full shadow-xl hover:border-primary/30 transition-all flex items-center justify-center"
-                                aria-label="Close modal"
-                            >
-                                <X size={18} />
-                            </motion.button>
+                            <div className="flex items-center gap-2">
+                                <a 
+                                    href={resumeUrl} 
+                                    download 
+                                    className="p-2 text-secondary hover:text-accent transition-colors group relative"
+                                    title="Download PDF"
+                                >
+                                    <Download size={18} />
+                                    <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-[8px] font-mono opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">DOWNLOAD</span>
+                                </a>
+                                <button 
+                                    onClick={onClose}
+                                    className="p-2 text-secondary hover:text-primary transition-colors ml-4"
+                                >
+                                    <X size={20} />
+                                </button>
+                            </div>
                         </div>
 
-                        {/* PDF Viewer - 100% space */}
-                        <div className="flex-1 relative bg-black/5">
-                             <iframe 
-                                src={`${resumeUrl}#toolbar=0&navpanes=0`} 
+                        {/* PDF Viewer Container */}
+                        <div className="flex-grow bg-[#2a2a2a] relative group">
+                            <iframe
+                                src={`${resumeUrl}#toolbar=0&navpanes=0&scrollbar=0`}
                                 className="w-full h-full border-none"
-                                title="Resume PDF"
+                                title="Deepak Paragi Resume"
                             />
                             
-                            {/* Mobile Scroll Hint - Minimalist */}
-                            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 md:hidden pointer-events-none">
-                                <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-secondary opacity-40">
-                                    Swipe to explore
+                            {/* Sophisticated Overlay on Hover */}
+                            <div className="absolute inset-0 pointer-events-none border-[1px] border-accent/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700 m-4" />
+                        </div>
+
+                        {/* Footer Info */}
+                        <div className="p-3 bg-background/50 border-t border-primary/5 flex justify-between items-center">
+                            <span className="text-[9px] font-mono text-secondary/40 tracking-[0.2em] uppercase">Secure_View / Port_8080</span>
+                            <div className="flex gap-4">
+                                <span className="text-[9px] font-mono text-accent/60 flex items-center gap-1 uppercase">
+                                    <div className="w-1 h-1 rounded-full bg-accent animate-pulse" />
+                                    Live Connection
                                 </span>
                             </div>
                         </div>
