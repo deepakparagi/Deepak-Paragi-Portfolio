@@ -9,11 +9,11 @@ import GithubStats from '../sections/GithubStats';
 import Contact from '../sections/Contact';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import ResumeModal from '../components/ResumeModal';
 
 const Home = () => {
-    const [isResumeOpen, setIsResumeOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
+    const baseUrl = import.meta.env.BASE_URL;
+    const resumeUrl = `${baseUrl}Deepak_Paragi_Resume.pdf`.replace(/\/+/g, '/');
 
     useEffect(() => {
         // Simulated loading state for skeleton screen demonstration
@@ -23,25 +23,23 @@ const Home = () => {
         return () => clearTimeout(timer);
     }, []);
 
-    const toggleResume = () => setIsResumeOpen(!isResumeOpen);
+    const handleResumeOpen = (e) => {
+        if (e) e.preventDefault();
+        window.open(resumeUrl, '_blank', 'noopener,noreferrer');
+    };
 
     return (
         <div className="relative">
-            <Navbar onResumeClick={toggleResume} />
-            <Hero onResumeClick={toggleResume} />
+            <Navbar onResumeClick={handleResumeOpen} />
+            <Hero onResumeClick={handleResumeOpen} />
             <About />
             <Skills />
             <Experience />
             <Projects isLoading={isLoading} />
             <Certifications />
             <GithubStats isLoading={isLoading} />
-            <Contact onResumeClick={toggleResume} />
+            <Contact onResumeClick={handleResumeOpen} />
             <Footer />
-
-            <ResumeModal 
-                isOpen={isResumeOpen} 
-                onClose={() => setIsResumeOpen(false)} 
-            />
         </div>
     );
 };

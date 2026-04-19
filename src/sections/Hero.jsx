@@ -203,7 +203,10 @@ const Hero = ({ onResumeClick }) => {
                         
                         {isMobile ? (
                             <motion.button
-                                onClick={onResumeClick}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    onResumeClick();
+                                }}
                                 whileTap={{ scale: 0.95 }}
                                 className="group flex items-center gap-5 py-6 px-4 -ml-4 font-sans text-[10px] font-medium tracking-[0.3em] uppercase text-secondary active:text-primary relative z-[60] pointer-events-auto touch-action-manipulation"
                             >
@@ -213,7 +216,10 @@ const Hero = ({ onResumeClick }) => {
                         ) : (
                             <Magnetic strength={0.3}>
                                 <motion.button
-                                    onClick={onResumeClick}
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        onResumeClick();
+                                    }}
                                     whileHover="hover"
                                     whileTap={{ scale: 0.95 }}
                                     initial={{ opacity: 0, y: 20 }}

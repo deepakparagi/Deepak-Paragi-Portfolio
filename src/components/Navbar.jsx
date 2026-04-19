@@ -27,7 +27,8 @@ const Navbar = ({ onResumeClick }) => {
         setIsOpen(false);
     };
 
-    const handleResumeClick = () => {
+    const handleResumeClick = (e) => {
+        if (e) e.preventDefault();
         setIsOpen(false);
         onResumeClick();
     };
@@ -98,7 +99,10 @@ const Navbar = ({ onResumeClick }) => {
                 
                 <Magnetic>
                     <button
-                        onClick={onResumeClick}
+                        onClick={(e) => {
+                            e.preventDefault();
+                            onResumeClick();
+                        }}
                         className="relative group p-2 flex items-center gap-2 bg-transparent border-none cursor-pointer text-inherit font-inherit text-accent"
                         aria-label="View Resume"
                     >
