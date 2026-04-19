@@ -238,7 +238,7 @@ const Hero = ({ onResumeClick }) => {
                 {/* Right Column: Neural Image Container - Optimized for all screens */}
                 <motion.div
                     style={{ y: y1 }}
-                    className="relative block h-[400px] md:h-[700px] lg:ml-auto w-full max-w-md group"
+                    className="relative block aspect-[3/4.5] md:aspect-auto md:h-[700px] lg:ml-auto w-full max-w-md group"
                 >
                     <div className="absolute inset-0 border border-primary/5 -m-2 md:-m-8 transition-all duration-1000 z-0" />
                     
@@ -248,7 +248,7 @@ const Hero = ({ onResumeClick }) => {
                         <img
                             src={profileImg}
                             alt="Deepak Paragi"
-                            className="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-1000"
+                            className="w-full h-full object-cover object-top scale-110 group-hover:scale-100 transition-transform duration-1000"
                         />
 
                         {/* Scan Line Effect */}
