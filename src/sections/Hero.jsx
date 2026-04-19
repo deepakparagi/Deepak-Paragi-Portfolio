@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform, AnimatePresence, useSpring, useMotionValue } from 'framer-motion';
 import { useState, useEffect, useRef } from 'react';
-import profileImg from '../assets/roman_reigns.jpg';
+import profileImg from '../assets/deepak_portrait.jpg';
 import { ArrowUpRight, Download, Plus } from 'lucide-react';
 import Magnetic from '../components/Magnetic';
 import BitStream from '../components/BitStream';
