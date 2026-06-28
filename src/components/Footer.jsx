@@ -40,7 +40,9 @@ const Footer = () => {
                     <div className="flex items-center gap-8 text-[10px] font-mono text-secondary/40 uppercase tracking-widest">
                         <span>© 2026 / All Rights Reserved</span>
                         <div className="h-4 w-[1px] bg-primary/10" />
-                        <span>Built with Agentic AI</span>
+                        <a href="https://deepcipher-studio.vercel.app/" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
+                            Built by Deepcipher Studio
+                        </a>
                     </div>
                 </div>
 

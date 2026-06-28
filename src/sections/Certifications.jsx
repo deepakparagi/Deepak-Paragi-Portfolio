@@ -56,12 +56,13 @@ const Certifications = () => {
                                 whileHover={{ y: -8 }}
                             >
                                 {/* Image Handle */}
-                                <div className="h-48 w-full overflow-hidden relative">
-                                    <div className="absolute inset-0 bg-background/50 z-10 group-hover:bg-background/20 transition-colors duration-500 mix-blend-multiply" />
+                                <div className="h-48 w-full overflow-hidden relative bg-surface">
+                                    <div className="absolute inset-0 bg-background/60 z-10 group-hover:bg-background/20 transition-colors duration-500" />
                                     <img 
                                         src={cert.image} 
                                         alt={cert.title} 
                                         className="w-full h-full object-cover grayscale group-hover:grayscale-0 scale-100 group-hover:scale-110 transition-all duration-700 ease-out"
+                                        loading="lazy"
                                     />
                                     <div className="absolute top-4 right-4 z-20">
                                         <Award className="w-6 h-6 text-accent drop-shadow-md" />

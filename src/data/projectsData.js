@@ -1,10 +1,37 @@
 import bipinSchoolImg from '../assets/bipin_school_hero.png';
 import project2Fitai from '../assets/Screenshot (63).png';
-import signifyImg from '../assets/signify_studio.webp';
 import shingriImg from '../assets/shingri.png';
 import gadagImg from '../assets/gadag_info.png';
+import khansFitnessImg from '../assets/Khans; fitness.png';
 
 export const projectsData = [
+    {
+        id: "02",
+        title: "FitAI: AI Fitness Coach",
+        category: "Artificial Intelligence",
+        description: "A personalized workout planner powered by GPT-4, generating scientific routines based on user constraints and goals. Featured autonomous planning logic.",
+        tags: ["React.js", "Node.js", "GPT-4", "OpenAI"],
+        link: "https://ai-fitness-coach-git-main-deepaks-projects-f551996f.vercel.app/",
+        github: "https://github.com/deepakparagi/ai-fitness-coach",
+        image: project2Fitai,
+        focalPoint: "object-center",
+        featured: true,
+        period: "2025",
+        overview: "An AI-native workout orchestrator that replaces generic fitness plans with scientifically-backed, GPT-4 generated routines tailored to the user's specific musculoskeletal constraints.",
+        challenge: "Fitness apps offer static templates. We needed an autonomous agent capable of generating scientifically strict workout splits while adapting to individual user constraints and real-time API latency.",
+        solution: "Integrated a custom Prompt Engineering layer to sanitize and structure LLM outputs. Implemented an optimistic UI update strategy combined with background processing to ensure zero-wait user interaction.",
+        stack: ["React.js", "Node.js", "OpenAI API", "Express"],
+        metrics: {
+            accuracy: "94% validated",
+            users: "500+",
+            year: 2025
+        },
+        lessonsLearned: [
+            "Sanitizing LLM outputs is critical for production safety.",
+            "User trust is built through transparent AI explanation layers.",
+            "Drag-and-drop feedback loops significantly improve AI planning accuracy."
+        ]
+    },
     {
         id: "00",
         title: "Shingri Developers",
@@ -18,8 +45,8 @@ export const projectsData = [
         featured: true,
         period: "2026",
         overview: "A flagship digital showcase for Shingri Developers, architected to bridge the gap between luxury architectural vision and digital experience. The platform serves as a high-conversion lead generation engine for premium real estate.",
-        challenge: "The primary challenge was implementing complex, high-performance animations (60fps) alongside large media assets without compromising on mobile load times or SEO readability.",
-        solution: "Engineered a custom motion framework using Framer Motion and GSAP, optimized through aggressive code-splitting and asset lazy-loading. Implemented a zero-layout-shift (CLS) architecture to ensure premium fluid motion across all viewports.",
+        challenge: "The brand required a highly visceral, motion-heavy digital experience, but typical implementations suffer from poor mobile load times, layout shifts, and SEO penalties.",
+        solution: "Engineered a custom motion framework using Framer Motion and GSAP, optimized through aggressive code-splitting. Implemented a zero-layout-shift (CLS) architecture to ensure premium fluid motion across all viewports.",
         stack: ["React", "Next.js", "TailwindCSS", "PostCSS", "Lenis"],
         metrics: {
             performance: "98% Lighthouse",
@@ -31,6 +58,28 @@ export const projectsData = [
             "Custom easing functions create a visceral sense of brand quality better than industry defaults.",
             "Performance budgets must be strictly enforced in media-heavy environments."
         ]
+    },
+    {
+        id: "04",
+        title: "Khan's Fitness — AI-Powered Gym Website",
+        category: "Agency Work",
+        description: "Built a full site with integrated AI tools: BMI calculator, Claude API-powered workout generator, and diet planner — all inside a brutalist high-contrast design.",
+        tags: ["Next.js", "Claude API", "Tailwind", "GSAP", "Framer Motion"],
+        link: "https://khans-fitness.vercel.app",
+        github: "https://github.com/deepakparagi",
+        image: khansFitnessImg,
+        focalPoint: "object-center",
+        featured: true,
+        period: "2024",
+        overview: "A brutalist high-contrast gym website built for Gadag-Betageri's fitness community, moving beyond a simple brochure to offer real utility.",
+        challenge: "Most gym websites are brochures. Khan's Fitness needed a product — a site that does something useful for members, not just looks good for the owner.",
+        solution: "Built a full site with integrated AI tools: BMI calculator, Claude API-powered workout generator, and diet planner — all inside a brutalist high-contrast design built for Gadag-Betageri's fitness community.",
+        stack: ["Next.js", "Claude API", "Tailwind CSS", "GSAP", "Framer Motion"],
+        metrics: {
+            features: "3 AI Tools",
+            design: "Brutalist",
+            year: 2024
+        }
     },
     {
         id: "00-B",
@@ -60,33 +109,6 @@ export const projectsData = [
         ]
     },
     {
-        id: "02",
-        title: "FitAI: AI Fitness Coach",
-        category: "Artificial Intelligence",
-        description: "A personalized workout planner powered by GPT-4, generating scientific routines based on user constraints and goals. Featured autonomous planning logic.",
-        tags: ["React.js", "Node.js", "GPT-4", "OpenAI"],
-        link: "https://ai-fitness-coach-git-main-deepaks-projects-f551996f.vercel.app/",
-        github: "https://github.com/deepakparagi/ai-fitness-coach",
-        image: project2Fitai,
-        focalPoint: "object-center",
-        featured: true,
-        period: "2025",
-        overview: "An AI-native workout orchestrator that replaces generic fitness plans with scientifically-backed, GPT-4 generated routines tailored to the user's specific musculoskeletal constraints.",
-        challenge: "Ensuring AI-generated plans followed strict scientific splits while handling real-time API latency and maintaining a responsive UI.",
-        solution: "Integrated a custom Prompt Engineering layer to sanitize and structure model outputs. Implemented an optimistic UI update strategy combined with background processing to ensure zero-wait user interaction.",
-        stack: ["React.js", "Node.js", "OpenAI API", "Express"],
-        metrics: {
-            accuracy: "94% validated",
-            users: "500+",
-            year: 2025
-        },
-        lessonsLearned: [
-            "Sanitizing LLM outputs is critical for production safety.",
-            "User trust is built through transparent AI explanation layers.",
-            "Drag-and-drop feedback loops significantly improve AI planning accuracy."
-        ]
-    },
-    {
         id: "01",
         title: "Bipin Chikkatti School",
         category: "Enterprise Web",
@@ -99,7 +121,7 @@ export const projectsData = [
         featured: true,
         period: "2025",
         overview: "The official digital platform for Bipin Chikkatti school, designed to modernize communication and streamline admissions processes for thousands of parents and students.",
-        challenge: "Developing a highly accessible, legacy-compatible platform that remains modern and easy for non-technical faculty to update.",
+        challenge: "Developing a highly accessible, legacy-compatible platform that remains modern and easy for non-technical faculty to update without developer intervention.",
         solution: "Built a component-based React architecture with deep SEO optimization and WCAG accessibility compliance. Integrated a custom CMS-lite layer for effortless content management.",
         stack: ["React", "SCSS", "Vite", "Web accessibility"],
         metrics: {

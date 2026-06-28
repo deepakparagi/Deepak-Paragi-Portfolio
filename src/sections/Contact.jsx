@@ -157,13 +157,13 @@ const Contact = ({ onResumeClick }) => {
                         </ScrollReveal>
 
                         <ScrollReveal delay={0.1}>
-                            <h2 className="text-[12vw] lg:text-[8vw] font-display font-medium leading-[0.85] tracking-tighter text-primary uppercase">
+                            <h2 className="text-[12vw] md:text-7xl lg:text-[7vw] font-display font-medium leading-[0.85] tracking-tighter text-primary uppercase">
                                 Let's <br />
-                                <span className="text-secondary opacity-20">Engineer</span> <br />
+                                <span className="text-secondary opacity-20">Build Something</span> <br />
                                 <span className="relative">
-                                    the Future
+                                    That Matters
                                     <motion.span 
-                                        className="absolute -right-8 top-0 text-[2vw] text-accent font-mono italic normal-case tracking-normal"
+                                        className="absolute -right-8 top-0 text-xl md:text-[2vw] text-accent font-mono italic normal-case tracking-normal"
                                         animate={{ opacity: [0.2, 1, 0.2] }}
                                         transition={{ duration: 4, repeat: Infinity }}
                                     >

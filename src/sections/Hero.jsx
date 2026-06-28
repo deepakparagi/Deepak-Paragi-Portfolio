@@ -41,7 +41,7 @@ const Hero = ({ onResumeClick }) => {
         mouseY.set((clientY / innerHeight) - 0.5);
     };
 
-    const roles = ["intelligent logic.", "elite digital craft."];
+    const roles = ["production-grade AI.", "agentic systems."];
     const [roleIndex, setRoleIndex] = useState(0);
 
     useEffect(() => {
@@ -54,7 +54,7 @@ const Hero = ({ onResumeClick }) => {
     return (
         <section 
             onMouseMove={handleMouseMove}
-            className="min-h-[100dvh] flex flex-col justify-center px-6 md:px-12 relative overflow-hidden pt-28 md:pt-36 bg-background"
+            className="min-h-[100vh] flex flex-col justify-start lg:justify-center px-6 md:px-12 relative overflow-hidden pt-[100px] lg:pt-36 pb-20 lg:pb-0 bg-background"
         >
             {/* Elite HUD Decor - Mobile & Desktop */}
             <div className="absolute inset-0 pointer-events-none overflow-hidden sm:visible">
@@ -74,7 +74,7 @@ const Hero = ({ onResumeClick }) => {
                 </div>
 
                 {/* Corner System Metadata HUD */}
-                <div className="absolute inset-x-0 inset-y-0 p-6 md:p-12 flex flex-col justify-between z-20 pointer-events-none mix-blend-difference">
+                <div className="absolute inset-x-0 inset-y-0 p-6 md:p-12 pt-[100px] md:pt-[120px] flex flex-col justify-between z-20 pointer-events-none mix-blend-difference">
                     <div className="flex justify-between items-start font-mono text-[7px] md:text-[8px] text-secondary/40 tracking-[0.3em] uppercase">
                         <div className="flex flex-col gap-1">
                             <span>SYS_AUTH_0x26</span>
@@ -92,7 +92,7 @@ const Hero = ({ onResumeClick }) => {
                 <div className="absolute top-1/2 right-4 h-32 w-[1px] bg-accent/20 -translate-y-1/2 hidden md:block" />
             </div>
 
-            <div className="max-w-screen-2xl mx-auto w-full z-10 grid lg:grid-cols-[1.2fr_1fr] gap-12 items-center relative">
+            <div className="max-w-screen-2xl mx-auto w-full z-10 flex flex-col-reverse lg:grid lg:grid-cols-[1.2fr_1fr] gap-8 lg:gap-12 items-center relative">
 
                 {/* Neural Golden Glow - Atmospheric Depth (Enhanced for Mobile) */}
                 <motion.div 
@@ -134,14 +134,14 @@ const Hero = ({ onResumeClick }) => {
                         <div className="absolute top-1/2 left-0 -translate-y-1/2 w-48 h-48 bg-accent/30 rounded-full blur-[80px] pointer-events-none z-0 mix-blend-screen opacity-50" />
                     </h1>
 
-                    <div className="mt-6 space-y-0">
-                        {["AI & Full", "Stack", "Developer"].map((text, i) => (
+                    <div className="mt-4 sm:mt-6 flex flex-wrap gap-x-3 sm:gap-x-4 gap-y-1 sm:gap-y-2">
+                        {["AI &", "Full Stack", "Developer"].map((text, i) => (
                             <motion.span
                                 key={i}
                                 initial={{ opacity: 0, x: -20 }}
                                 animate={{ opacity: 0.25, x: 0 }}
                                 transition={{ duration: 1.2, delay: 0.6 + i * 0.15, ease: [0.16, 1, 0.3, 1] }}
-                                className="block font-display font-normal text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.0] transition-all duration-700 hover:opacity-100 hover:text-accent/40"
+                                className="font-display font-normal text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[1.0] transition-all duration-700 hover:opacity-100 hover:text-accent/40"
                             >
                                 {text}
                             </motion.span>
@@ -155,7 +155,7 @@ const Hero = ({ onResumeClick }) => {
                             transition={{ duration: 1, delay: 1.2, ease: [0.16, 1, 0.3, 1] }}
                         >
                             <p className="flex flex-wrap items-center gap-x-4 gap-y-2">
-                                <span className="opacity-40 uppercase tracking-[0.4em] text-[10px] font-bold">Orchestrating</span>
+                                <span className="opacity-40 uppercase tracking-[0.4em] text-[10px] font-bold">Building</span>
                                 <span className="text-primary relative inline-block">
                                     <AnimatePresence mode="popLayout">
                                         <motion.span
@@ -172,7 +172,7 @@ const Hero = ({ onResumeClick }) => {
                                 </span>
                             </p>
                             <p className="mt-4 text-secondary/60 text-sm md:text-base font-light max-w-xl">
-                                Bridging the gap between frontier AI intelligence and production-grade engineering to build the next generation of digital experiences.
+                                Building production-grade AI & agentic systems that bridge the gap between frontier intelligence and scalable engineering.
                             </p>
                         </motion.div>
                     </div>
@@ -244,7 +244,7 @@ const Hero = ({ onResumeClick }) => {
                 {/* Right Column: Neural Image Container - Optimized for all screens */}
                 <motion.div
                     style={{ y: y1 }}
-                    className="relative block aspect-[3/4.5] md:aspect-auto md:h-[700px] lg:ml-auto w-full max-w-md group"
+                    className="relative flex-shrink-0 aspect-[4/5] sm:aspect-[3/4] lg:aspect-auto lg:h-[700px] mb-8 lg:mb-0 mx-auto lg:ml-auto w-[85%] max-w-[340px] md:max-w-md lg:w-full group"
                 >
                     <div className="absolute inset-0 border border-primary/5 -m-2 md:-m-8 transition-all duration-1000 z-0" />
                     

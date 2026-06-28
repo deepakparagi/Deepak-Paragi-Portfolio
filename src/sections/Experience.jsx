@@ -7,6 +7,23 @@ import BitStream from '../components/BitStream';
 
 const EXPERIENCE_DATA = [
     {
+        id: 0,
+        year: "2024",
+        period: "Jan 2024 — Present",
+        role: "Founder & Full Stack Engineer",
+        company: "DEEPCIPHER Studio",
+        description: "Founded and operate a premium web development agency delivering high-performance digital products. Engineered scalable architectures and managed complete project lifecycles—from requirements gathering to Vercel deployments.",
+        metrics: [
+            { label: "Client Projects", value: "5", suffix: "+", icon: Layers },
+            { label: "Lighthouse Score", value: "98", suffix: "%", icon: Zap },
+            { label: "Motion Frames", value: "60", suffix: "fps", icon: FastForward },
+            { label: "Components Built", value: "20", suffix: "+", icon: Database }
+        ],
+        skills: ["Next.js", "React", "GSAP", "Framer Motion", "Node.js"],
+        blueprint: "ai",
+        image: "ai_module.png"
+    },
+    {
         id: 1,
         year: "2023",
         period: "Feb 2023 — Jun 2023",
@@ -69,14 +86,14 @@ const Experience = () => {
                                 </div>
                                 <motion.h3 
                                     whileHover="hover"
-                                    className="text-6xl md:text-[10rem] lg:text-[13rem] font-display font-medium text-primary leading-[0.8] tracking-tighter cursor-default"
+                                    className="text-[16vw] md:text-[10rem] lg:text-[13rem] font-display font-medium text-primary leading-[0.8] tracking-tighter cursor-default"
                                 >
                                     CORE <br />
                                     <motion.span 
                                         variants={{
                                             hover: { opacity: 0.8, letterSpacing: "0.05em", color: "var(--accent)" }
                                         }}
-                                        className="text-secondary italic font-light opacity-20 text-4xl md:text-8xl lg:text-[11rem] transition-all duration-700"
+                                        className="text-secondary italic font-light opacity-20 text-[11vw] md:text-8xl lg:text-[11rem] transition-all duration-700"
                                     >
                                         SYSTEMS
                                     </motion.span>

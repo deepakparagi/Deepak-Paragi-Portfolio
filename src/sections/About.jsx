@@ -5,7 +5,7 @@ import { Cpu, Globe, Zap } from 'lucide-react';
 
 const About = () => {
     return (
-        <section id="about" className="min-h-screen py-10 md:py-32 px-6 md:px-12 relative overflow-hidden bg-background">
+        <section id="about" className="min-h-screen py-16 md:py-32 lg:py-40 px-6 md:px-12 relative overflow-hidden bg-background">
 
             <div className="max-w-screen-2xl mx-auto w-full z-10 relative">
 
@@ -34,13 +34,13 @@ const About = () => {
 
                                 <div className="space-y-10 text-xl md:text-2xl text-secondary leading-relaxed font-sans font-light max-w-3xl">
                                     <p>
-                                        I operate at the precise intersection of **Artificial Intelligence** and **Production-Grade Engineering**. As an AI & Machine Learning specialist, I don't just build models—I architect the ecosystems that allow them to live, breathe, and act autonomously.
+                                        I'm an **AI Full Stack Engineer** operating at the precise intersection of frontier intelligence and production-grade engineering. I don't just build models—I architect the ecosystems that allow them to live, breathe, and act autonomously within scalable digital products.
                                     </p>
                                     <p>
-                                        My engineering philosophy is rooted in **Materiality and Precision**. Whether I'm orchestrating a complex <strong className="text-primary font-medium italic underline decoration-accent/30 decoration-2 underline-offset-8">RAG (Retrieval-Augmented Generation) pipeline</strong> or crafting a high-performance web interface, I prioritize absolute system integrity and sub-millisecond efficiency.
+                                        As the Founder of **DEEPCIPHER Studio**, I've managed the complete lifecycle of premium web applications, shipping high-performance platforms that prioritize absolute system integrity and zero-layout-shift UI motion. I build for materiality, precision, and visceral user experiences.
                                     </p>
                                     <p>
-                                        I believe that the next generation of digital experiences won't just be "smart"—they will be sentient-like, proactive, and perfectly integrated into our physical reality. From Hubli to the global stage, I am pushing the boundaries of **Agentic Workflows** and **Distributed systems** that redefine autonomy.
+                                        Currently, my focus is entirely on the next paradigm of software: building complex <strong className="text-primary font-medium italic underline decoration-accent/30 decoration-2 underline-offset-8">RAG pipelines</strong> and **Agentic Workflows**. I'm pushing the boundaries of what's possible with LLM orchestration to create systems that are proactive, autonomous, and undeniably powerful.
                                     </p>
                                 </div>
                             </div>
@@ -64,7 +64,7 @@ const About = () => {
                 </div>
 
                 {/* Core focus grid */}
-                <div className="grid md:grid-cols-3 gap-8 md:gap-12">
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
                     {[
                         {
                             icon: Cpu,

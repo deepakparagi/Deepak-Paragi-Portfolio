@@ -8,9 +8,9 @@ const skills = [
         icon: Bot,
         items: [
             { name: "Agentic AI / Workflows", level: 95 },
-            { name: "RAG Architectures", level: 90 },
-            { name: "Machine Learning (CNN/RNN)", level: 85 },
-            { name: "Prompt Engineering", level: 95 }
+            { name: "Claude Code", level: 95 },
+            { name: "AI Automation", level: 95 },
+            { name: "RAG Architectures", level: 90 }
         ] 
     },
     { 
@@ -47,10 +47,10 @@ const skills = [
         category: "AI Integration",
         icon: Zap,
         items: [
-            { name: "OpenAI / Claude API", level: 95 },
+            { name: "OpenAI / Anthropic APIs", level: 95 },
             { name: "LangChain / LlamaIndex", level: 85 },
-            { name: "Hugging Face", level: 80 },
-            { name: "Vertex AI", level: 75 }
+            { name: "Vercel AI SDK", level: 90 },
+            { name: "Hugging Face", level: 80 }
         ] 
     }
 ];

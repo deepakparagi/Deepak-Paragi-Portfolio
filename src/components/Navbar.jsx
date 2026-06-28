@@ -50,33 +50,10 @@ const Navbar = ({ onResumeClick }) => {
         </Magnetic>
     );
 
-    const menuVars = {
-        initial: { scaleY: 0 },
-        animate: {
-            scaleY: 1,
-            transition: { duration: 0.5, ease: [0.12, 0, 0.39, 0] }
-        },
-        exit: {
-            scaleY: 0,
-            transition: { delay: 0.5, duration: 0.5, ease: [0.22, 1, 0.36, 1] }
-        }
-    };
+    // Mobile menu background animation constraints
+    // Defined inline to prevent variant string propagation to children
 
-    const containerVars = {
-        initial: { transition: { staggerChildren: 0.09, staggerDirection: -1 } },
-        open: { transition: { delayChildren: 0.3, staggerChildren: 0.09, staggerDirection: 1 } }
-    };
-
-    const mobileLinkVars = {
-        initial: {
-            y: "30vh",
-            transition: { duration: 0.5, ease: [0.37, 0, 0.63, 1] }
-        },
-        open: {
-            y: 0,
-            transition: { duration: 0.7, ease: [0, 0.55, 0.45, 1] }
-        }
-    };
+    // Using explicit animations instead of nested variants for reliability
 
     return (
         <nav className="fixed top-0 left-0 right-0 px-6 py-4 md:px-12 md:py-5 flex justify-between items-center z-50 text-primary pointer-events-none" role="navigation" aria-label="Main navigation">
@@ -136,35 +113,32 @@ const Navbar = ({ onResumeClick }) => {
             <AnimatePresence>
                 {isOpen && (
                         <motion.div
-                        variants={menuVars}
-                        initial="initial"
-                        animate="animate"
-                        exit="exit"
+                        initial={{ scaleY: 0 }}
+                        animate={{ scaleY: 1 }}
+                        exit={{ scaleY: 0, transition: { delay: 0.5, duration: 0.5, ease: [0.22, 1, 0.36, 1] } }}
+                        transition={{ duration: 0.5, ease: [0.12, 0, 0.39, 0] }}
                         className="fixed inset-0 origin-top pointer-events-auto flex flex-col justify-center items-center md:hidden"
                         style={{ backgroundColor: 'rgb(var(--background))', color: 'rgb(var(--primary))' }}
                     >
-                        <motion.div
-                            variants={containerVars}
-                            initial="initial"
-                            animate="open"
-                            exit="initial"
-                            className="flex flex-col items-center gap-8"
-                        >
-                            {['About', 'Projects', 'Contact', 'Resume'].map((item) => (
-                                <div key={item} className="overflow-hidden">
-                                    <motion.div variants={mobileLinkVars}>
-                                        <button
-                                            onClick={() => item === 'Resume' ? handleResumeClick() : handleScroll(item.toLowerCase())}
-                                            className={`text-5xl font-display font-medium hover:text-accent transition-colors bg-transparent border-none cursor-pointer ${item === 'Resume' ? 'text-accent' : ''}`}
-                                            style={{ color: item === 'Resume' ? 'rgb(var(--accent))' : 'rgb(var(--primary))' }}
-                                            aria-label={item === 'Resume' ? 'View Resume' : `Navigate to ${item === 'Projects' ? 'Work' : item} section`}
-                                        >
-                                            {item === 'Projects' ? 'Work' : item}
-                                        </button>
-                                    </motion.div>
-                                </div>
+                        <div className="flex flex-col items-center gap-8">
+                            {['About', 'Projects', 'Contact', 'Resume'].map((item, index) => (
+                                <motion.div 
+                                    key={item}
+                                    initial={{ opacity: 0, y: 40 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: 40 }}
+                                    transition={{ duration: 0.5, delay: 0.3 + (index * 0.1), ease: [0.16, 1, 0.3, 1] }}
+                                >
+                                    <button
+                                        onClick={() => item === 'Resume' ? handleResumeClick() : handleScroll(item.toLowerCase())}
+                                        className={`text-5xl font-display font-medium hover:text-accent transition-colors bg-transparent border-none cursor-pointer ${item === 'Resume' ? 'text-accent' : 'text-primary'}`}
+                                        aria-label={item === 'Resume' ? 'View Resume' : `Navigate to ${item === 'Projects' ? 'Work' : item} section`}
+                                    >
+                                        {item === 'Projects' ? 'Work' : item}
+                                    </button>
+                                </motion.div>
                             ))}
-                        </motion.div>
+                        </div>
                     </motion.div>
                 )}
             </AnimatePresence>
