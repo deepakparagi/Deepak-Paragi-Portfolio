@@ -25,8 +25,8 @@ const GithubStats = ({ isLoading = false }) => {
     };
 
     return (
-        <section className="py-16 md:py-32 px-4 md:px-12 bg-background relative overflow-hidden">
-            <div className="max-w-screen-2xl mx-auto w-full relative z-10">
+        <section className="py-10 md:py-16 px-4 md:px-12 bg-background relative overflow-hidden">
+            <div className="w-full relative z-10">
                 <ScrollReveal width="100%">
                     <div className="mb-12 md:mb-20 flex flex-col md:flex-row md:items-end justify-between gap-8">
                         <div>

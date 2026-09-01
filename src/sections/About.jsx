@@ -1,16 +1,84 @@
+import { useRef } from 'react';
 import ScrollReveal from '../components/ScrollReveal';
 import aboutImg from '../assets/about_hero.png';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { Cpu, Globe, Zap } from 'lucide-react';
+
+const p1Data = [
+    "I'm a",
+    { text: "Full Stack Developer", type: "strong" },
+    "and founder with a focus on building production-ready applications. I specialize in the entire development lifecycle—from backend architecture using Python, FastAPI, and Node.js, to crafting responsive frontends with React and Next.js."
+];
+
+const p2Data = [
+    "Through my agency,",
+    { text: "DeepCipher Studio,", type: "strong" },
+    "I've delivered multiple live applications for clients. My work frequently involves integrating powerful LLMs (OpenAI & Claude) and building automation workflows to solve real business problems, moving beyond standard web pages."
+];
+
+const p3Data = [
+    "Currently, my main focus is on",
+    { text: "AI-powered automation", type: "accent" },
+    "and robust full-stack systems. I enjoy taking complex requirements and turning them into scalable, high-performance digital products."
+];
+
+const Word = ({ word, progress, range }) => {
+    const opacity = useTransform(progress, range, [0.3, 1]);
+    
+    let className = "";
+    if (word.type === "strong") className = "font-medium font-display";
+    if (word.type === "accent") className = "font-medium italic underline decoration-accent/30 decoration-2 underline-offset-8";
+    
+    return (
+        <>
+            <motion.span style={{ opacity }} className={className}>
+                {word.text}
+            </motion.span>
+            {" "}
+        </>
+    );
+};
+
+const ScrollRevealText = ({ data }) => {
+    const paragraphRef = useRef(null);
+    const { scrollYProgress } = useScroll({
+        target: paragraphRef,
+        offset: ["start 0.85", "start 0.4"]
+    });
+
+    const words = [];
+    data.forEach(item => {
+        if (typeof item === 'string') {
+            item.split(" ").filter(w => w.length > 0).forEach(w => words.push({ text: w, type: 'normal' }));
+        } else {
+            item.text.split(" ").filter(w => w.length > 0).forEach(w => words.push({ text: w, type: item.type }));
+        }
+    });
+
+    const step = 1 / words.length;
+
+    return (
+        <p ref={paragraphRef}>
+            {words.map((word, i) => {
+                const start = i * step;
+                const end = start + step;
+                
+                return (
+                    <Word key={i} word={word} progress={scrollYProgress} range={[start, end]} />
+                );
+            })}
+        </p>
+    );
+};
 
 const About = () => {
     return (
-        <section id="about" className="min-h-screen py-16 md:py-32 lg:py-40 px-6 md:px-12 relative overflow-hidden bg-background">
+        <section id="about" className="py-12 md:py-20 lg:py-24 px-6 md:px-12 relative overflow-hidden bg-background">
 
-            <div className="max-w-screen-2xl mx-auto w-full z-10 relative">
+            <div className="w-full z-10 relative">
 
                 {/* Header & Bio */}
-                <div className="mb-24 md:mb-40">
+                <div className="mb-12 md:mb-20">
                     <ScrollReveal width="100%">
                         <div className="grid lg:grid-cols-12 gap-16 lg:gap-24 items-start">
                             <div className="lg:col-span-12 xl:col-span-7">
@@ -32,16 +100,10 @@ const About = () => {
                                     </motion.h3>
                                 </div>
 
-                                <div className="space-y-10 text-xl md:text-2xl text-secondary leading-relaxed font-sans font-light max-w-3xl">
-                                    <p>
-                                        I'm an **AI Full Stack Engineer** operating at the precise intersection of frontier intelligence and production-grade engineering. I don't just build models—I architect the ecosystems that allow them to live, breathe, and act autonomously within scalable digital products.
-                                    </p>
-                                    <p>
-                                        As the Founder of **DEEPCIPHER Studio**, I've managed the complete lifecycle of premium web applications, shipping high-performance platforms that prioritize absolute system integrity and zero-layout-shift UI motion. I build for materiality, precision, and visceral user experiences.
-                                    </p>
-                                    <p>
-                                        Currently, my focus is entirely on the next paradigm of software: building complex <strong className="text-primary font-medium italic underline decoration-accent/30 decoration-2 underline-offset-8">RAG pipelines</strong> and **Agentic Workflows**. I'm pushing the boundaries of what's possible with LLM orchestration to create systems that are proactive, autonomous, and undeniably powerful.
-                                    </p>
+                                <div className="space-y-10 text-xl md:text-2xl text-primary leading-relaxed font-sans font-light max-w-3xl">
+                                    <ScrollRevealText data={p1Data} />
+                                    <ScrollRevealText data={p2Data} />
+                                    <ScrollRevealText data={p3Data} />
                                 </div>
                             </div>
                             
@@ -68,18 +130,18 @@ const About = () => {
                     {[
                         {
                             icon: Cpu,
-                            title: "Agentic Workflows",
-                            desc: "Designing autonomous LLM behaviors that navigate complex, multi-step tasks with zero-latency execution patterns."
+                            title: "AI Engineering",
+                            desc: "Integrating OpenAI and Claude APIs for AI-powered generation, personalized workflows, and automation."
                         },
                         {
                             icon: Globe,
-                            title: "Distributed Systems",
-                            desc: "Building resilient, high-scale backends that bridge the gap between AI inference and production-grade stability."
+                            title: "Backend Systems",
+                            desc: "Architecting REST APIs, serving models with FastAPI, and optimizing SQL databases for high-performance data retrieval."
                         },
                         {
                             icon: Zap,
-                            title: "Tactile Interfaces",
-                            desc: "Crafting fluid, motion-driven frontends that prioritize kinetic feedback and editorial typographic scales."
+                            title: "Frontend Development",
+                            desc: "Crafting fluid, responsive interfaces using Next.js, React, Tailwind CSS, and advanced motion systems like GSAP."
                         }
                     ].map((discipline, i) => (
                         <ScrollReveal key={i} delay={i * 0.1}>
@@ -95,10 +157,10 @@ const About = () => {
                 </div>
 
                 {/* Final punchy statement */}
-                <div className="mt-32 md:mt-48 max-w-4xl">
+                <div className="mt-16 md:mt-24 max-w-4xl">
                     <ScrollReveal>
                         <p className="text-3xl md:text-5xl lg:text-6xl font-display font-medium text-primary/30 leading-tight italic">
-                            Currently pushing the limits of <span className="text-primary opacity-100 not-italic uppercase tracking-tighter">Model Context Protocol</span> to enable a new era of proactive machine intelligence.
+                            Currently pushing the limits of <span className="text-primary opacity-100 not-italic uppercase tracking-tighter">AI AUTOMATION</span> to enable a new era of proactive applications.
                         </p>
                     </ScrollReveal>
                 </div>

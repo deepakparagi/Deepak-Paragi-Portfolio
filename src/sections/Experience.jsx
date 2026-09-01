@@ -8,54 +8,54 @@ import BitStream from '../components/BitStream';
 const EXPERIENCE_DATA = [
     {
         id: 0,
-        year: "2024",
-        period: "Jan 2024 — Present",
-        role: "Founder & Full Stack Engineer",
-        company: "DEEPCIPHER Studio",
-        description: "Founded and operate a premium web development agency delivering high-performance digital products. Engineered scalable architectures and managed complete project lifecycles—from requirements gathering to Vercel deployments.",
+        year: "2026",
+        period: "Jan 2026 — Present",
+        role: "Founder & Full Stack Developer",
+        company: "DeepCipher Studio",
+        description: "Founded and operate a web development studio delivering production websites and digital products. Built and shipped multiple live applications managing the complete development lifecycle including API integration, debugging, performance optimization, and deployment.",
         metrics: [
-            { label: "Client Projects", value: "5", suffix: "+", icon: Layers },
-            { label: "Lighthouse Score", value: "98", suffix: "%", icon: Zap },
-            { label: "Motion Frames", value: "60", suffix: "fps", icon: FastForward },
-            { label: "Components Built", value: "20", suffix: "+", icon: Database }
+            { label: "Frontend", value: "Next.js", suffix: "", icon: Layers },
+            { label: "AI Integration", value: "LLMs", suffix: "", icon: Cpu },
+            { label: "Performance", value: "SEO", suffix: "+", icon: Zap },
+            { label: "Deployment", value: "Vercel", suffix: "", icon: Globe }
         ],
-        skills: ["Next.js", "React", "GSAP", "Framer Motion", "Node.js"],
+        skills: ["Next.js", "React.js", "Node.js", "Tailwind CSS", "OpenAI API"],
         blueprint: "ai",
         image: "ai_module.png"
     },
     {
         id: 1,
-        year: "2023",
-        period: "Feb 2023 — Jun 2023",
-        role: "Full Stack Engineering Intern",
-        company: "GTTC, Hubli",
-        description: "Architected and deployed modular internal tools using the MERN stack. Optimised the data persistence layer resulting in a 30% reduction in query latency. Orchestrated responsive frontend architectures that served 500+ internal users with 100% uptime.",
+        year: "2026",
+        period: "Jan 2026 — Mar 2026",
+        role: "Data Science Intern",
+        company: "Proxenix",
+        description: "Built and evaluated an NLP sentiment classification pipeline using Python, TF-IDF, pandas, and scikit-learn. Developed CinePulse, an end-to-end sentiment analysis platform exposing machine learning inference through application APIs.",
         metrics: [
-            { label: "Query Latency", value: "30", suffix: "%", icon: Activity },
-            { label: "Internal Users", value: "500", suffix: "+", icon: Database },
-            { label: "System Uptime", value: "100", suffix: "%", icon: Zap },
-            { label: "Deployment Velocity", value: "3.2", suffix: "x", icon: FastForward }
+            { label: "Model", value: "NLP", suffix: "", icon: Activity },
+            { label: "Algorithm", value: "TF-IDF", suffix: "", icon: Database },
+            { label: "Language", value: "Python", suffix: "", icon: Zap },
+            { label: "Inference", value: "API", suffix: "", icon: FastForward }
         ],
-        skills: ["React", "Express", "Node.js", "MongoDB", "Auth0"],
+        skills: ["Python", "scikit-learn", "pandas", "TF-IDF", "NLP"],
         blueprint: "database",
         image: "database_module.png"
     },
     {
         id: 2,
         year: "2023",
-        period: "2023 — Present",
-        role: "AI Open Source Contributor",
-        company: "GitHub / Independent",
-        description: "Engineering and iterating on high-performance Full Stack projects. Currently specializing in Agentic AI integration and Model Context Protocol (MCP) implementations. Deployed multiple production-ready templates utilized by 50+ developers for rapid AI prototyping.",
+        period: "Feb 2023 — Jun 2023",
+        role: "Full Stack Developer Intern",
+        company: "GTTC, Hubli",
+        description: "Developed responsive web interfaces and RESTful APIs for application workflows. Optimized SQL queries and relational database structures, improving data retrieval performance by over 30%. Performed API testing using Postman.",
         metrics: [
-            { label: "Logic Adoption", value: "120", suffix: "+", icon: Cpu },
-            { label: "Inference Efficiency", value: "99.8", suffix: "%", icon: Layers },
-            { label: "Context Window", value: "128", suffix: "K", icon: Globe },
-            { label: "Inference Latency", value: "180", suffix: "ms", icon: Timer }
+            { label: "Query Speed", value: "30", suffix: "%", icon: Zap },
+            { label: "Backend", value: "REST", suffix: " APIs", icon: Globe },
+            { label: "Database", value: "SQL", suffix: "", icon: Database },
+            { label: "Testing", value: "API", suffix: "", icon: Activity }
         ],
-        skills: ["Next.js", "Agentic AI", "MCP", "Framer Motion", "OpenAI"],
-        blueprint: "ai",
-        image: "ai_module.png"
+        skills: ["REST APIs", "SQL", "Postman", "Frontend", "Backend"],
+        blueprint: "database",
+        image: "database_module.png"
     }
 ];
 
@@ -68,8 +68,8 @@ const Experience = () => {
     });
 
     return (
-        <section ref={containerRef} id="experience" className="pt-20 pb-10 md:py-64 px-6 md:px-12 bg-background relative">
-            <div className="max-w-screen-2xl mx-auto w-full">
+        <section ref={containerRef} id="experience" className="pt-12 pb-10 md:py-24 px-6 md:px-12 bg-background relative">
+            <div className="w-full">
                 <div className="lg:grid lg:grid-cols-2 lg:gap-24 items-start relative">
                     
                     {/* Sticky Column */}
@@ -100,7 +100,7 @@ const Experience = () => {
                                 </motion.h3>
 
                                 {/* Sticky Progress Track */}
-                                <div className="hidden lg:block w-[1px] h-64 bg-primary/5 relative mt-32">
+                                <div className="hidden lg:block w-[1px] h-32 bg-primary/5 relative mt-16">
                                     <motion.div
                                         className="absolute top-0 left-0 w-full bg-accent shadow-[0_0_15px_rgba(212,175,55,0.4)]"
                                         style={{ height: useTransform(scrollYProgress, [0, 1], ["0%", "100%"]) }}
@@ -112,7 +112,7 @@ const Experience = () => {
                     </div>
 
                     {/* Scrolling Track */}
-                    <div className="space-y-40 md:space-y-[40rem] pb-20">
+                    <div className="space-y-24 pb-20">
                         {EXPERIENCE_DATA.map((exp, index) => (
                             <CoreModule key={exp.id} exp={exp} index={index} baseUrl={baseUrl} />
                         ))}

@@ -4,61 +4,61 @@ import ScrollReveal from '../components/ScrollReveal';
 
 const skills = [
     { 
-        category: "Machine Intelligence",
+        category: "AI & Machine Learning",
         icon: Bot,
         items: [
-            { name: "Agentic AI / Workflows", level: 95 },
-            { name: "Claude Code", level: 95 },
-            { name: "AI Automation", level: 95 },
-            { name: "RAG Architectures", level: 90 }
+            { name: "OpenAI / Claude APIs", level: 95 },
+            { name: "Prompt Engineering", level: 95 },
+            { name: "scikit-learn / NLP", level: 85 },
+            { name: "LSTM / Random Forest", level: 80 }
         ] 
     },
     { 
-        category: "Backend Systems",
+        category: "Backend Development",
         icon: Server,
         items: [
-            { name: "Distributed Systems", level: 80 },
+            { name: "Python / FastAPI", level: 90 },
             { name: "Node.js / Express", level: 90 },
-            { name: "MCP (Model Context Protocol)", level: 95 },
-            { name: "PostgreSQL / MongoDB", level: 85 }
+            { name: "REST APIs", level: 95 },
+            { name: "API Integration", level: 90 }
         ] 
     },
     { 
-        category: "Interface Design",
+        category: "Frontend Development",
         icon: Layout, 
         items: [
-            { name: "Next.js / TypeScript", level: 95 },
+            { name: "React.js / Next.js", level: 95 },
             { name: "Tailwind CSS", level: 95 },
-            { name: "Framer Motion", level: 90 },
-            { name: "GSAP / UI Motion", level: 85 }
+            { name: "Framer Motion / GSAP", level: 90 },
+            { name: "Three.js", level: 80 }
         ] 
     },
     { 
-        category: "Architecture",
+        category: "Languages",
         icon: Shield,
         items: [
-            { name: "REST / GraphQL", level: 90 },
-            { name: "Docker / Kubernetes", level: 75 },
-            { name: "CI-CD / DevSecOps", level: 80 },
-            { name: "System Design", level: 85 }
+            { name: "Python", level: 95 },
+            { name: "JavaScript / TypeScript", level: 90 },
+            { name: "SQL", level: 85 },
+            { name: "HTML5 / CSS3", level: 95 }
         ] 
     },
     { 
-        category: "AI Integration",
+        category: "Databases & Tools",
         icon: Zap,
         items: [
-            { name: "OpenAI / Anthropic APIs", level: 95 },
-            { name: "LangChain / LlamaIndex", level: 85 },
-            { name: "Vercel AI SDK", level: 90 },
-            { name: "Hugging Face", level: 80 }
+            { name: "SQL / MongoDB", level: 85 },
+            { name: "Git / GitHub", level: 90 },
+            { name: "Vercel Deployment", level: 95 },
+            { name: "Cursor / AI Tools", level: 90 }
         ] 
     }
 ];
 
 const Skills = () => {
     return (
-        <section id="skills" className="py-10 md:py-32 px-4 md:px-12 bg-background relative overflow-hidden text-primary">
-            <div className="max-w-screen-2xl mx-auto w-full relative z-10">
+        <section id="skills" className="py-10 md:py-16 px-4 md:px-12 bg-background relative overflow-hidden text-primary">
+            <div className="w-full relative z-10">
                 <ScrollReveal width="100%">
                     <div className="mb-12 md:mb-20">
                         <h2 className="text-sm font-mono text-secondary mb-4 uppercase tracking-[0.2em]">03 / Tactical Arsenal</h2>

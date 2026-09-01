@@ -8,25 +8,18 @@ import Skeleton from './Skeleton';
 const ProjectCard = ({ project, index, isLoading = false }) => {
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
-    
-    // Always declare hooks at the top level
-    const mouseGradient = useMotionTemplate`
-        radial-gradient(
-            650px circle at ${mouseX}px ${mouseY}px,
-            rgba(255,255,255,0.15),
-            transparent 80%
-        )
-    `;
 
-    function handleMouseMove({ currentTarget, clientX, clientY }) {
+    const handleMouseMove = ({ currentTarget, clientX, clientY }) => {
         const { left, top } = currentTarget.getBoundingClientRect();
         mouseX.set(clientX - left);
         mouseY.set(clientY - top);
-    }
+    };
+
+    const mouseGradient = useMotionTemplate`radial-gradient(400px circle at ${mouseX}px ${mouseY}px, rgba(255,255,255,0.15), transparent 80%)`;
 
     if (isLoading) {
         return (
-            <div className={`relative flex flex-col gap-12 md:gap-20 items-center mb-24 md:mb-40 ${
+            <div className={`relative flex flex-col gap-12 md:gap-20 items-center mb-12 md:mb-20 ${
                 index % 2 === 1 ? 'md:flex-row-reverse' : 'md:flex-row'
             }`}>
                 <div className="flex-1 w-full space-y-6">
@@ -52,7 +45,8 @@ const ProjectCard = ({ project, index, isLoading = false }) => {
 
     return (
         <motion.div
-            className="group block w-full mb-24 md:mb-40 last:mb-0 relative"
+            onMouseMove={handleMouseMove}
+            className="group block w-full mb-12 md:mb-20 last:mb-0 relative"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
@@ -62,7 +56,6 @@ const ProjectCard = ({ project, index, isLoading = false }) => {
                 className={`relative flex flex-col gap-12 md:gap-20 items-center ${
                     index % 2 === 1 ? 'md:flex-row-reverse' : 'md:flex-row'
                 }`}
-                onMouseMove={handleMouseMove}
             >
                 {/* Content */}
                 <div className={`flex-1 flex flex-col gap-6 relative z-10 w-full order-2 md:order-none ${index % 2 === 1 ? 'md:pl-8 lg:pl-16' : 'md:pr-8 lg:pr-16'}`}>
@@ -171,6 +164,7 @@ const ProjectCard = ({ project, index, isLoading = false }) => {
                         />
                         
                         <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent z-10 pointer-events-none opacity-50" />
+                        <div className="absolute inset-0 bg-background/0 group-hover/image:bg-background/60 transition-colors duration-[0.6s] ease-[cubic-bezier(0.16,1,0.3,1)] z-20 pointer-events-none" />
 
                         <LazyImage
                             src={project.image}

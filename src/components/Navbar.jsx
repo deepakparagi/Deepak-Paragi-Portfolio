@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Magnetic from './Magnetic';
 import ThemeToggle from './ThemeToggle';
 import Logo from './Logo';
@@ -50,13 +50,12 @@ const Navbar = ({ onResumeClick }) => {
         </Magnetic>
     );
 
-    // Mobile menu background animation constraints
-    // Defined inline to prevent variant string propagation to children
-
-    // Using explicit animations instead of nested variants for reliability
-
     return (
-        <nav className="fixed top-0 left-0 right-0 px-6 py-4 md:px-12 md:py-5 flex justify-between items-center z-50 text-primary pointer-events-none" role="navigation" aria-label="Main navigation">
+        <nav 
+            className="fixed top-0 left-0 right-0 px-6 py-4 md:px-12 md:py-5 flex justify-between items-center z-[100] text-primary pointer-events-none transition-all duration-300" 
+            role="navigation" 
+            aria-label="Main navigation"
+        >
             {/* Background Blur only when menu is closed or on desktop */}
             <div className={`absolute inset-0 bg-background/80 backdrop-blur-md border-b border-primary/5 transition-opacity duration-300 ${isOpen ? 'opacity-0' : 'opacity-100'}`} />
 

@@ -1,133 +1,150 @@
 import bipinSchoolImg from '../assets/bipin_school_hero.png';
-import project2Fitai from '../assets/Screenshot (63).png';
 import shingriImg from '../assets/shingri.png';
-import gadagImg from '../assets/gadag_info.png';
-import khansFitnessImg from '../assets/Khans; fitness.png';
+import gadagImg from '../assets/Gadag_info.png';
+import khansFitnessImg from '../assets/Khans fitness.png';
+import deepcipherImg from '../assets/Deepcipher studio.png';
+import gridmindImg from '../assets/Gridmind Energy.png';
+import aiOutreachImg from '../assets/Ai email outreach.png';
 
 export const projectsData = [
     {
-        id: "02",
-        title: "FitAI: AI Fitness Coach",
+        id: "01",
+        title: "AI Outreach Automation Platform",
         category: "Artificial Intelligence",
-        description: "A personalized workout planner powered by GPT-4, generating scientific routines based on user constraints and goals. Featured autonomous planning logic.",
-        tags: ["React.js", "Node.js", "GPT-4", "OpenAI"],
-        link: "https://ai-fitness-coach-git-main-deepaks-projects-f551996f.vercel.app/",
-        github: "https://github.com/deepakparagi/ai-fitness-coach",
-        image: project2Fitai,
-        focalPoint: "object-center",
-        featured: true,
-        period: "2025",
-        overview: "An AI-native workout orchestrator that replaces generic fitness plans with scientifically-backed, GPT-4 generated routines tailored to the user's specific musculoskeletal constraints.",
-        challenge: "Fitness apps offer static templates. We needed an autonomous agent capable of generating scientifically strict workout splits while adapting to individual user constraints and real-time API latency.",
-        solution: "Integrated a custom Prompt Engineering layer to sanitize and structure LLM outputs. Implemented an optimistic UI update strategy combined with background processing to ensure zero-wait user interaction.",
-        stack: ["React.js", "Node.js", "OpenAI API", "Express"],
-        metrics: {
-            accuracy: "94% validated",
-            users: "500+",
-            year: 2025
-        },
-        lessonsLearned: [
-            "Sanitizing LLM outputs is critical for production safety.",
-            "User trust is built through transparent AI explanation layers.",
-            "Drag-and-drop feedback loops significantly improve AI planning accuracy."
-        ]
-    },
-    {
-        id: "00",
-        title: "Shingri Developers",
-        category: "System Architecture",
-        description: "A premium luxury real estate platform designed for high-end digital presence. Engineered with an editorial design system and high-performance frontend architecture.",
-        tags: ["Next.js", "Tailwind CSS", "Framer Motion", "GSAP"],
-        link: "https://shingri-developers.vercel.app/",
+        description: "An AI-powered outreach agent that processes datasets (like Excel sheets) to write and send customized emails with attachments automatically.",
+        tags: ["Next.js", "GPT-4", "OpenAI API", "Automation"],
+        link: "#",
         github: "https://github.com/deepakparagi",
-        image: shingriImg,
-        focalPoint: "object-center",
+        image: aiOutreachImg,
+        focalPoint: "object-top",
         featured: true,
         period: "2026",
-        overview: "A flagship digital showcase for Shingri Developers, architected to bridge the gap between luxury architectural vision and digital experience. The platform serves as a high-conversion lead generation engine for premium real estate.",
-        challenge: "The brand required a highly visceral, motion-heavy digital experience, but typical implementations suffer from poor mobile load times, layout shifts, and SEO penalties.",
-        solution: "Engineered a custom motion framework using Framer Motion and GSAP, optimized through aggressive code-splitting. Implemented a zero-layout-shift (CLS) architecture to ensure premium fluid motion across all viewports.",
-        stack: ["React", "Next.js", "TailwindCSS", "PostCSS", "Lenis"],
+        overview: "Built an AI-powered outreach automation platform using Next.js and the GPT-4 API. Users can upload a dataset (such as an Excel sheet) containing email addresses and contextual details. The AI agent automatically writes highly customized emails, attaches relevant files (like resumes or photos), and sends them directly from the user's connected mail ID.",
+        challenge: "Manual outreach is time-consuming and lacks personalization at scale. A flexible system was needed to ingest arbitrary datasets and transform them into personalized, automated email campaigns with attachments.",
+        solution: "Designed an automated workflow that processes structured data to generate and dispatch personalized emails on behalf of the user. The system automates customized outreach at approximately 5 emails per minute.",
+        stack: ["Next.js", "GPT-4 API", "OpenAI", "Node.js"],
         metrics: {
-            performance: "98% Lighthouse",
-            conversion: "+25% leads",
+            speed: "5 emails/min",
+            scale: "Automated",
             year: 2026
         },
         lessonsLearned: [
-            "Precision-tuned typography is the foundation of digital luxury.",
-            "Custom easing functions create a visceral sense of brand quality better than industry defaults.",
-            "Performance budgets must be strictly enforced in media-heavy environments."
+            "LLM workflow automation scales real-world communication effectively.",
+            "Prompt engineering is critical for maintaining high personalization quality."
+        ]
+    },
+    {
+        id: "02",
+        title: "DeepCipher Studio Platform",
+        category: "System Architecture",
+        description: "The complete agency platform with reusable components, responsive architecture, interactive WebGL elements, and advanced motion systems.",
+        tags: ["Next.js", "GSAP", "Framer Motion", "Three.js"],
+        link: "https://deepcipher-studio.vercel.app/",
+        github: "https://github.com/deepakparagi",
+        image: deepcipherImg,
+        focalPoint: "object-top",
+        featured: true,
+        period: "2026",
+        overview: "Designed and developed the complete DeepCipher Studio agency platform with reusable components, responsive architecture, interactive WebGL elements, and advanced motion systems.",
+        challenge: "Creating a standout portfolio platform that demonstrates high-end engineering and design capabilities.",
+        solution: "Implemented SEO metadata, responsive behavior, performance optimization, and production deployment on Vercel utilizing Three.js and GSAP for visceral motion.",
+        stack: ["Next.js", "GSAP", "Framer Motion", "Three.js"],
+        metrics: {
+            performance: "Optimized",
+            design: "WebGL Motion",
+            year: 2026
+        }
+    },
+    {
+        id: "03",
+        title: "Gridmind Energy",
+        category: "Machine Learning",
+        description: "A full-stack machine learning platform serving multiple forecasting models through FastAPI REST endpoints for residential energy prediction.",
+        tags: ["Python", "FastAPI", "LSTM", "Next.js", "MongoDB"],
+        link: "#",
+        github: "https://github.com/deepakparagi",
+        image: gridmindImg,
+        focalPoint: "object-top",
+        featured: true,
+        period: "2026",
+        overview: "Architected a full-stack machine learning platform serving multiple forecasting models through FastAPI REST endpoints. Research from the project contributed to an IEEE co-authored paper on residential energy consumption prediction.",
+        challenge: "Managing multiple machine learning models (LSTM, ARIMA, Random Forest) for inference and visualizing the prediction data interactively.",
+        solution: "Implemented model selection and prediction workflows using LSTM, ARIMA, and Random Forest, with MongoDB for historical prediction storage. Built a Next.js dashboard consuming backend APIs for interactive visualization.",
+        stack: ["Python", "FastAPI", "LSTM", "ARIMA", "Random Forest", "Next.js", "MongoDB"],
+        metrics: {
+            models: "3 ML Models",
+            paper: "IEEE Co-authored",
+            year: 2026
+        },
+        lessonsLearned: [
+            "FastAPI is excellent for serving ML models with low latency.",
+            "Visualizing time-series prediction data requires efficient frontend rendering."
         ]
     },
     {
         id: "04",
         title: "Khan's Fitness — AI-Powered Gym Website",
         category: "Agency Work",
-        description: "Built a full site with integrated AI tools: BMI calculator, Claude API-powered workout generator, and diet planner — all inside a brutalist high-contrast design.",
-        tags: ["Next.js", "Claude API", "Tailwind", "GSAP", "Framer Motion"],
+        description: "Built and deployed a production fitness platform with integrated Claude API for personalized workout plans and diet recommendations.",
+        tags: ["Next.js", "Claude API", "Tailwind CSS", "GSAP", "Framer Motion"],
         link: "https://khans-fitness.vercel.app",
         github: "https://github.com/deepakparagi",
         image: khansFitnessImg,
-        focalPoint: "object-center",
+        focalPoint: "object-top",
         featured: true,
         period: "2024",
-        overview: "A brutalist high-contrast gym website built for Gadag-Betageri's fitness community, moving beyond a simple brochure to offer real utility.",
-        challenge: "Most gym websites are brochures. Khan's Fitness needed a product — a site that does something useful for members, not just looks good for the owner.",
-        solution: "Built a full site with integrated AI tools: BMI calculator, Claude API-powered workout generator, and diet planner — all inside a brutalist high-contrast design built for Gadag-Betageri's fitness community.",
+        overview: "Built and deployed a production fitness platform with membership information, trainer profiles, transformation showcases, lead generation, and AI-powered features.",
+        challenge: "Most gym websites are brochures. Khan's Fitness needed a product — a site that does something useful for members.",
+        solution: "Integrated the Claude API to generate personalized workout plans, BMI analysis, and diet recommendations using prompt engineering and LLM response handling. Developed a responsive production interface with GSAP and Framer Motion.",
         stack: ["Next.js", "Claude API", "Tailwind CSS", "GSAP", "Framer Motion"],
         metrics: {
-            features: "3 AI Tools",
-            design: "Brutalist",
+            features: "AI Workouts",
+            design: "Production",
             year: 2024
         }
     },
     {
-        id: "00-B",
-        title: "GADAG_INFO",
+        id: "05",
+        title: "Shingri Developers",
+        category: "Agency Work",
+        description: "Built and deployed a responsive real estate platform with reusable property presentation components.",
+        tags: ["Next.js", "Tailwind CSS", "Framer Motion"],
+        link: "https://shingri-developers.vercel.app/",
+        github: "https://github.com/deepakparagi",
+        image: shingriImg,
+        focalPoint: "object-top",
+        featured: true,
+        period: "2026",
+        overview: "Built and deployed a responsive real estate platform using Next.js, Tailwind CSS, and Framer Motion with reusable property presentation components.",
+        challenge: "The brand required a digital presence to showcase premium real estate efficiently.",
+        solution: "Developed a modern, responsive platform optimizing property display and layout performance.",
+        stack: ["Next.js", "Tailwind CSS", "Framer Motion"],
+        metrics: {
+            design: "Premium UI",
+            performance: "High",
+            year: 2026
+        }
+    },
+    {
+        id: "06",
+        title: "Gadag Info",
         category: "Digital Preservation",
-        description: "A breathtaking digital museum documenting North Karnataka's soul. Features millisecond-perfect localization and immersive horizontal scroll storytelling.",
-        tags: ["React", "TailwindCSS", "Framer Motion", "i18n"],
+        description: "Partnered with an Instagram community page of 120k+ followers to build their official bilingual digital platform.",
+        tags: ["React", "Tailwind CSS", "i18n"],
         link: "https://gadag.vercel.app/",
         github: "https://github.com/deepakparagi",
         image: gadagImg,
-        focalPoint: "object-center",
+        focalPoint: "object-top",
         featured: true,
         period: "2026",
-        overview: "A high-performance localized web experience designed for the 'GADAG_INFO' brand. It documents historical Chalukyan architecture through an editorial, 2026-level digital interface.",
-        challenge: "Handling seamless switching between English and Kannada scripts while maintaining perfect typographic alignment and 60fps scroll performance in an image-heavy environment.",
-        solution: "Developed a CSS-driven localization engine that eliminates JS-state lag. Implemented a custom horizontal scroll engine with Lenis integration to simulate a physical gallery walk-through.",
-        stack: ["React", "Vite", "TailwindCSS", "i18next", "Lenis"],
+        overview: "Partnered with a prominent local Instagram page boasting 120k+ followers to build their official website. Engineered a bilingual Kannada-English community platform using React and Tailwind CSS, featuring robust internationalization and accessible navigation.",
+        challenge: "Supporting seamless bilingual content delivery for a massive local community platform.",
+        solution: "Integrated i18n for smooth language switching and built an accessible, component-driven UI.",
+        stack: ["React", "Tailwind CSS", "i18next"],
         metrics: {
-            localization: "Sub-50ms",
-            uptime: "99.9%",
+            impact: "120k+ Followers",
+            localization: "Bilingual",
             year: 2026
-        },
-        lessonsLearned: [
-            "Historical content demands high-contrast serif typography for maximum impact.",
-            "CSS Grid is more performant than absolute positioning for large gallery layouts.",
-            "Zero-lag script switching greatly enhances perceived performance in multilingual apps."
-        ]
-    },
-    {
-        id: "01",
-        title: "Bipin Chikkatti School",
-        category: "Enterprise Web",
-        description: "Official digital hub for a major educational institution. Engineered for accessibility, admissions management, and community engagement.",
-        tags: ["React", "SCSS", "JavaScript"],
-        link: "https://www.chikkattieducation.co.in/",
-        github: "https://github.com/deepakparagi/bipin-chikkatti-school",
-        image: bipinSchoolImg,
-        focalPoint: "object-center-top",
-        featured: true,
-        period: "2025",
-        overview: "The official digital platform for Bipin Chikkatti school, designed to modernize communication and streamline admissions processes for thousands of parents and students.",
-        challenge: "Developing a highly accessible, legacy-compatible platform that remains modern and easy for non-technical faculty to update without developer intervention.",
-        solution: "Built a component-based React architecture with deep SEO optimization and WCAG accessibility compliance. Integrated a custom CMS-lite layer for effortless content management.",
-        stack: ["React", "SCSS", "Vite", "Web accessibility"],
-        metrics: {
-            reach: "5k+ students",
-            mobile_ui: "10/10",
-            year: 2025
         }
     }
 ];

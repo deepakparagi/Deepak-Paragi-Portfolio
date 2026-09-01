@@ -13,7 +13,7 @@ import Footer from '../components/Footer';
 const Home = () => {
     const [isLoading, setIsLoading] = useState(true);
     const baseUrl = import.meta.env.BASE_URL;
-    const resumeUrl = `${baseUrl}Deepak_Paragi_Resume.pdf`.replace(/\/+/g, '/');
+    const resumeUrl = `${baseUrl}Deepak_Paragi_Resume_G.pdf`.replace(/\/+/g, '/');
 
     useEffect(() => {
         // Simulated loading state for skeleton screen demonstration

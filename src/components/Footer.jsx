@@ -8,7 +8,7 @@ const Footer = () => {
 
     return (
         <footer className="w-full py-12 md:py-20 px-6 md:px-12 bg-background border-t border-primary/5">
-            <div className="max-w-screen-2xl mx-auto w-full flex flex-col md:flex-row justify-between items-center gap-12 md:gap-0">
+            <div className="w-full flex flex-col md:flex-row justify-between items-center gap-12 md:gap-0">
                 
                 <motion.div
                     initial={{ opacity: 0, x: -20 }}

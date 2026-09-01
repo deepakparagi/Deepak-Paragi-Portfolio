@@ -5,12 +5,12 @@ import { projectsData } from '../data/projectsData';
 
 const Projects = ({ isLoading }) => {
     return (
-        <section id="projects" className="relative pt-10 pb-32 md:py-32 flex flex-col justify-center overflow-hidden bg-background">
+        <section id="projects" className="relative pt-10 pb-16 md:py-20 flex flex-col justify-center overflow-hidden bg-background">
 
-            <div className="relative z-10 px-6 md:px-12 max-w-screen-2xl mx-auto w-full">
+            <div className="relative z-10 px-6 md:px-12 w-full">
 
                 {/* Header Section */}
-                <div className="mb-16 md:mb-32 grid md:grid-cols-12 gap-8 md:gap-12 items-end">
+                <div className="mb-10 md:mb-16 grid md:grid-cols-12 gap-8 md:gap-12 items-end">
                     <div className="md:col-span-8">
                         <ScrollReveal width="100%">
                             <h2 className="text-sm font-mono text-secondary mb-4 uppercase tracking-[0.2em]">01 / Selected Work</h2>

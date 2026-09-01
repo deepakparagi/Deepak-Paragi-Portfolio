@@ -140,8 +140,8 @@ const ContactForm = () => {
 
 const Contact = ({ onResumeClick }) => {
     return (
-        <section id="contact" className="py-16 md:py-32 px-4 md:px-12 bg-background relative overflow-hidden">
-            <div className="max-w-screen-2xl mx-auto w-full relative z-10">
+        <section id="contact" className="py-10 md:py-16 px-4 md:px-12 bg-background relative overflow-hidden">
+            <div className="w-full relative z-10">
                 <div className="grid lg:grid-cols-12 gap-16 lg:gap-24 items-start">
                     
                     {/* Left Side: Massive Typography */}
@@ -152,7 +152,7 @@ const Contact = ({ onResumeClick }) => {
                                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
                                     <span className="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
                                 </span>
-                                <span className="font-mono text-[10px] tracking-[0.4em] text-secondary uppercase italic">Uplink Status: Active / Hubli, India</span>
+                                <span className="font-mono text-[10px] tracking-[0.4em] text-secondary uppercase italic">Uplink Status: Active / Bengaluru, India</span>
                             </div>
                         </ScrollReveal>
 
@@ -167,7 +167,7 @@ const Contact = ({ onResumeClick }) => {
                                         animate={{ opacity: [0.2, 1, 0.2] }}
                                         transition={{ duration: 4, repeat: Infinity }}
                                     >
-                                        .2126
+                                        .2026
                                     </motion.span>
                                 </span>
                             </h2>
@@ -198,6 +198,10 @@ const Contact = ({ onResumeClick }) => {
                                     <div className="flex flex-col gap-1">
                                         <span className="text-[10px] font-mono text-secondary uppercase tracking-widest">Direct Address</span>
                                         <a href="mailto:deepakparagi03@gmail.com" className="text-xl font-display text-primary hover:text-accent transition-colors">deepakparagi03@gmail.com</a>
+                                    </div>
+                                    <div className="flex flex-col gap-1">
+                                        <span className="text-[10px] font-mono text-secondary uppercase tracking-widest">Direct Comms</span>
+                                        <a href="tel:+918197174493" className="text-xl font-display text-primary hover:text-accent transition-colors">+91 8197174493</a>
                                     </div>
                                     <div className="flex items-center gap-6">
                                         <button 
