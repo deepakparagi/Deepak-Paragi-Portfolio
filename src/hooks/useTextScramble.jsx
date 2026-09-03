@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { useState, useEffect, useCallback } from 'react';
 
 const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+';
@@ -9,7 +10,7 @@ export const useTextScramble = (text, trigger = true) => {
     const scramble = useCallback(() => {
         let iteration = 0;
         const interval = setInterval(() => {
-            setDisplayValue(prev => 
+            setDisplayValue(
                 text.split('').map((char, index) => {
                     if (index < iteration) return text[index];
                     return characters[Math.floor(Math.random() * characters.length)];

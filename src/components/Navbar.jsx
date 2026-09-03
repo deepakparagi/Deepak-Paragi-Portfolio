@@ -6,6 +6,23 @@ import Magnetic from './Magnetic';
 import ThemeToggle from './ThemeToggle';
 import Logo from './Logo';
 
+const NavItem = ({ name, id, onClick }) => (
+    <Magnetic>
+        <button
+            key={name}
+            onClick={() => onClick(id)}
+            className="relative group p-2 flex items-center gap-2 bg-transparent border-none cursor-pointer text-inherit font-inherit"
+            aria-label={`Navigate to ${name} section`}
+        >
+            {name}
+            <motion.span
+                className="absolute bottom-0 left-0 w-full h-0.5 bg-primary origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"
+                layoutId="underline"
+            />
+        </button>
+    </Magnetic>
+);
+
 const Navbar = ({ onResumeClick }) => {
     const [isOpen, setIsOpen] = useState(false);
     const location = useLocation();
@@ -33,23 +50,6 @@ const Navbar = ({ onResumeClick }) => {
         onResumeClick();
     };
 
-    const NavItem = ({ name, id }) => (
-        <Magnetic>
-            <button
-                key={name}
-                onClick={() => handleScroll(id)}
-                className="relative group p-2 flex items-center gap-2 bg-transparent border-none cursor-pointer text-inherit font-inherit"
-                aria-label={`Navigate to ${name} section`}
-            >
-                {name}
-                <motion.span
-                    className="absolute bottom-0 left-0 w-full h-0.5 bg-primary origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]"
-                    layoutId="underline"
-                />
-            </button>
-        </Magnetic>
-    );
-
     return (
         <nav 
             className="fixed top-0 left-0 right-0 px-6 py-4 md:px-12 md:py-5 flex justify-between items-center z-[100] text-primary pointer-events-none transition-all duration-300" 
@@ -69,9 +69,9 @@ const Navbar = ({ onResumeClick }) => {
 
             {/* Desktop Menu */}
             <div className="hidden md:flex items-center gap-8 text-sm font-medium pointer-events-auto relative z-50">
-                <NavItem name="About" id="about" />
-                <NavItem name="Work" id="projects" />
-                <NavItem name="Contact" id="contact" />
+                <NavItem name="About" id="about" onClick={handleScroll} />
+                <NavItem name="Work" id="projects" onClick={handleScroll} />
+                <NavItem name="Contact" id="contact" onClick={handleScroll} />
                 
                 <Magnetic>
                     <button

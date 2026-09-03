@@ -57,7 +57,6 @@ const ArchitectureLogo = () => {
 
 const Loader = ({ onComplete }) => {
     const [progress, setProgress] = useState(0);
-    const [statusIndex, setStatusIndex] = useState(0);
     const [isExiting, setIsExiting] = useState(false);
 
     useEffect(() => {
@@ -80,12 +79,7 @@ const Loader = ({ onComplete }) => {
         return () => clearInterval(timer);
     }, []);
 
-    useEffect(() => {
-        const targetIndex = Math.floor((progress / 100) * STATUS_MESSAGES.length);
-        if (targetIndex !== statusIndex && targetIndex < STATUS_MESSAGES.length) {
-            setStatusIndex(targetIndex);
-        }
-    }, [progress, statusIndex]);
+
 
     useEffect(() => {
         if (progress >= 100) {
@@ -96,6 +90,9 @@ const Loader = ({ onComplete }) => {
             return () => clearTimeout(timer);
         }
     }, [progress, onComplete]);
+
+    const targetIndex = Math.floor((progress / 100) * STATUS_MESSAGES.length);
+    const statusIndex = Math.min(targetIndex, STATUS_MESSAGES.length - 1);
 
     return (
         <motion.div
