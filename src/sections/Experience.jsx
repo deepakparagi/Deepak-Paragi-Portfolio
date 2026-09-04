@@ -1,5 +1,5 @@
-import { motion, useScroll, useTransform, useMotionValue, useSpring, useMotionTemplate, useInView } from 'framer-motion';
-import { useRef, useState, useEffect } from 'react';
+import { motion, useScroll, useTransform, useInView } from 'framer-motion';
+import { useRef } from 'react';
 import ScrollReveal from '../components/ScrollReveal';
 import { ArrowUpRight, Database, Cpu, Activity, Circle, Layers, Zap, FastForward, Globe, Timer } from 'lucide-react';
 import Magnetic from '../components/Magnetic';

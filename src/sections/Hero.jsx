@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform, AnimatePresence, useSpring, useMotionValue } from 'framer-motion';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import profileImg from '../assets/deepak_portrait.jpg';
 import { ArrowUpRight, Download, Plus } from 'lucide-react';
 import Magnetic from '../components/Magnetic';
@@ -7,7 +7,6 @@ import BitStream from '../components/BitStream';
 
 const Hero = ({ onResumeClick }) => {
     const [isMobile, setIsMobile] = useState(false);
-    const containerRef = useRef(null);
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
@@ -49,7 +48,7 @@ const Hero = ({ onResumeClick }) => {
             setRoleIndex((prev) => (prev + 1) % roles.length);
         }, 3000);
         return () => clearInterval(interval);
-    }, []);
+    }, [roles.length]);
 
     return (
         <section id="home" className="relative min-h-[90svh] lg:h-screen flex items-center px-6 md:px-12 pt-24 md:pt-0 overflow-hidden bg-background" onMouseMove={handleMouseMove}>

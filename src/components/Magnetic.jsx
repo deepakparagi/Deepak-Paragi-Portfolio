@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { motion, useSpring, useMotionValue } from 'framer-motion';
 
 const Magnetic = ({ children, strength = 0.5 }) => {

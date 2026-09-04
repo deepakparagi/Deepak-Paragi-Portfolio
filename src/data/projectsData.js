@@ -1,4 +1,3 @@
-import bipinSchoolImg from '../assets/bipin_school_hero.png';
 import shingriImg from '../assets/shingri.png';
 import gadagImg from '../assets/Gadag_info.png';
 import khansFitnessImg from '../assets/Khans fitness.png';

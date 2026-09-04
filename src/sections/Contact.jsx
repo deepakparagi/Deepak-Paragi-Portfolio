@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { ArrowUpRight, Github, Linkedin, Twitter, Mail, FileText, Zap, AlertCircle, CheckCircle2 } from 'lucide-react';
 import ScrollReveal from '../components/ScrollReveal';
 
+// eslint-disable-next-line no-unused-vars
 const SocialCard = ({ icon: Icon, label, href }) => (
     <motion.a
         href={href}
@@ -27,7 +28,6 @@ const SocialCard = ({ icon: Icon, label, href }) => (
 
 const ContactForm = () => {
     const [status, setStatus] = useState('idle'); // idle, sending, success, error
-    const [result, setResult] = useState("");
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -55,7 +55,7 @@ const ContactForm = () => {
             } else {
                 setStatus('error');
             }
-        } catch (error) {
+        } catch {
             setStatus('error');
         }
 
