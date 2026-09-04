@@ -199,10 +199,7 @@ const Contact = ({ onResumeClick }) => {
                                         <span className="text-[10px] font-mono text-secondary uppercase tracking-widest">Direct Address</span>
                                         <a href="mailto:deepakparagi03@gmail.com" className="text-xl font-display text-primary hover:text-accent transition-colors">deepakparagi03@gmail.com</a>
                                     </div>
-                                    <div className="flex flex-col gap-1">
-                                        <span className="text-[10px] font-mono text-secondary uppercase tracking-widest">Direct Comms</span>
-                                        <a href="tel:+918197174493" className="text-xl font-display text-primary hover:text-accent transition-colors">+91 8197174493</a>
-                                    </div>
+
                                     <div className="flex items-center gap-6">
                                         <button 
                                             onClick={onResumeClick}
